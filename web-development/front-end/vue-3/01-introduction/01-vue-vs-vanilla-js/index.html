@@ -17,7 +17,7 @@
 <body>
   <!-- Vanilla JavaScript -->
   <div class="row">
-    <fieldset id="vanilla" class="border rounded p-3 mt-3 col-6 offset-sm-3">
+    <fieldset id="vanilla" class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
       <legend>Vanilla JavaScript</legend>
 
       <!-- Input group -->
@@ -42,8 +42,8 @@
   </div>
 
   <!-- Same as above, but this time using Vue -->
-  <div id="app">
-    <fieldset class="border rounded p-3 mt-3 col-6 offset-sm-3">
+  <div id="app" class="row">
+    <fieldset class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
       <legend>Vue Application</legend>
 
       <!-- Input group -->
@@ -54,7 +54,7 @@
         </div>
 
         <!-- Input -->
-        <input type="text" class="form-control" placeholder="Enter item here" v-model="newItem">
+        <input type="text" class="form-control" placeholder="Enter item here" v-model="newItem" />
 
         <!-- Button-->
         <div class="input-group-append">

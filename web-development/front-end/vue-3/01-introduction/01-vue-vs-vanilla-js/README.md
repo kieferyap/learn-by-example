@@ -33,7 +33,7 @@
 ## Under the hood: Vue
 - Let's first take a look at `index.html`, and note the following:
   - At line 11, we are importing Vue.
-  - Line 45: We have a div with `id="app"`
+  - Line 45: We have a div with `id="app"` (Its [selector](https://www.w3schools.com/cssref/css_selectors.php) is `#app`)
   - Line 57: Our `<input>` tag has a new *directive*: `v-model="newItem"`
   - Line 61: Our `<button>` tag has a new directive: `@click="addItem"`
   - Line 67: `<li>` has a `v-for="item in list"` directive
@@ -56,7 +56,7 @@
 - Key takeaways:
   - Browsers don't know what to do with directives such as `v-model` or `@click`. This is Vue doing its magic.
   - You can have multiple Vue apps within a single HTML page, but each app cannot access the variables and methods of the other Vue apps.
-  - Feel free to pull the code, experiment and break the code!
+  - In our example, all child HTML elements inside the div with ID `app` are controlled by Vue.
 
 # Conclusions
 - Unlike with vanilla JavaScript, which does things procedurally, with Vue, we are doing things *declaratively*.
