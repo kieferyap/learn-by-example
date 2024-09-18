@@ -7,13 +7,13 @@ const app = Vue.createApp({
     return {
       // v-if
       guessedNumberIf: '',
-      targetNumberIf: 1,
+      targetNumberIf: 50,
       isLowerIf: false,
       isHigherIf: true,
 
       // v-show
       guessedNumberShow: '',
-      targetNumberShow: 1,
+      targetNumberShow: 50,
       isLowerShow: false,
       isHigherShow: true,
 
@@ -28,6 +28,14 @@ const app = Vue.createApp({
         'Sapphire',
         'Topaz',
       ],
+
+      // v-for, but for an object
+      character: {
+        level: 36,
+        element: 'fire',
+        species: 'badger',
+        gender: 'male'
+      }
     }
   },
   methods: {

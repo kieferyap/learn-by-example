@@ -3,7 +3,7 @@
 To learn a bunch of Vue directives, what they do, and how to use them.
 
 ## Running the Demo
-1. Double click `index.html` to open the file in your default browser.
+- Double click `index.html` to open the file in your default browser.
 
 # Explanation
 ## Interpolation

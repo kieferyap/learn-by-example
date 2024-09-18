@@ -3,7 +3,7 @@
  To get an idea of the differences between vanilla JavaScript and Vue.
 
 ## Running the Demo
-1. Double click `index.html` to open the file in your default browser.
+- Double click `index.html` to open the file in your default browser.
 
 # Explanation
 ## Feature
