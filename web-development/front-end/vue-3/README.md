@@ -36,3 +36,22 @@
   - Watchers
   - Dynamic CSS Classes
   - Methods vs Computed vs Watchers
+- [05 Vue Instance Lifecycle](./05-lifecycle/)
+  - Mounting: `beforeCreate()`, `created()`, `beforeMount()`, `mounted()`
+  - Updating: `beforeUpdate()`, `updated()`
+  - Unmounting: `beforeUnmount()`, `unmounted()`
+- 06 Vue CLI
+- 07 Composition API
+- 08 Components and Props
+- 09 Emit, Fallthrough, Bind All
+- 10 Slots, Teleport, Provide and Inject
+- 11 Vue Style Guide
+- 12 Routing
+- 13 Transition
+- 14 States with Pinia
+- 15 Navigation Guards
+- 16 Optimization
+- 17 Mixins and Hooks
+- 18 Vue and CASL: An Authorization Library
+- 19 Testing with ViTest
+- 20 Progressive Web Applications
