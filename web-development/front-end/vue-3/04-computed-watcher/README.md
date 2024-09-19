@@ -50,7 +50,7 @@
     - We want to update `assessment` (line 8) and `assessmentClass` (line 9) based on the value of `socialStudies`
     - To do that, we use a watcher, `socialStudies()` (line 22), which does just that
 
-## Dynamic Styling
+## Dynamic CSS Classes
 ![GIF of dynamic styling in action](guide/03-dynamic-css.gif)
 - **Relevant files and lines:** 
   - `index.html`: Lines 112
