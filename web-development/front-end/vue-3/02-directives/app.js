@@ -12,6 +12,7 @@ const app = Vue.createApp({
       numbersOnly: 0,
       trimmedString: '',
       specialCounter: 10,
+      htmlText: '<b>Bolded text</b>'
     }
   },
   methods: {

@@ -32,12 +32,12 @@ To learn a bunch of Vue directives, what they do, and how to use them.
 ![Method Demo](guide/03-methods.gif)
 - **Relevant files and lines:** 
   - `index.html`: Lines 46-60
-  - `app.js`: Line 18-25
+  - `app.js`: Line 19-26
 - **Methods:**
   - Suppose we have a button that needs to call a function when it's clicked. To do that, we use v-on like so: `v-on:click="functionName"`
   - The shorthand for `v-on:click="functionName"` is `@click="functionName"`
   - The demo provides two examples to illustrate the use of methods: a button that increases a counter, and another one that decreases it.
-  - Examples on how to write methods can be seen in `app.js`, lines 17-40.
+  - Examples on how to write methods can be seen in `app.js`, lines 18-41.
 - **Best Practices:**
   - Note that it is possible to write JavaScript code within `@click`, like so: `@click="counter += 2"`
   - However, the best practice is to write as little JavaScript code in the template as possible, so it is better to instead call a method.
@@ -48,7 +48,7 @@ To learn a bunch of Vue directives, what they do, and how to use them.
     - This parameter contains information about the element that triggered it. This is called an `event`.
     - For more information, run the application and click on the "Increase counter above" button and check the logs by right clicking and looking for Inspect Element.
     - Line 19 of `app.js` logs the event information using `console.log()`
-    - `@click="functionName($event, parameter)"` calls the function, passes the `event` and also an additional parameter. See `index.html` line 59 and `app.js` line 22 for more details.
+    - `@click="functionName($event, parameter)"` calls the function, passes the `event` and also an additional parameter. See `index.html` line 59 and `app.js` line 23 for more details.
 
 
 ## Event Modifiers
@@ -58,7 +58,7 @@ Official documentation on Event Modifiers can be viewed [here](https://vuejs.org
 ![Click Event Modifier Demo](guide/04-click-event-modifiers.gif)
 - **Relevant files and lines:** 
   - `index.html`: Lines 62-76
-  - `app.js`: Line 18-25
+  - `app.js`: Line 19-26
 - **Click modifiers:**
   - Suppose that instead of triggering a function by clicking a button, you want to trigger a function by *right-clicking* a button.
   - This is where event modifiers come in.
@@ -69,7 +69,7 @@ Official documentation on Event Modifiers can be viewed [here](https://vuejs.org
 ![Key Event Modifier Demo](guide/05-key-event-modifiers.gif)
 - **Relevant files and lines:** 
   - `index.html`: Lines 78-94
-  - `app.js`: Line 26-28
+  - `app.js`: Line 27-29
 - **Key Up Modifiers:**
   - `@keyup.enter` triggers the function if the user hits the enter button (`index.html`, line 87)
   - `@keyup.control` triggers the function if the user hits the control button (`index.html`, line 88)
@@ -88,8 +88,8 @@ Official documentation on Event Modifiers can be viewed [here](https://vuejs.org
   - `app.js`:
     - Just a simple V-Model: Line 10
     - Lazy Updating V-Model: Lines 11 
-    - Numerical V-Model: Lines 12 and 29-31
-    - Trimmed V-Model: Lines 13 and 32-34
+    - Numerical V-Model: Lines 12 and 30-32
+    - Trimmed V-Model: Lines 13 and 33-35
 - **V-Model:**
   - The `v-model` directive does two things:
     - `:value="variableName"`, which gets the `variableName` and uses it in the template
@@ -107,8 +107,17 @@ Official documentation on Event Modifiers can be viewed [here](https://vuejs.org
 ![V-Once Demo](guide/07-v-once.gif)
 - **Relevant files and lines:** 
   - `index.html`: Lines 173-187
-  - `app.js`: Line 14 and 35-38
+  - `app.js`: Line 14 and 36-39
 - **V-Once:**
   - Any interpolation found within this directive will only be evaluated *once*: when the page loads.
   - This means that any succeeding updates to variables surrounded by `v-once` will not be updated.
   - You can see v-once in action in lines 173-187 of `index.html`
+
+## V-HTML
+![V-HTML Demo](guide/08-v-html.gif)
+- **Relevant files and lines:** 
+  - `index.html`: Lines 189-208
+  - `app.js`: Line 15
+- **V-HTML:**
+  - This directive is called HTML Interpolation, and is used when you need to display data properties with HTML tags.
+  - This isn't sanitized though, so only use it on trusted content, and never on user-provided content.
