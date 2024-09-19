@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Imports: Bootstrap and Vue -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/vue@3.4.9/dist/vue.global.js"></script>
+
+  <!-- Title -->
+  <title>Interpolation, V-Bind, V-Html, @click, etc.</title>
+</head>
+
+<body>
+  <div class="row">
+    <div id="app" class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+      <h3>Directive Playground</h3>
+
+      <!-- Data Binding and Interpolation -->
+      <h4 class="mt-3">Interpolation</h4>
+      <ul class="list-group">
+        <li class="list-group-item">The counter: {{ counter }}</li>
+      </ul>
+
+      <h4 class="mt-3">V-Bind</h4>
+      <ul class="list-group">
+        <!-- Without v-bind -->
+        <li class="list-group-item">
+          <a href="{{ linkVariable }}">This link will not work...</a>
+        </li>
+
+        <!-- With v-bind -->
+        <li class="list-group-item">
+          <a v-bind:href="linkVariable">...but this link should work!</a>
+        </li>
+
+        <!-- Another way to write v-bind: the colon (:) -->
+        <li class="list-group-item">
+          <a :href="linkVariable">...and so should this link.</a>
+        </li>
+      </ul>
+
+      <h4 class="mt-3">Methods</h4>
+      <ul class="list-group">
+        <!-- These call a method -->
+        <li class="list-group-item">
+          <button class="btn btn-primary" type="button" @click="increaseCounter">
+            Increase counter above
+          </button>
+        </li>
+
+        <li class="list-group-item">
+          <button class="btn btn-outline-primary" type="button" @click="decreaseCounter($event, 2)">
+            Decrease counter above
+          </button>
+        </li>
+      </ul>
+
+      <h4 class="mt-3">Event Modifiers: Click</h4>
+      <ul class="list-group">
+        <!-- Event modifiers: click -->
+        <li class="list-group-item">
+          <button class="btn btn-warning" type="button" @click.right="increaseCounter">
+            Right click to increase counter above
+          </button>
+        </li>
+
+        <li class="list-group-item">
+          <button class="btn btn-outline-warning" type="button" @click.middle="decreaseCounter($event, 2)">
+            Middle click to decrease counter above
+          </button>
+        </li>
+      </ul>
+
+      <h4 class="mt-3">Event Modifiers: Key Up</h4>
+      <ul class="list-group">
+        <!-- Event modifiers: keyup -->
+        <li class="list-group-item">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="There's a special alert on Enter, Control, Page Down/Up"
+              @keyup.enter="keyPressed('enter')"
+              @keyup.control="keyPressed('control')"
+              @keyup.page-down="keyPressed('page-down')"
+              @keyup.page-up="keyPressed('page-up')"
+            />
+          </div>
+        </li>
+      </ul>
+
+      <h4 class="mt-3">Event Modifiers: V-Model</h4>
+      <ul class="list-group">
+        <!-- No event modifiers: Just a simple v-model -->
+        <li class="list-group-item">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Sync'd immediately"
+              v-model="immediateString"
+            />
+            
+            <div class="input-group-append">
+              <span class="input-group-text">
+                Entered string: {{ immediateString }}
+              </span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Event modifiers: v-model, but lazily reflected-->
+        <li class="list-group-item">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Sync'd, but only after clicking out of the input"
+              v-model.lazy="lazyString"
+            />
+            
+            <div class="input-group-append">
+              <span class="input-group-text">
+                Entered string: {{ lazyString }}
+              </span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Event modifiers: v-model, only numbers are displayed -->
+        <li class="list-group-item">
+          <div class="input-group">
+            <!-- NOTE: It works if the string starts with a number, but fails if it starts with a letter -->
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter numbers and letters"
+              v-model.number="numbersOnly"
+            />
+
+            <div class="input-group-append">
+              <button class="btn btn-success" type="button" @click="alertNumber">
+                Alert Number
+              </button>
+            </div>
+          </div>
+        </li>
+
+        <!-- Event modifiers: v-model, but the string is trimmed -->
+        <li class="list-group-item">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="This string is auto-trimmed from both sides"
+              v-model.trim="trimmedString"
+            />
+
+            <!-- Button-->
+            <div class="input-group-append">
+              <button class="btn btn-outline-success" type="button" @click="alertTrimmedString">
+                Alert Trimmed String
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <h4 class="mt-3">V-Once</h4>
+      <ul class="list-group">
+        <!-- v-once: Value within is evaluated only when it first loads -->
+        <li class="list-group-item">
+          <span v-once>V-Once'd Special Counter: {{ specialCounter }}, </span>
+          <span>Updated Special Counter: {{ specialCounter }}</span>
+        </li>
+        
+        <!-- Modify the special counter -->
+        <li class="list-group-item">
+          <button class="btn btn-primary" type="button" @click="increaseSpecialCounter">
+            Increase Special Counter
+          </button>
+        </li>
+      </ul>
+
+      <h4 class="mt-3">V-HTML</h4>
+      <ul class="list-group">
+        <!-- Event modifiers: click -->
+        <li class="list-group-item">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter HTML-formatted text here"
+            v-model="htmlText"
+          />
+        </li>
+
+        <li class="list-group-item">
+          Displayed with Interpolation: {{ htmlText }}
+        </li>
+
+        <li class="list-group-item">
+          Displayed with <code>v-html</code>: <span v-html="htmlText" />
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>
