@@ -5,19 +5,19 @@
 - **Language**: English
 
 # Topic List
-<!-- - [algorithms](algorithms)
+- [algorithms](algorithms)
   - [dynamic](algorithms/dynamic/)
     - [dijkstra-shortest-path](algorithms/dynamic/dijkstra-shortest-path/)
     - [knapsack-problem](algorithms/dynamic/knapsack-problem/)
   - [search](algorithms/search/)
     - [breadth-first](algorithms/search/breadth-first/)
-    - [depth-first](algorithms/search/depth-first/) -->
+    - [depth-first](algorithms/search/depth-first/)
 - [web-development](web-development/)
-  <!-- - [back-end](web-development/back-end/)
+  - [back-end](web-development/back-end/)
     - [django](web-development/back-end/django/)
-    - [laravel](web-development/back-end/laravel) -->
+    - [laravel](web-development/back-end/laravel)
   - [front-end](web-development/front-end/)
-    <!-- - [react](web-development/front-end/react/) -->
+    - [react](web-development/front-end/react/)
     - [vue-3](web-development/front-end/vue-3)
 
 # Contributing
