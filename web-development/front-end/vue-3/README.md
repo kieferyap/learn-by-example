@@ -21,7 +21,7 @@
   - Methods and V-On
   - Event Modifiers
     - click.right, click.middle
-    - keyup.enter, keyup.control
+    - keyup.enter, keyup.control, keyup.page-down, keyup.page-up
   - V-Model
     - v-model, v-model.trim, v-model.lazy
   - V-Once
@@ -40,18 +40,25 @@
   - Mounting: `beforeCreate()`, `created()`, `beforeMount()`, `mounted()`
   - Updating: `beforeUpdate()`, `updated()`
   - Unmounting: `beforeUnmount()`, `unmounted()`
-- 06 Vue CLI
-- 07 Composition API
+- [06 Vue CLI](./06-vue-cli/)
+  - What the Vue CLI is trying to solve?
+  - Installing and creating a project via the Vue CLI
+  - Parts of a Vue CLI-created project
+- [07 Composition API](./07-composition-api/)
+  - What is the Composition API?
+  - Directives, Methods, and Event Modifiers
+  - Computed Properties and Watchers
 - 08 Components and Props
 - 09 Emit, Fallthrough, Bind All
 - 10 Slots, Teleport, Provide and Inject
 - 11 Vue Style Guide
-- 12 Routing
-- 13 Transition
-- 14 States with Pinia
-- 15 Navigation Guards
-- 16 Optimization
-- 17 Mixins and Hooks
-- 18 Vue and CASL: An Authorization Library
-- 19 Testing with ViTest
-- 20 Progressive Web Applications
+- 12 Back-end Communication
+- 13 Routing
+- 14 Transition
+- 15 States with Pinia
+- 16 Navigation Guards
+- 17 Optimization
+- 18 Mixins and Hooks
+- 19 Vue and CASL: An Authorization Library
+- 20 Testing with ViTest
+- 21 Progressive Web Applications
