@@ -1,7 +1,8 @@
 <template>
   <div>
-    <fieldset class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
-      <legend>Vue Application</legend>
+    <!-- Composition API -->
+    <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+      <h3>Composition API</h3>
 
       <!-- Input group -->
       <div class="input-group mb-3">
@@ -33,12 +34,61 @@
           </span>
         </li>
       </ul>
-    </fieldset>
+    </div>
+
+    <!-- Reactive -->
+    <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+      <h3>Reactive()</h3>
+
+      <!-- Name -->
+      <ul class="list-group">
+        <!-- First name -->
+        <li class="list-group-item">
+          <input type="text" class="form-control" placeholder="First name" v-model="fullName.first" />
+        </li>
+
+        <!-- Middle name -->
+        <li class="list-group-item">
+          <input type="text" class="form-control" placeholder="Middle name" v-model="fullName.middle" />
+        </li>
+
+        <!-- Last name -->
+        <li class="list-group-item">
+          <input type="text" class="form-control" placeholder="Last name" v-model="fullName.last" />
+        </li>
+
+        <!-- Full name -->
+        <li class="list-group-item">
+          Full name: {{ computedFullName }}
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- Reference Properties -->
+    <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+      <h3>Reference Properties</h3>
+
+      <!-- Name -->
+      <ul class="list-group">
+        <!-- Username -->
+        <li class="list-group-item">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter username" ref="username" />
+            <div class="input-group-append">
+              <button class="btn btn-success" type="button" @click="alertUsername">Alert Username</button>
+            </div>
+          </div>
+        </li>
+
+        <!-- Alert Button -->
+      </ul>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Ref, ref, computed, watch } from 'vue'
+import { Ref, ref, computed, watch, reactive, toRefs, isRef, isReactive } from 'vue'
 
 export default {
   setup() {
@@ -54,6 +104,8 @@ export default {
         return
       }
 
+      // Note how we are accessing the list via list.value
+      // but in the template, we are only using list
       if (!isNaN(number)) {
         list.value.push(number)
         newNumber.value = ''
@@ -108,6 +160,29 @@ export default {
       }, 500)
     })
 
+    // reactive
+    const fullName = reactive({
+      first: '',
+      middle: '',
+      last: ''
+    })
+
+    // Note how we are not using fullName.value.first
+    const computedFullName = computed(() => {
+      return `${fullName.first} ${fullName.middle} ${fullName.last}`
+    })
+
+    // toRefs, isRefs, isReactive
+    const fullNameRefs = toRefs(fullName)
+    console.log('fullNameRefs:', fullNameRefs, fullNameRefs.first, `>>${fullNameRefs.first.value}<<`)
+    console.log('isRef:', isRef(newNumber))
+    console.log('isReactive:', isReactive(fullName))
+
+    // Reference properties
+    const username = ref<HTMLInputElement | null>(null)
+    const alertUsername = function () {
+      alert(username.value?.value)
+    }
 
     // Exposing functions and variables to the template
     return {
@@ -117,6 +192,10 @@ export default {
       average,
       assessmentClass,
       assessment,
+      fullName,
+      computedFullName,
+      username,
+      alertUsername
     }
   }
 }

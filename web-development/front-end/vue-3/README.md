@@ -11,6 +11,7 @@
 - Vue courses on Udemy are also recommended
 
 3. If you already know your stuff and just would like to review, feel free to look around at the code
+4. Feel free to experiment and break the code!
 
 # Table of Contents
 - [01 Comparing Vue JS and Pure Vanilla JS](./01-vue-vs-vanilla-js/)
@@ -45,9 +46,10 @@
   - Installing and creating a project via the Vue CLI
   - Parts of a Vue CLI-created project
 - [07 Composition API](./07-composition-api/)
-  - What is the Composition API?
-  - Directives, Methods, and Event Modifiers
-  - Computed Properties and Watchers
+  - Composition API vs Options API
+  - `data()`, Methods, Computed Properties and Watchers
+  - Reference Properties
+  - `ref()`, `reactive()`, `toRefs()`, `isRef()`, `isReactive()`
 - 08 Components and Props
 - 09 Emit, Fallthrough, Bind All
 - 10 Slots, Teleport, Provide and Inject
