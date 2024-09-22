@@ -50,7 +50,7 @@
   - `data()`, Methods, Computed Properties and Watchers
   - Reference Properties
   - `ref()`, `reactive()`, `toRefs()`, `isRef()`, `isReactive()`
-- 08 Components and Props
+- [08 Components and Props](./08-components-props/)
 - 09 Emit, Fallthrough, Bind All
 - 10 Slots, Teleport, Provide and Inject
 - 11 Vue Style Guide
