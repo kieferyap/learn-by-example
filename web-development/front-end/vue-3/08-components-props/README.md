@@ -1,59 +1,23 @@
 # About
 ## Objective
-To learn about the Composition API:
-- Composition API vs Options API
-- `data()`, Methods, Computed Properties and Watchers
-- Reference Properties
-- `ref()`, `reactive()`, `toRefs()`, `isRef()`, `isReactive()`
+- To learn about Vue Components
+  - Components
+  - Props and Prop Mutation
+  - Emitting events
+  - Fallthrough properties
+  - Bind All
 
 ## Running the Demo
-- Navigate to the `07-composition-cli` directory in your command line
+- Navigate to the `08-components-props` directory in your command line
 - Run `npm install` to install dependencies
 - Run `npm run serve` to run the front end server
 
-# Background
-## Options API
-- The following way of writing Vue's properties is called the **Options API**
-```javascript
-const app = Vue.createApp({
-  data() {
-    return {
-      list: [],
-      newItem: ''
-    }
-  },
-  methods: {
-    addItem() {
-      this.list.push(this.newItem)
-      this.newItem = ''
-    }
-  }
-})
-```
-
-## Problem with Options API
-- Code that should be grouped together are distributed into data(), methods, computed, etc.
-- On larger applications, this unnecessary code splitting can make things messy and difficult to maintain.
-- In addition, reusing logic can be tricky and cumbersome, which makes copy-pasting unavoidable at times.
-
-# Composition API
-## Notable changes
-- Instead of dividing our code into `data()`, `methods`, `computed`, and `watch`, they are all in one place called `setup()`
-  - `setup()` is called very early in the lifecycle, so you cannot use `this` within `setup()`
-  - `setup()` is called only once, when Vue sets up the component
-- Rewriting `setup()` over and over can get repetitive, so:
-  ```javascript
-  <script>
-  import { ref } from 'vue'
-  export default {
-    setup () {
-      const username = ref('Test')
-      return { username }
-    }
-  }
-  </script>
-  ```
-  can be written as:
+# Lesson
+## Component Introduction
+- Back in the previous lesson's [App.vue](./../07-composition-api/src/App.vue), you'll notice that there are blocks of HTML code *that are very similar* (lines 46-48, 51-53, 56-58)
+- Components address this problem by providing a way to make... something like a class with *properties*, which can be imported to different parts of the code
+- Note that while not seen in the example, it is possible to use directives such as `v-for`, `v-if`, `v-show`, etc., in components
+- In the previous lesson's [README.md](./../07-composition-api/README.md), we noted two different ways of writinf the JS/TS portion (See Notable Changes portion). From this lesson onwards, we will be using the following form:
   ```javascript
   <script setup>
   import { ref } from 'vue'
@@ -61,100 +25,104 @@ const app = Vue.createApp({
   </script>
   ```
 
-## data()
-- In Options API, we put our reactive variables in `data()`, but in Compositions API, we write it as `const variable = ref('test')`.
-  - To access the variable from within the template, it needs to be returned at the end of the `setup()` function, like so: `return { variable }`
-  - From the template, the variable can then be accessed like so: `<input v-model="variable" />`
-  - From the JS/TS part of the code though, the reactive variable can be accessed like so: `alert(variable.value)`
-  - You cannot access `.value` from within the template
-  - `ref()` needs to be imported from `vue`, like so: `import { ref } from 'vue'`
-- You can see this in action within [./src/App.vue](./src/App.vue), lines 96-97, 126-127
+## Component Example
+- **Relevant files and lines:** 
+  - `src/App.vue`: 
+    - Line 2: The component `FullNameListInput` is imported into App.vue
+    - Lines 37-42: The imported component is used
+  - `src/components/FullNameListInput.vue`: 
+    - Line 4: The component `ListGroupInput` is imported into FullNameListInput.vue
+    - Lines 36-41, 44-49, 52-57: The imported component is used
+  - `src/components/ListGroupInput.vue`: 
+    - Notice how lines 32-40 is pretty similar to lines 46-48 of the previous lesson's App.vue
+- Naming Convention: A rule of thumb is that *multi-word elements* should be used because single-word elements may crash with existing HTML elements
+  - Multi-word Elements: `FullNameInput`, `ListGroup`
+  - Single-word Element: `Input`, `Span`
+  
+## Props (Component's Properties)
+Props are varibles that are passed from a parent component to a child component.
 
-## methods
-- Methods can be written as `const methodName = () => { /* Method body here */ }`
-- To access the method from within the template, it needs to be returned as well, like so: `return { methodName }` ([./src/App.vue](./src/App.vue), line 186+)
-- You can see this in action within [./src/App.vue](./src/App.vue), lines 102-115
+### Declaring Props
+As an example, let's take a look at `src/components/ListGroupInput.vue`: 
+- At lines 6-9, we are writing down the properties that this component needs: `inputModel` and `placeholder`
+  - Since we are using TypeScript, we explicitly say that these two props are strings
+  - Props can be `boolean`, `string`, `number`, or any other type
+  - Note that for TypeScript, you can specify that a prop is optional by using the question mark, as seen in line 8.
+- At lines 10-13, we are explicitly declaring that `ListGroupInput`'s props are `inputModel` and `placeholder`
+  - `withDefaults` does what the name implies: declare the default values for the props.
+  - If we don't want to specify its default values, it is possible to omit it, and instead write it as `const props = defineProps<Props>()`
+- At this point, we have now specified what the props of the component `ListGroupComponent` will be. Next, it's time to use them.
 
-## computed
-- Computed Properties are written as `const computedProperty = computed(() => { /* Calculate for the computed property */ })`
-- Computed properties are readonly, and cannot be manually assigned a new value. (i.e.: You cannot do `computedProperty.value`)
-- You can see this in action within [./src/App.vue](./src/App.vue), lines 118-123
-- `computed()` needs to be imported from `vue`, like so: `import { computed } from 'vue'`
+### Using Props
+To see these props being used in action, let's take a look at its parent component, `src/components/FullNameListInput.vue`:
+- At line 4, the component is imported.
+- Lines 36-41 (and also 44-49, and 52-57) sees the component being used:
+  - The props that we declared, `inputModel` and `placeholder` are being used:
+    - `placeholder="Last name"`: We are setting the `placeholder` prop to hold the string, "Last Name"
+    - `:input-model="last"`: 
+      - Note how the multi-word `inputModel` is written in camelCase, but when it is being used, it is written in kebab-case
+      - `:input-model` is shorthand for `v-bind:input-model`, and a variable called `last` is being passed into it
 
-## watch
-- Watchers are written as `watch(variableBeingWatched, (newValue, oldValue) => {})`
-  - It is possible to specify multiple variables to be watched, like so:
-  ```javascript
-  watch([variableName, anotherVariable], (newValues, oldValues) => {
-    // variableName's new and old values
-    console.log(newValues[0])
-    console.log(oldValues[0])
-    
-    // anotherVariable's new and old values
-    console.log(newValues[1])
-    console.log(oldValues[1])
-  })
-  ```
-  - In the above example, the watcher is triggered when *either* `variableName` *or* `anotherVariable` changes.
-- You can see this in action within [./src/App.vue](./src/App.vue), lines 129-161
-- `watch()` needs to be imported from `vue`, like so: `import { watch } from 'vue'`
+### Prop Mutation
+- Props should **never be mutated**, that is, they should never be changed within a component.
+- This is due to a core Vue concept called *unidirectional data flow*: this means that data passed from parent to child needs to be changed *in the parent component*, and not in the child component.
+- If we want to change the value of a prop, we can:
+  - Clone the prop's values in the child component, and mutate that clone instead, thereby leaving the prop un-mutated.
+  - We can also let the parent know that a prop has changed, and update the value being passed in the parent accordingly
+- We can see this cloning in action in `FullNameListInput.vue`:
+  - Lines 29-31: The props are being cloned *once*
+  - Lines 39, 47, and 55: The cloned props are being used
+- Cloning can also be seen in `ListGroupInput.vue`:
+  - Line 21: `props.inputModel` is being cloned once into `inputModel`
+  - Line 37: The cloned prop is being used
+  - Note how we did not clone `props.placeholder` and are just using it as is. That is because it doesn't mutate, and therefore doesn't need to be cloned.
+- It was briefly mentioned that it is possible to let the parent know that a prop has changed, which can be done with **Emitters**, which will be tackled in the next section.
 
-## ref() vs reactive()
-- Both `ref()` and `reactive()` make a variable reactive, however:
-  - `ref()` works with objects (`ref({})`), strings (`ref('')`), numbers (`ref(0)`), etc.
-  - `reactive()` only works with objects. See [./src/App.vue](./src/App.vue), lines 164-173
-- There is also a slight difference when it comes to accessing the variables within the JS/TS code:
-  - `const variable = ref({ name: 'Brok' })` can be accessed with `variable.value.name`
-  - `const variable = reactive({ name: 'Brok' })` can be accessed with `variable.name`
-- In both cases however:
-  - `variable` is reactive, but `variable.name` (or `variable.value.name`) is not.
-  - Object properties can be accessed **within the template** as `variable.name`.
-- To make a reactive object's properties all reactive, we use `toRefs()`
+## Emitters
+- If props are used as a way to communicate from parent components to child components, emitters are used as a way to communicate from child components to parent components.
+- You can see this in action in `ListGroupInput.vue`:
+  - Lines 16-18: We write down what the component is emitting
+    - `changed:value` is the name of the emit
+    - `value:NameValue` is the value being passed (its type is `NameValue`, which is an object that has a `name`, which is a `string` and `characterCount`, which is a `number`)
+    - `void` is what the emitter function returns. In this case, it doesn't return anything.
+  - Line 19: We explicitly declare what the component is emitting
+    - Note that it is possible to rewrite lines 16-19 to the following:
+      ```javascript
+      const emit = defineEmits<{
+        (e: "changed:value", value: NameValue): void
+      }>()
+      ```
+    - That `emit` in `const emit` is actually a function, which we will use in lines 23-28.
+  - Lines 23-28: We write down the function that calls `emit()`
+  - Line 38: We call the function that was written in lines 23-28 every time the user inputs something.
+- In the parent component, `FullNameListInput.vue`, we are receiving the emit in lines 40, 48, and 56.
+  - `@changed:value` is shorthand for `v-on:changed:value`
+  - `$event` contains the values that we are passing, in this case, it contains an object that has `name:string` and `characterCount:number`
+    - You can see `$event` being used in App.vue
+      - Line 41 passes the entire `$event` object
+      - Lines 23-24 makes use of the passed value
+  - In lines 21-26, we are declaring what the component emits, just like in lines 16-19 of `ListGroupInput.vue`
+- With that, we now know how to use emitters.
 
-## toRefs()
-- Suppose we have a `reactive()` object:
-```javascript
-const fullName = reactive({
-  first: '',
-  middle: '',
-  last: ''
-})
+## Fallthrough Properties
+- Props or events that are set in the parent component are automatically set in the child component's *root* element.
+- For instance, in `FullNameListInput.vue`, line 37, we have the property, `class="bg-danger"`.
+  - This class "falls through", and is now set in the child component (`ListGroupInput.vue`)'s root element, which is `<li>`
+  - This applies to events as well: Suppose you add `@click="console.log('Hello!')"` after `class="bg-danger"`. It falls through to the child component's root element as well: if you click the `<li>`, it should give you the log.
+
+## Bind All
+The following code:
+```html
+  <FullNameListInput 
+    :first="fullName.first"
+    :middle="fullName.middle"
+    :last="fullName.last"
+  />
 ```
-- In the above code, `fullName` is reactive, but `fullName.first` is not.
-- If we want to make the `first`, `middle`, and `last` properties reactive, all we have to do is: 
-```javascript
-const fullNameRefs = toRefs(user)
+can be written as
+```html
+  <FullNameListInput v-bind="fullName" />
 ```
-- After doing so, its properties are now reactive (and can be accessed as, `fullNameRefs.first.value`)  
+This is because when you `v-bind` an object, Vue automatically passes all key-value pairs of the object as props for the component.
 
-## Reference Properties
-- Suppose that, in the template, you have the following code: `<input ref="inputName" />`
-- Accessing it within JS/TS can be done like so:
-  ```javascript
-  const username = ref<HTMLInputElement | null>(null)
-  // For JS, it's just const username = ref(null)
-
-  function alertUsername() {
-    // The first .value accesses ref()
-    // The second .value accesses the value property of the input tag
-    alert(username.value?.value)
-  }
-
-  return {
-    username
-  }
-  ```
-- You can see this in action within [./src/App.vue](./src/App.vue), lines 181-185
-
-## Other functions
-- `isRef(variableName)`: returns true if the `variableName` is a `ref()`, false if otherwise
-- `isReactive(variableName)`: returns true if the `variableName` is a `reactive()`, false if otherwise
-
-## Summary
-
-| Description | Options API | Composition API |
-| ----------- | ----------- | --------------- |
-| Reactivity | `data() { variable: 'test' }` | `const variable = ref('test')` |
-| Methods | `methods: { methodName() {} } ` | `const methodName = () => { /* Method body here */ }` |
-| Computed | `computed: { computedProperty() {} } ` | `const computedProperty = computed(() => {})` |
-| Watcher | `watch: { variableName (newVal, oldVal) {} } ` | `watch(variableBeingWatched, (newVal, oldVal) => {})` |
+You can see this in action in line 38 of App.vue.

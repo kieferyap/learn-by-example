@@ -51,8 +51,16 @@
   - Reference Properties
   - `ref()`, `reactive()`, `toRefs()`, `isRef()`, `isReactive()`
 - [08 Components and Props](./08-components-props/)
-- 09 Emit, Fallthrough, Bind All
-- 10 Slots, Teleport, Provide and Inject
+  - Components
+  - Props and Prop Mutation
+  - Emitting events
+  - Fallthrough properties
+  - Bind All
+- 09 Dynamic Components, Provide and Inject
+  - Dynamic Components
+  - Provide/Inject for Props
+  - Provide/Inject for Events
+- 10 Slots and Teleport
 - 11 Vue Style Guide
 - 12 Back-end Communication
 - 13 Routing
