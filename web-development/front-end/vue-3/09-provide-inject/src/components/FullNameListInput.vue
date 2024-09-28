@@ -3,9 +3,9 @@ import { inject } from 'vue'
 import ListGroupInput from "./ListGroupInput.vue"
 import { FirstNameFunction, LastNameFunction, MiddleNameFunction } from '@/types';
 
-const { firstName, updateFirst } = inject('firstName') as FirstNameFunction 
-const { middleName, updateMiddle } = inject('middleName') as MiddleNameFunction
-const { lastName, updateLast } = inject('lastName') as LastNameFunction
+const { firstName, updateFirst } = inject('first-name') as FirstNameFunction 
+const { middleName, updateMiddle } = inject('middle-name') as MiddleNameFunction
+const { lastName, updateLast } = inject('last-name') as LastNameFunction
 </script>
 
 <template>

@@ -56,10 +56,10 @@
   - Emitting events
   - Fallthrough properties
   - Bind All
-- 09 Dynamic Components, Provide and Inject
+- [09 Dynamic Components, Provide and Inject](./09-provide-inject/)
   - Dynamic Components
-  - Provide/Inject for Props
-  - Provide/Inject for Events
+  - Provide
+  - Inject
 - 10 Slots and Teleport
 - 11 Vue Style Guide
 - 12 Back-end Communication

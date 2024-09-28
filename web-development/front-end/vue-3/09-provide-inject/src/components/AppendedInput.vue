@@ -25,20 +25,18 @@ const emitNewValueCount = function () {
 </script>
 
 <template>
-  <li class="list-group-item">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">
-          {{ inject('key-number') }}
-        </span>
-      </div>
-      <input
-        type="text"
-        class="form-control"
-        :placeholder="props.placeholder"
-        v-model="inputModel"
-        @input="emitNewValueCount"
-      />
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      :placeholder="props.placeholder"
+      v-model="inputModel"
+      @input="emitNewValueCount"
+    />
+    <div class="input-group-append">
+      <span class="input-group-text">
+        kg
+      </span>
     </div>
-  </li>
+  </div>
 </template>

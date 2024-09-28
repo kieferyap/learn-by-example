@@ -3,10 +3,12 @@ import {
   Ref,
   computed,
   provide,
+  readonly,
   ref,
 } from "vue"
 import { FirstNameFunction, MiddleNameFunction, LastNameFunction } from "./types";
-import PassThrough from "./components/PassThrough.vue";
+import BorderedFullName from "./components/BorderedFullName.vue";
+import ComponentSelector from "./components/ComponentSelector.vue";
 
 const firstName: Ref<string> = ref('Ryan')
 const middleName: Ref<string> = ref('Rodney')
@@ -24,10 +26,12 @@ const updateLast = function (value: string) {
   lastName.value = value
 }
 
-provide('keyNumber', 'Test')
-provide('firstName', { firstName, updateFirst } as FirstNameFunction)
-provide('middleName', { middleName, updateMiddle } as MiddleNameFunction)
-provide('lastName', { lastName, updateLast } as LastNameFunction)
+const readOnlyKey = ref('Test')
+
+provide('key-number', readonly(readOnlyKey))
+provide('first-name', { firstName, updateFirst } as FirstNameFunction)
+provide('middle-name', { middleName, updateMiddle } as MiddleNameFunction)
+provide('last-name', { lastName, updateLast } as LastNameFunction)
 
 const computedFullName = computed(() => {
   return `${firstName.value} ${middleName.value} ${lastName.value}`
@@ -37,13 +41,13 @@ const computedFullName = computed(() => {
 
 <template>
   <span>
-    <!-- Components, Props, Emits -->
+    <!-- Provide, Inject -->
     <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
       <h3>Provide, Inject</h3>
 
-      <!-- Name -->
       <ul class="list-group">
-        <PassThrough />
+        <!-- Name -->
+        <BorderedFullName />
 
         <!-- Full name -->
         <li class="list-group-item">
@@ -51,6 +55,12 @@ const computedFullName = computed(() => {
         </li>
 
       </ul>
+    </div>
+
+    <!-- Dynamic Components -->
+    <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+      <h3>Dynamic Components</h3>
+      <ComponentSelector />
     </div>
   </span>
 </template>
