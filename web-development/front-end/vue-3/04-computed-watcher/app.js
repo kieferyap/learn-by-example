@@ -50,7 +50,7 @@ const app = Vue.createApp({
 
         // Log the old and new values
         console.log(`New value: ${newValue}, Old value: ${oldValue}`)
-      }, 500)
+      }, 300)
       
     }
   },
