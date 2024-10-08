@@ -84,5 +84,8 @@ To learn about Slots and Teleport
 
 # Teleport
 - The teleport tag:
-  - Accepts one property: `to`, which is a string containing the CSS selector 
+  - Accepts one property: `to`, which is a string containing the CSS selector
+  - This tells Vue where the HTML elements within the `<teleport>` tag should be placed.
+- You can see this in action within [App.vue](./src/App.vue), line 87.
+  - The `<footer>` tag was moved to the end of the `<body>` because it was encased in the `<teleport to="body"></teleport>` tag.
 

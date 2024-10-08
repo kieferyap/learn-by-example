@@ -58,3 +58,6 @@
   - However, if it is surrounded by `<KeepAlive>`, then the component is cached instead of being unmounted, retaining the data (v-models within the component) that was entered.
 
 # Provide/Inject vs Props/Slots: Usage Guide
+- The problem with using Provide/Inject too much is maintainability. Using it too much can make the code difficult to understand and maintain.
+- Therefore, our go-to for passing information between components should be via `props` and `emit` (See [08-components-props](./../08-components-props/))
+- However, provide/inject shines most when data needs to be passed up and down repeatedly between several nodes within the component tree.
