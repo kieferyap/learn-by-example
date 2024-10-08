@@ -60,15 +60,17 @@
   - Dynamic Components
   - Provide
   - Inject
-- 10 Slots and Teleport
-- 11 Vue Style Guide
-- 12 Back-end Communication
-- 13 Routing
-- 14 Transition
-- 15 States with Pinia
-- 16 Navigation Guards
-- 17 Optimization
-- 18 Mixins and Hooks
-- 19 Vue and CASL: An Authorization Library
-- 20 Testing with ViTest
-- 21 Progressive Web Applications
+- [10 Slots and Teleport](./10-slots-teleport/)
+  - Slots and Scoped Slots
+  - Teleport
+- 11 Optimization
+- 12 Transition
+- 13 States with Pinia
+- 14 Mixins and Hooks
+- 15 Vue and CASL: An Authorization Library
+- 16 Testing with ViTest
+- 17 Progressive Web Applications
+- 18 Back-end Communication
+- 19 Navigation Guards
+- 20 Routing
+- 21 Vue Style Guide

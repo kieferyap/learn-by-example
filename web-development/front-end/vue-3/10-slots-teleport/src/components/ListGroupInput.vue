@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref } from "vue"
+import { ref } from "vue"
 
 // Component custom properties: Props
 interface Props {
@@ -25,18 +25,15 @@ const emitNewValue = function () {
 </script>
 
 <template>
-  <div class="input-group">
-    <input
-      type="text"
-      class="form-control"
-      :placeholder="props.placeholder"
-      v-model="inputModel"
-      @input="emitNewValue"
-    />
-    <div class="input-group-append">
-      <span class="input-group-text">
-        kg
-      </span>
+  <li class="list-group-item">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        :placeholder="props.placeholder"
+        v-model="inputModel"
+        @input="emitNewValue"
+      />
     </div>
-  </div>
+  </li>
 </template>

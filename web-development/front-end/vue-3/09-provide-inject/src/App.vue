@@ -10,9 +10,9 @@ import { FirstNameFunction, MiddleNameFunction, LastNameFunction } from "./types
 import BorderedFullName from "./components/BorderedFullName.vue";
 import ComponentSelector from "./components/ComponentSelector.vue";
 
-const firstName: Ref<string> = ref('Ryan')
-const middleName: Ref<string> = ref('Rodney')
-const lastName: Ref<string> = ref('Reynolds')
+const firstName: Ref<string> = ref('Judith')
+const middleName: Ref<string> = ref('Laverne')
+const lastName: Ref<string> = ref('Hopps')
 
 const updateFirst = function (value: string) {
   firstName.value = value

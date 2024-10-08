@@ -12,8 +12,7 @@
 - Run `npm install` to install dependencies
 - Run `npm run serve` to run the front end server
 
-# Lesson
-## Component Introduction
+# Component Introduction
 - Back in the previous lesson's [App.vue](./../07-composition-api/src/App.vue), you'll notice that there are blocks of HTML code *that are very similar* (lines 46-48, 51-53, 56-58)
 - Components address this problem by providing a way to make... something like a class with *properties*, which can be imported to different parts of the code
 - Note that while not seen in the example, it is possible to use directives such as `v-for`, `v-if`, `v-show`, etc., in components
@@ -25,7 +24,7 @@
   </script>
   ```
 
-## Component Example
+# Component Example
 - **Relevant files and lines:** 
   - `src/App.vue`: 
     - Line 2: The component `FullNameListInput` is imported into App.vue
@@ -39,10 +38,10 @@
   - Multi-word Elements: `FullNameInput`, `ListGroup`
   - Single-word Element: `Input`, `Span`
   
-## Props (Component's Properties)
+# Props (Component's Properties)
 Props are varibles that are passed from a parent component to a child component.
 
-### Declaring Props
+## Declaring Props
 As an example, let's take a look at `src/components/ListGroupInput.vue`: 
 - At lines 6-9, we are writing down the properties that this component needs: `inputModel` and `placeholder`
   - Since we are using TypeScript, we explicitly say that these two props are strings
@@ -53,7 +52,7 @@ As an example, let's take a look at `src/components/ListGroupInput.vue`:
   - If we don't want to specify its default values, it is possible to omit it, and instead write it as `const props = defineProps<Props>()`
 - At this point, we have now specified what the props of the component `ListGroupComponent` will be. Next, it's time to use them.
 
-### Using Props
+## Using Props
 To see these props being used in action, let's take a look at its parent component, `src/components/FullNameListInput.vue`:
 - At line 4, the component is imported.
 - Lines 36-41 (and also 44-49, and 52-57) sees the component being used:
@@ -63,7 +62,7 @@ To see these props being used in action, let's take a look at its parent compone
       - Note how the multi-word `inputModel` is written in camelCase, but when it is being used, it is written in kebab-case
       - `:input-model` is shorthand for `v-bind:input-model`, and a variable called `last` is being passed into it
 
-### Prop Mutation
+## Prop Mutation
 - Props should **never be mutated**, that is, they should never be changed within a component.
 - This is due to a core Vue concept called *unidirectional data flow*: this means that data passed from parent to child needs to be changed *in the parent component*, and not in the child component.
 - If we want to change the value of a prop, we can:
@@ -78,7 +77,7 @@ To see these props being used in action, let's take a look at its parent compone
   - Note how we did not clone `props.placeholder` and are just using it as is. That is because it doesn't mutate, and therefore doesn't need to be cloned.
 - It was briefly mentioned that it is possible to let the parent know that a prop has changed, which can be done with **Emitters**, which will be tackled in the next section.
 
-## Emitters
+# Emitters
 - If props are used as a way to communicate from parent components to child components, emitters are used as a way to communicate from child components to parent components.
 - You can see this in action in `ListGroupInput.vue`:
   - Lines 16-18: We write down what the component is emitting
@@ -104,13 +103,13 @@ To see these props being used in action, let's take a look at its parent compone
   - In lines 21-26, we are declaring what the component emits, just like in lines 16-19 of `ListGroupInput.vue`
 - With that, we now know how to use emitters.
 
-## Fallthrough Properties
+# Fallthrough Properties
 - Props or events that are set in the parent component are automatically set in the child component's *root* element.
 - For instance, in `FullNameListInput.vue`, line 37, we have the property, `class="bg-danger"`.
   - This class "falls through", and is now set in the child component (`ListGroupInput.vue`)'s root element, which is `<li>`
   - This applies to events as well: Suppose you add `@click="console.log('Hello!')"` after `class="bg-danger"`. It falls through to the child component's root element as well: if you click the `<li>`, it should give you the log.
 
-## Bind All
+# Bind All
 The following code:
 ```html
   <FullNameListInput 

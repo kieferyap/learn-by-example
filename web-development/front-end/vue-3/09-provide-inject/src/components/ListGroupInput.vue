@@ -19,7 +19,7 @@ const emit = defineEmits<Emit>()
 
 const inputModel = ref(props.inputModel)
 
-const emitNewValueCount = function () {
+const emitNewValue = function () {
   emit('changed:value', inputModel.value)
 }
 </script>
@@ -37,7 +37,7 @@ const emitNewValueCount = function () {
         class="form-control"
         :placeholder="props.placeholder"
         v-model="inputModel"
-        @input="emitNewValueCount"
+        @input="emitNewValue"
       />
     </div>
   </li>
