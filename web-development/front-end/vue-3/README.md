@@ -63,14 +63,14 @@
 - [10 Slots and Teleport](./10-slots-teleport/)
   - Slots and Scoped Slots
   - Teleport
-- 11 Optimization
-- 12 Transition
-- 13 States with Pinia
-- 14 Mixins and Hooks
-- 15 Vue and CASL: An Authorization Library
-- 16 Testing with ViTest
-- 17 Progressive Web Applications
-- 18 Back-end Communication
-- 19 Navigation Guards
-- 20 Routing
+- [11 Transition](./11-transition/)
+- 12 States with Pinia
+- 13 Mixins and Hooks
+- 14 Vue and CASL: An Authorization Library
+- 15 Testing with ViTest
+- 16 Progressive Web Applications
+- 17 Back-end Communication
+- 18 Navigation Guards
+- 19 Routing
+- 20 Optimization
 - 21 Vue Style Guide
