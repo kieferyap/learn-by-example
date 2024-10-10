@@ -36,8 +36,4 @@ const isShowingTooltip = ref(false)
 .v-leave-to {
   opacity: 0;
 }
-
-.cursor-pointer {
-  cursor: pointer;
-}
 </style>
