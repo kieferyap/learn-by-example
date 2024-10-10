@@ -43,7 +43,6 @@ const setSelectedTab = function (tabId: string) {
       </div>
     </div>
 
-    <!-- Tab content: Dynamic Slots! -->
     <div class="border-primary border p-2 rounded-bottom">
       <transition name="slide" mode="out-in">
         <span v-if="selectedTab === 'medicine'">
@@ -83,5 +82,4 @@ const setSelectedTab = function (tabId: string) {
 .slide-leave-to {
   opacity: 0;
 }
-
 </style>

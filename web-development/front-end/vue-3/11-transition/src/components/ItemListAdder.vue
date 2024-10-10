@@ -73,4 +73,5 @@ const removeItem = function(item: string) {
   opacity: 0;
   transform: translateX(50px);
 }
+
 </style>
