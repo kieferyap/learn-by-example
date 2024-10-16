@@ -89,3 +89,6 @@ To learn about Slots and Teleport
 - You can see this in action within [App.vue](./src/App.vue), line 87.
   - The `<footer>` tag was moved to the end of the `<body>` because it was encased in the `<teleport to="body"></teleport>` tag.
 
+# Further Reading
+- Slots: https://vuejs.org/guide/components/slots.html
+- Teleport: https://vuejs.org/guide/built-ins/teleport.html

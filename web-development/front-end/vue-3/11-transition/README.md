@@ -133,3 +133,7 @@ To learn about the Vue Transitions:
 - Note that the `<transition>` tag only adds certain classes to its lone child element; however, `<transition-group>` actually adds a new element into the DOM.
   - In this case, it is a `<ul>` element with the classes, `"list-group mt-2"`.
   - It also accepts the same properties as `<transition>`, which means that properties such as `name` or `mode` can be used
+
+# Further Reading
+- Transition: https://vuejs.org/guide/built-ins/transition.html
+- Transition Group: https://vuejs.org/guide/built-ins/transition-group.html

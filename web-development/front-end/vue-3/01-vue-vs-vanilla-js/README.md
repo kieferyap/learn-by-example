@@ -62,3 +62,4 @@
 - Unlike with vanilla JavaScript, which does things procedurally, with Vue, we are doing things *declaratively*.
 - We are pretty much declaring rules like, "`newItem` is a string that is linked to the `<input>` tag", or, "If the `<button>` is clicked, call the `addItem()` function."
 - In the long run, with a declarative way of writing code, we end up writing less code, which significantly makes large projects easier to maintain.
+

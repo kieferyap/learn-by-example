@@ -1,0 +1,3 @@
+<template>
+  Index footer
+</template>

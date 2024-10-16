@@ -125,3 +125,11 @@ can be written as
 This is because when you `v-bind` an object, Vue automatically passes all key-value pairs of the object as props for the component.
 
 You can see this in action in line 38 of App.vue.
+
+# Further Reading
+- Component Basics: https://vuejs.org/guide/essentials/component-basics.html
+- Component Registration: https://vuejs.org/guide/components/registration.html
+- Props: https://vuejs.org/guide/components/props.html
+- Events: https://vuejs.org/guide/components/events.html
+- Component v-model: https://vuejs.org/guide/components/v-model.html
+- Fallthrough Attributes: https://vuejs.org/guide/components/attrs.html

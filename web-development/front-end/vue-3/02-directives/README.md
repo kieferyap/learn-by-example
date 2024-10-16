@@ -121,3 +121,7 @@ Official documentation on Event Modifiers can be viewed [here](https://vuejs.org
 - **V-HTML:**
   - This directive is called HTML Interpolation, and is used when you need to display data properties with HTML tags.
   - This isn't sanitized though, so only use it on trusted content, and never on user-provided content.
+
+# Further Reading
+- Reactivity fundamentals: https://vuejs.org/guide/essentials/reactivity-fundamentals
+- Event handling: https://vuejs.org/guide/essentials/list.html

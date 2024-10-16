@@ -72,7 +72,7 @@
   - `<router-link>` Tag
   - Routing Programmatically with `router.push()`
   - Routing with Parameters (and passing it as a prop)
-  - Same Path Routing (e.g.: `/user/1` and `/user/2`)
+  - Same Path Routing (e.g.: `/post/1` and `/post/2`)
   - Catch All Routes
   - Nested Routes
   - Routes with Query Parameters
