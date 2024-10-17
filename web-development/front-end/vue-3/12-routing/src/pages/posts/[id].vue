@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AppPost from '../../components/AppPost.vue';
 import PostList from '../../components/PostList.vue';
 import { useRoute } from 'vue-router'
 
@@ -6,5 +7,5 @@ const route = useRoute('/posts/[id]')
 </script>
 
 <template>
-  <PostList :id="Number(route.params.id)"/>
+  <AppPost />
 </template>

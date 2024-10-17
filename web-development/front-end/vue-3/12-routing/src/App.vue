@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
 import AppCard from './components/AppCard.vue'
 import RouterButton from './components/RouterButton.vue'
 
@@ -15,12 +14,12 @@ const buttonProperties = {
       <div class="col-3">
         <div class="btn-group-vertical w-100">
           <RouterButton
-            to="posts"
+            to="/posts"
             :button="buttonProperties"
             name="Posts"
           />
           <RouterButton
-            to="users"
+            to="/users"
             :button="buttonProperties"
             name="Users"
           />

@@ -23,7 +23,7 @@ const props = defineProps<Props>()
   color: white;
 }
 
-.router-link-active::before {
+.router-link-exact-active::before {
   content: '👉 ';
 }
 </style>
