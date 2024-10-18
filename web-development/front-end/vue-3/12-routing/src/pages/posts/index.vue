@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import PostList from '../../components/PostList.vue';
+import AppPost from '../../components/AppPost.vue';
+import data from './data'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -12,9 +13,12 @@ const newPost = function () {
 
 <template>
   <div>
+    <!-- Title -->
     <h3 class="d-inline-block w-50">
       Post List
     </h3>
+
+    <!-- New post button -->
     <div class="d-inline-block w-50 text-end">
       <button
         class="btn btn-primary mb-2"
@@ -24,6 +28,15 @@ const newPost = function () {
         New Post
       </button>
     </div>
-    <PostList />
+
+    <!-- Post list -->
+    <AppPost
+      v-for="post in data"
+      :id="post.id"
+      :title="post.title"
+      :date="post.date"
+    >
+      {{ post.body }}
+    </AppPost>
   </div>
 </template>
