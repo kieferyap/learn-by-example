@@ -6,26 +6,28 @@ import data from './data'
 import { Post } from './../../types'
 
 const route = useRoute('/posts/[id]')
-const post: Ref<Post|null> = ref(null)
+const post: Ref<Post | null> = ref(null)
+const id = ref(Number(route.params.id))
 
 const getPost = function (id: number): Post | null {
   return data.find(post => post.id === id) ?? null
 }
 
-post.value = getPost(Number(route.params.id))
+post.value = getPost(id.value)
 
 watch(route, value => {
-  post.value = getPost(Number(value.params.id))
+  id.value = Number(value.params.id)
+  post.value = getPost(id.value)
 })
 </script>
 
 <template>
   <AppPost
-    :id="post.id"
-    :title="post.title"
-    :date="post.date"
+    :id="post?.id"
+    :title="post?.title"
+    :date="post?.date"
   >
-    {{ post.body }}
+    {{ post?.body }}
   </AppPost>
 
   <!-- Navigation buttons -->
@@ -33,8 +35,8 @@ watch(route, value => {
     <!-- Previous -->
     <div class="col text-start">
       <router-link
-        :to="`/posts/${post.id - 1}`"
-        v-if="post.id > 1"
+        :to="`/posts/${id - 1}`"
+        v-if="id > 1"
       >
         ⬅ Previous
       </router-link>
@@ -43,8 +45,8 @@ watch(route, value => {
     <!-- Next -->
     <div class="col text-end">
       <router-link
-        :to="`/posts/${post.id + 1}`"
-        v-if="post.id < data.length"
+        :to="`/posts/${id + 1}`"
+        v-if="id < data.length"
       >
         Next ➡
       </router-link>

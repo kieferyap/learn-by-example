@@ -1,3 +1,3 @@
 <template>
-  Index footer
+  This project is a demo project.
 </template>

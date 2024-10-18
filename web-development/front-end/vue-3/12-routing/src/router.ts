@@ -5,12 +5,15 @@ import { routes } from 'vue-router/auto-routes'
 const router = createRouter({
   history: createWebHistory(),
   // Scroll behavior: to, from, savedPosition
+  // This method is called whenever the route changes
   scrollBehavior(_, _2, savedPosition) {
-    // A method called whenever the route changes
+    // Scroll back to the previous position
     if (savedPosition) return savedPosition
+
+    // Scroll all the way to the top
     return {
       left: 0,
-      top: 0, // Scroll all the way to the top
+      top: 0,
     }
   },
   // Pass the generated routes written by the plugin
