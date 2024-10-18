@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppPost from '../../components/AppPost.vue'
-import { useRoute } from 'vue-router'
+import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { Ref, ref, watch } from 'vue';
 import data from './data'
 import { Post } from './../../types'
@@ -16,8 +16,13 @@ const getPost = function (id: number): Post | null {
 post.value = getPost(id.value)
 
 watch(route, value => {
+  console.log('The route just updated')
   id.value = Number(value.params.id)
   post.value = getPost(id.value)
+})
+
+onBeforeRouteUpdate(updateGuard => {
+  console.log('The route is about to update:', updateGuard)
 })
 </script>
 

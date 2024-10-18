@@ -22,6 +22,7 @@ const router = createRouter({
 
 // Global before guards
 router.beforeEach(to => {
+  console.log('Global before each is called!')
   // For public pages, simply continue the navigation
   if (to.meta.public)
     return

@@ -67,7 +67,7 @@
   - Transition Modes (`out-in`, `in-out`)
   - Transition Multiple Elements with `v-if`
   - Transition Group
-- 12 Routing
+- [12 Routing with unplugin-vue-router](./12-routing/)
   - Router File
   - `<router-link>` Tag
   - Routing Programmatically with `router.push()`
@@ -78,15 +78,14 @@
   - Routes with Query Parameters
   - Router View (and Multiple Router Views)
   - Scroll Behavior on Route Change
-- 13 Navigation Guards
   - Navigation Guards with `beforeEach()` and `next()`
   - `beforeRouteEnter()` and `beforeRouteUpdate()`
   - Meta Data and Navigation Guards
-- 14 Optimization
-- 15 Back-end Communication
-- 16 States with Pinia
-- 17 Mixins and Hooks
-- 18 Vue and CASL: An Authorization Library
-- 19 Testing with ViTest
-- 20 Progressive Web Applications
-- 21 Vue Style Guide
+- 13 Optimization
+- 14 Back-end Communication
+- 15 States with Pinia
+- 16 Mixins and Hooks
+- 17 Vue and CASL: An Authorization Library
+- 18 Testing with ViTest
+- 19 Progressive Web Applications
+- 20 Vue Style Guide
