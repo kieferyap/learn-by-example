@@ -66,18 +66,18 @@
   - Transition Group
 - [12 Routing with unplugin-vue-router](./12-routing/)
   - Router File
-  - `<router-link>` Tag
-  - Routing Programmatically with `router.push()`
-  - Routing with Parameters (and passing it as a prop)
-  - Same Path Routing (e.g.: `/post/1` and `/post/2`)
-  - Catch All Routes
+  - Scroll Behavior
+  - Route Array
+  - Navigation Guards
+  - Unplugin Vue Router
+    - File-based Routing
+    - Catch-all Routes
+  - Router View
+  - Router Link
   - Nested Routes
-  - Routes with Query Parameters
-  - Router View (and Multiple Router Views)
-  - Scroll Behavior on Route Change
-  - Navigation Guards with `beforeEach()` and `next()`
-  - `beforeRouteEnter()` and `beforeRouteUpdate()`
-  - Meta Data and Navigation Guards
+  - Routing Programmatically
+  - Same Path Routing
+  - definePage() 
 - 13 Vue and CASL: An Authorization Library
 - 14 States with Pinia
 - 15 Back-end Communication

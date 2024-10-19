@@ -1,10 +1,19 @@
 # About
 ## Objective
 To learn about routing with Unpluggin Vue Router
-- A basic transition
-- Transition class prefixes
-- Transitioning multiple elements
-- Transition Group
+- Router File
+- Scroll Behavior
+- Route Array
+- Navigation Guards
+- Unplugin Vue Router
+  - File-based Routing
+  - Catch-all Routes
+- Router View
+- Router Link
+- Nested Routes
+- Routing Programmatically
+- Same Path Routing
+- definePage() 
 
 ## Running the Demo
 - Navigate to the `12-routing` directory in your command line
@@ -223,9 +232,33 @@ src/pages/
   - [AppPost.vue](./src/components/AppPost.vue): focuses on showing a post's details (title, body, date)
   - Unless the component is specifically routing-related like [RouterButton.vue](./src/components/RouterButton.vue), it is best to move routing-related code to files within [/src/pages/](./src/pages/)
 
-# Meta Data
-- 
+# Metadata
+- Metadata is additional data attached to the page to tell the router specific information about the page.
+- You can see metadata in action within:
+  - [[...error].vue](./src/pages/[...error].vue), line 7: we tell the router that this is a public page -- a page that anybody can access.
+  - [login.vue](./src/pages/login.vue), line 5: we tell the router that this is an unauthenticated page -- a page that can only be accessed by people who aren't authenticated
+- You can also see the declared metadata being used in [router.ts](./src/router.ts)
+
+# definePage()
+- You might've noticed that there was a method called `definePage()` inside [[...error].vue](./src/pages/[...error].vue). It accepts an object that has the following properties:
+  - `alias`
+    - Provides an alternate URL path for a route
+    - If `users.vue` had an alias of `/people`, then accessing both `/people` and `/users` would render `users.vue`
+  - `meta`
+    - Stores additional information about the route, to be accessed by navigation guards
+  - `path`
+    - A string used for overriding the default path
+    - `users.vue` has a default path of `/users`. If it's `path` is `/person` then it can no longer be accessed via `/users`, and instead, be only accessible via `/person`
+  - `props`
+    - A boolean value which allows route parameters to be passed as props to the component
+  - `redirect`
+    - A string denoting which other route to automatically redirect to
+  - `beforeEnter(to, from, next)`
+    - A navigation guard that applies only to a specific page.
+    - This navigation guard is executed after the global `beforeEach`
+    - You can see this in action within [users.vue](./src/pages/users.vue)
 
 # Further Reading
+- Vue Router documentation: https://router.vuejs.org/guide/
 - unplugin-vue-router documentation: https://uvr.esm.is/introduction.html
 
