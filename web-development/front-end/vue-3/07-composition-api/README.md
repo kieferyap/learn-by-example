@@ -158,3 +158,6 @@ const fullNameRefs = toRefs(user)
 | Methods | `methods: { methodName() {} } ` | `const methodName = () => { /* Method body here */ }` |
 | Computed | `computed: { computedProperty() {} } ` | `const computedProperty = computed(() => {})` |
 | Watcher | `watch: { variableName (newVal, oldVal) {} } ` | `watch(variableBeingWatched, (newVal, oldVal) => {})` |
+
+# Further Reading
+- TypeScript with Composition API: https://vuejs.org/guide/typescript/composition-api.html

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Composition API -->
-    <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+    <div class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
       <h3>Composition API</h3>
 
       <!-- Input group -->
@@ -37,7 +37,7 @@
     </div>
 
     <!-- Reactive -->
-    <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+    <div class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
       <h3>Reactive()</h3>
 
       <!-- Name -->
@@ -66,7 +66,7 @@
     </div>
 
     <!-- Reference Properties -->
-    <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+    <div class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
       <h3>Reference Properties</h3>
 
       <!-- Name -->

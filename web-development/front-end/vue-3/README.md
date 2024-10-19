@@ -1,32 +1,28 @@
 # Objective
 - To learn the ins and outs of Vue
 
-# Usage
-1. Pull the repository
-2. For first time learners:
-- You can go through the lessons/folders in order
-- It might be nice to split your screen into two:
-    - One to read the lesson's README
-    - The other to look at the code
-- Vue courses on Udemy are also recommended
+# Target
+- People who are starting out with Vue and want to see actual code examples from mini projects.
+- People who are familiar with Vue and want some code snippets they can copy-paste.
 
-3. If you already know your stuff and just would like to review, feel free to look around at the code
-4. Feel free to experiment and break the code!
+# Author Notes
+- While I have notes and explanations in each lesson's README, this is not a comprehensive guide.
+- If you see any typos, or any topics that you'd like to see, feel free to let me know by commenting in the issue.
 
 # Table of Contents
 - [01 Comparing Vue JS and Pure Vanilla JS](./01-vue-vs-vanilla-js/)
   - Learn about key differences between Vue JS and Vanilla JS
 - [02 Directives and Event Modifiers](./02-directives/)
   - Interpolation
-  - V-Bind
-  - Methods and V-On
+  - `v-bind`
+  - Methods and `v-on`
   - Event Modifiers
-    - click.right, click.middle
-    - keyup.enter, keyup.control, keyup.page-down, keyup.page-up
-  - V-Model
-    - v-model, v-model.trim, v-model.lazy
-  - V-Once
-  - V-HTML
+    - `click.right`, `click.middle`
+    - `keyup.enter`, `keyup.control`, `keyup.page-down`, `keyup.page-up`
+  - `v-model`
+    - `v-model`, `v-model.trim`, `v-model.lazy`
+  - `v-once`
+  - `v-html`
 - [03 Conditionals and Loops](./03-conditionals-loops/)
   - v-if, v-else-if, v-else
   - v-show (and differences with v-if)
@@ -63,14 +59,30 @@
 - [10 Slots and Teleport](./10-slots-teleport/)
   - Slots and Scoped Slots
   - Teleport
-- 11 Optimization
-- 12 Transition
-- 13 States with Pinia
-- 14 Mixins and Hooks
-- 15 Vue and CASL: An Authorization Library
-- 16 Testing with ViTest
-- 17 Progressive Web Applications
-- 18 Back-end Communication
-- 19 Navigation Guards
-- 20 Routing
-- 21 Vue Style Guide
+- [11 Transition](./11-transition/)
+  - Basic Transition
+  - Transition Modes (`out-in`, `in-out`)
+  - Transition Multiple Elements with `v-if`
+  - Transition Group
+- [12 Routing with unplugin-vue-router](./12-routing/)
+  - Router File
+  - Scroll Behavior
+  - Route Array
+  - Navigation Guards
+  - Unplugin Vue Router
+    - File-based Routing
+    - Catch-all Routes
+  - Router View
+  - Router Link
+  - Nested Routes
+  - Routing Programmatically
+  - Same Path Routing
+  - definePage() 
+- 13 Vue and CASL: An Authorization Library
+- 14 States with Pinia
+- 15 Back-end Communication
+- 16 Mixins and Hooks
+- 17 Optimization
+- 18 Testing with ViTest
+- 19 Progressive Web Applications
+- 20 Vue Style Guide

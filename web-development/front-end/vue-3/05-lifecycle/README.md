@@ -38,3 +38,6 @@
 - This lifecycle is triggered when the app is about to be set as inactive (i.e.: "killed"). Once inactive, all content is removed.
 - `beforeUnmount()`: called when Vue is aware that the app is about to be unmounted.
 - `unmounted()`: called when Vue is finished unmounting
+
+# Further Reading
+- Lifecycle Hooks: https://vuejs.org/guide/essentials/lifecycle.html

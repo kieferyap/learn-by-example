@@ -81,3 +81,7 @@
 - Watchers:
   - These are primarily used for *reacting*: we run a function whenever a property changes
   - "Call this function whenever this one property changes"
+
+# Further Reading
+- Computed Properties: https://vuejs.org/guide/essentials/computed.html
+- Watchers: https://vuejs.org/guide/essentials/watchers.html

@@ -59,3 +59,7 @@
   - However, this is not the case, as 10, 20, and 30 are still visiable.
   - The GIF above illustrates this bug.
 - `:key` fixes this bug, as it tells Vue that the elements within it should be kept track of.
+
+# Further Reading
+- Conditional rendering: https://vuejs.org/guide/essentials/conditional.html
+- List rendering: https://vuejs.org/guide/essentials/list.html

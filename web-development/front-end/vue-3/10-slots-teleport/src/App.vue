@@ -24,7 +24,7 @@ watch(progress, (value) => {
 
 <template>
   <!-- Slots -->
-  <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+  <div class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
     <h3>Slots</h3>
 
     <ul class="list-group">
@@ -69,7 +69,7 @@ watch(progress, (value) => {
   </div>
 
   <!-- Scoped Slots -->
-  <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+  <div class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
     <h3>Scoped Slots</h3>
 
     <FullNameInput>
@@ -82,7 +82,7 @@ watch(progress, (value) => {
   </div>
 
   <!-- Teleport -->
-  <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+  <div class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
     <h3>Teleport</h3>
     <teleport to="body">
       <footer class="text-center mt-3 mb-2">Footer (c) 2024</footer>

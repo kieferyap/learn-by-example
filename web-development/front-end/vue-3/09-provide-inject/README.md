@@ -61,3 +61,7 @@
 - The problem with using Provide/Inject too much is maintainability. Using it too much can make the code difficult to understand and maintain.
 - Therefore, our go-to for passing information between components should be via `props` and `emit` (See [08-components-props](./../08-components-props/))
 - However, provide/inject shines most when data needs to be passed up and down repeatedly between several nodes within the component tree.
+
+# Further Reading
+- Provide/Inject: https://vuejs.org/guide/components/provide-inject.html
+- Keep Alive: https://vuejs.org/guide/built-ins/keep-alive.html

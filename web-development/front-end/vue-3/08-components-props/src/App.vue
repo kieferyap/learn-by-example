@@ -29,7 +29,7 @@ const updateLastName = function (event: NameValue) {
 <template>
   <span>
     <!-- Components, Props, Emits -->
-    <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+    <div class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
       <h3>Components, Props, Emits</h3>
 
       <!-- Name -->

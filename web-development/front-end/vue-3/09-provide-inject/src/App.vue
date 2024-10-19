@@ -42,7 +42,7 @@ const computedFullName = computed(() => {
 <template>
   <span>
     <!-- Provide, Inject -->
-    <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+    <div class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
       <h3>Provide, Inject</h3>
 
       <ul class="list-group">
@@ -58,7 +58,7 @@ const computedFullName = computed(() => {
     </div>
 
     <!-- Dynamic Components -->
-    <div class="border rounded p-3 mt-3 col-12 col-md-6 offset-md-3">
+    <div class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
       <h3>Dynamic Components</h3>
       <ComponentSelector />
     </div>
