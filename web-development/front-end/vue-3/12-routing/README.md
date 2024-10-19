@@ -92,7 +92,6 @@ In [router.ts](./src/router.ts), line 5, we are calling the `createRouter()` fun
 - ([router.ts](./src/router.ts), line 20): 
   - Contains an array which tells the router what which component to load given a URL.
   - "If the user enters the URL, `https://site.com/teams/1`", render the following component: `teams.vue`
-  - As for what this array contains specifically, I'll dive into more detail later on.
 
 ### Navigation Guards:
 - `router.beforeEach(to => {...})`([router.ts](./src/router.ts), line 24-49):
@@ -108,3 +107,125 @@ In [router.ts](./src/router.ts), line 5, we are calling the `createRouter()` fun
   - Line 49: Allow the navigation (the user is logged in and is trying to access a page within the site)
     - What if the user is trying to access a resource that is not theirs? (i.e.: User tries to access the private details of another user)
     - This is where CASL comes in, and will be covered in a later lesson.
+
+# Routes Array: Unplugin Vue Router
+## About
+- The `routes` array contains the following:
+  - `path`: the URL path (e.g.: `'/login'`)
+  - `component`: the name of the component to load given the path
+  - `props`: a boolean value, which if true, loads any parameters to the path as props (e.g. the `1` in `/posts/1` can be accessed as a prop)
+  - `children`: an array about a route's children (e.g.: `/posts/new` is a child of `/posts/`)
+  - `query`: any accepted optional query parameters (e.g.: `{ sort: 'asc' }`)
+- Maintaining this array can be very tedious, cumbersome, and mistake-prone.
+- This is where the `unplugin-vue-router` library comes in.
+
+## File-based Routing
+- This plugin checks for the files within [/src/pages](./src/pages/).
+- It then builds a routes array depending on the file structure, the result of which can be seen in [/typed-router.ts](./typed-router.d.ts).
+- In our case, the following file structure:
+```
+src/pages/
+├── [...error].vue
+├── index.vue
+├── index@footer.vue
+├── login.vue
+├── posts.vue
+├── users.vue
+└── posts/
+    ├── [id].vue
+    ├── [id]@footer.vue
+    ├── index.vue
+    ├── index@footer.vue
+    └── new.vue
+```
+- ...generates the following routes:
+
+| Route | Component(s) Rendered |
+| ----------- | ----------- | 
+| `/` | [src/pages/index.vue](./src/pages/index.vue) |
+| `/login` | [src/pages/login.vue](./src/pages/login.vue) |
+| `/posts` | [src/pages/posts.vue](./src/pages/posts.vue) which loads [src/pages/posts/index.vue](./src/pages/posts/index.vue)  |
+| `/posts/` | [src/pages/posts.vue](./src/pages/posts.vue) which loads [src/pages/posts/index.vue](./src/pages/posts/index.vue)  |
+| `/posts/[id]` | [src/pages/posts.vue](./src/pages/posts.vue) which loads [src/pages/posts/[id].vue](./src/pages/posts/[id].vue)  |
+| `/posts/new` | [src/pages/posts.vue](./src/pages/posts.vue) which loads [src/pages/posts/index.vue](./src/pages/posts/new.vue)  |
+| `/users` | [src/pages/users.vue](./src/pages/users.vue) |
+| `/*` | [src/pages/[...error].vue](./src/pages/[...error].vue]) |
+
+## Catch-All Routes
+- Files with the name formattted in the following way: `[...error].vue`, where `error` can be any string, will be considered as a catch-all route by the unplugin-vue-router.
+- This means that if the user goes to the page like `/this-page-does-not-exist`, it will render `[...error].vue`
+- By this logic, if we were to create the following file: `src/pages/posts/[...dne].vue`, then:
+  - If the user goes to the page like `/posts/test-page`, then `src/pages/posts/[...dne].vue` will be rendered
+
+# Router Views and Router Links
+## Router View
+- In the Router File, we have a `routes` array where we specify which component to load given the URL.
+- The `<router-view>` tag tells Vue *where* to load the component.
+- You can see this in action in [App.vue](./src/App.vue), line 29 and 34.
+  - It has a `name` property, which is sort of like a tag on the `<router-view>`
+  - In our case, we have a default `<router-view>` at line 29, and a **footer** `<router-view>` at line 34.
+
+## Nested Routes
+- You can the above Router Views see this in action in [src/pages/posts.vue](./src/pages/posts.vue), which also has two router views: 
+  - a default, nameless one 
+  - and a footer one.
+- When the user goes to `/posts/`, the following happens:
+  - [App.vue](./src/App.vue) is first rendered, and it sees the nameless/default `<router-view>`
+    - [src/pages/posts.vue](./src/pages/posts.vue) is rendered next, and it sees another nameless `<router-view>`
+    - [src/pages/posts/index.vue](./src/pages/posts/index.vue) is rendered within the nameless `<router-view>` within posts.vue, which is within App.vue
+  - Within [App.vue](./src/App.vue), there's another `<router-view>`, this time with the name: **footer**, at line 34.
+    - [src/pages/posts.vue](./src/pages/posts.vue) is rendered next, and it sees another *footer* `<router-view>`
+    - [src/pages/posts/index@footer.vue](./src/pages/posts/index@footer.vue) is rendered within the footer `<router-view>` within posts.vue, which is within App.vue
+
+## Router Link
+- A Router Link is a *special* kind of `<a>` tag, and is rendered as an `<a>` tag in the DOM.
+  - Clicking a Router Link navigates you to a page within the site...
+    - ...but it doesn't reload the entire page.
+    - It only reloads one portion of the site: the affected `<router-view>` portion.
+  - If you instead use an `<a>` tag instead of a `<router-link>`, the entire page refreshes
+- You can see this in action within [RouterButton.vue](./src/components/RouterButton.vue), and it has the following notable properties:
+  - `to`: a required string (or an object) denoting the route it will go to when clicked
+  - `tag`: an optional string that denotes what type of object it will render (the default is `<a>`)
+    - Try experimenting by changing the `tag` property and then inspecting the element to see what kind of element it is rendering.
+- There are two classes that are added to the tag, depending on the URL:
+  - `router-link-exact-active`: is added to the tag if the URL completely matches the `to` parameter.
+  - `router-link-active`: is added to the tag if the URL is in a nested route.
+  - You can see this in action within the CSS portion of the [RouterButton.vue](./src/components/RouterButton.vue) (Lines 20-29) where we are setting the following rules:
+    - The `router-link-exact-active` class will have a finger added to the start of the button
+    - The `router-link-active` class will have its background turned blue and its text turned white
+
+## Routing Programmatically
+- Router links are not the only tools we can use to move from one page to another within the site.
+- It is possible to move from one part to another programmatically.
+- You can see this in action within [src/pages/posts/index.vue](./src/pages/posts/index.vue), lines 6-11
+  ```typescript
+  const router = useRouter()
+
+  // Programmatic routing
+  const newPost = function () {
+    router.push('/posts/new')
+  }
+  ```
+
+# Same Path Routing
+- Suppose the user is in `/posts/1`, and wants to navigate to `/posts/2` by clicking the "Next" button within the page.
+  - In this case, the navigation fails. We get stuck in the same page.
+  - This is because `/posts/1` and `/posts/2` are both the *same route*.
+  - If you look at the table above, both of them are in the `/posts/[id]` route.
+  - Since they are in the same route, the page does not get updated.
+- So how do we update the page? There are two possible solutions:
+  - We use `watch()` to keep an eye out on the `route` variable: if it changes, we take note of the new ID and retrieve the appropriate values. ([/src/pages/posts/[id].vue](./src/pages/posts/[id].vue), line 18-22)
+  - OR we can use `onBeforeRouteUpdate(updateGuard)`, because as the name implies, this function gets triggered before the route gets updated, and we can use the `updateGuard` parameter to take note of the new ID. ([/src/pages/posts/[id].vue](./src/pages/posts/[id].vue), line 24-31)
+
+# Routing-related Code
+- You'll notice that the code within [/src/components](./src/components/) are mostly focused on displaying data.
+  - [AppCard.vue](./src/components/AppCard.vue): focuses on showing a title and its content by surrounding it in a shadowed box with rounded corners.
+  - [AppPost.vue](./src/components/AppPost.vue): focuses on showing a post's details (title, body, date)
+  - Unless the component is specifically routing-related like [RouterButton.vue](./src/components/RouterButton.vue), it is best to move routing-related code to files within [/src/pages/](./src/pages/)
+
+# Meta Data
+- 
+
+# Further Reading
+- unplugin-vue-router documentation: https://uvr.esm.is/introduction.html
+

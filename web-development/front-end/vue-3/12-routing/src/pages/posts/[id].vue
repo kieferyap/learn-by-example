@@ -2,7 +2,7 @@
 import AppPost from '../../components/AppPost.vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { Ref, ref, watch } from 'vue';
-import data from './data'
+import data from './../../data'
 import { Post } from './../../types'
 
 const route = useRoute('/posts/[id]')
@@ -23,6 +23,12 @@ watch(route, value => {
 
 onBeforeRouteUpdate(updateGuard => {
   console.log('The route is about to update:', updateGuard)
+  console.log('The new ID is:', updateGuard.params.id)
+  /*
+  // Update the post
+  id.value = Number(value.params.id)
+  post.value = getPost(id.value)
+   */
 })
 </script>
 

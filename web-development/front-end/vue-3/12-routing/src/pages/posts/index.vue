@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppPost from '../../components/AppPost.vue';
-import data from './data'
+import data from './../../data'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

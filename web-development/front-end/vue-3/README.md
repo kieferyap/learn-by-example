@@ -1,16 +1,13 @@
 # Objective
 - To learn the ins and outs of Vue
 
-# Usage
-- Pull the repository
-- For first time learners:
-  - You can go through the lessons/folders in order
-  - It might be nice to split your screen into two:
-      - One to read the lesson's README
-      - The other to look at the code
-  - Vue courses on Udemy are also recommended
-- If you already know your stuff and just would like to review, feel free to look around at the code
-- Feel free to experiment and break the code!
+# Target
+- People who are starting out with Vue and want to see actual code examples from mini projects.
+- People who are familiar with Vue and want some code snippets they can copy-paste.
+
+# Author Notes
+- While I have notes and explanations in each lesson's README, this is not a comprehensive guide.
+- If you see any typos, or any topics that you'd like to see, feel free to let me know by commenting in the issue.
 
 # Table of Contents
 - [01 Comparing Vue JS and Pure Vanilla JS](./01-vue-vs-vanilla-js/)
@@ -81,11 +78,11 @@
   - Navigation Guards with `beforeEach()` and `next()`
   - `beforeRouteEnter()` and `beforeRouteUpdate()`
   - Meta Data and Navigation Guards
-- 13 Optimization
-- 14 Back-end Communication
-- 15 States with Pinia
+- 13 Vue and CASL: An Authorization Library
+- 14 States with Pinia
+- 15 Back-end Communication
 - 16 Mixins and Hooks
-- 17 Vue and CASL: An Authorization Library
+- 17 Optimization
 - 18 Testing with ViTest
 - 19 Progressive Web Applications
 - 20 Vue Style Guide
