@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { definePage } from 'unplugin-vue-router/runtime';
+import { definePage } from 'unplugin-vue-router/runtime'
+import User from '../../models/user'
 
 definePage({
   // Page-specific navigation guard
@@ -10,6 +11,17 @@ definePage({
     // next('/post') // redirects to another page
   }
 });
+
+const getUsers = async function () {
+  try {
+    const response = await User.get()
+    console.log('response', response)
+  } catch (error) {
+    console.error(`Failed to fetch users: ${error}`)
+  }
+}
+
+getUsers()
 
 </script>
 
