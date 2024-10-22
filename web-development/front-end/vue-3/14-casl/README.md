@@ -3,7 +3,7 @@
 To learn about routing with Unpluggin Vue Router
 
 ## Running the Demo
-- Navigate to the `13-casl` directory in your command line
+- Navigate to the `14-casl` directory in your command line
 - Run `npm install` to install dependencies
 - Run `npm run dev` to run the front end server
 
