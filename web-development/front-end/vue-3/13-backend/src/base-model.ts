@@ -11,6 +11,7 @@ export default class BaseModel extends Model {
   }
 
   async request(config: any) {
+    console.log(`Calling the following API: ${config.url}`)
     return { data: await this.$http(config.url, config) }
   }
 }

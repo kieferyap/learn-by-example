@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Component custom properties: Props
 interface Props {
   title: string
 }

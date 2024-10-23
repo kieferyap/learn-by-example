@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 // Component custom properties: Props
 interface Props {
   id: number
@@ -13,6 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
   isTitleClickable: true
 })
 
+const isEditing = ref(false)
 </script>
 <template>
   <div class="border border-primary rounded p-3 pb-0 mb-3">
@@ -31,6 +34,22 @@ const props = withDefaults(defineProps<Props>(), {
     <slot />
 
     <!-- Post Date -->
-    <p class="text-secondary mt-2">{{ props.date }}</p>
+    <div class="row">
+      <!-- Post title -->
+      <div class="col-9">
+        <p class="text-secondary mt-2">{{ props.date }}</p>
+      </div>
+
+      <!-- Edit button -->
+      <div class="col-3 text-end">
+        <button
+          type="button"
+          class="btn btn-link btn-sm"
+          @click="isEditing = true"
+        >
+          Edit
+        </button>
+      </div>
+    </div>
   </div>
 </template>

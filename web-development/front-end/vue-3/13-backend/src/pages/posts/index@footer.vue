@@ -1,3 +1,3 @@
 <template>
-  End of all posts
+  End of all your posts
 </template>
