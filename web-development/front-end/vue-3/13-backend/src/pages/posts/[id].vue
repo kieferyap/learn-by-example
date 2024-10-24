@@ -2,10 +2,11 @@
 import AppPost from '../../components/AppPost.vue'
 import AppLoading from '../../components/AppLoading.vue'
 import { useRoute } from 'vue-router'
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import Post from './../../../models/post'
 import AppPostInput from '../../components/AppPostInput.vue'
 import { onBeforeRouteLeave } from 'vue-router'
+import { AlertMessageFunction } from './../../types'
 
 const route = useRoute('/posts/[id]')
 const id = ref(Number(route.params.id))
@@ -13,7 +14,8 @@ const post = ref<Post | null>(null)
 const isLoading = ref(false)
 const isEditing = ref(false)
 const isUnsavedChangesPresent = ref(false)
-const alertMessage = ref('')
+
+const { alertMessage, setAlertMessage } = inject('alert-message') as AlertMessageFunction
 
 // The parameters are: to, from, next
 onBeforeRouteLeave((_, _2, next) => {
@@ -44,9 +46,7 @@ const editButtonClicked = function () {
 const getPost = async function () {
   try {
     isLoading.value = true
-    const response = await Post.find(id.value)
-    console.log('post-response', response)
-    post.value = 'data' in response ? response.data : response
+    post.value = await Post.find(id.value)
     isLoading.value = false
   } catch (error) {
     console.error(`Failed to fetch resource: ${error}`)
@@ -54,7 +54,7 @@ const getPost = async function () {
 }
 
 const savedPost = function () {
-  alertMessage.value = 'Post saved successfully'
+  setAlertMessage('Post saved successfully')
   isUnsavedChangesPresent.value = false
   getPost()
   editButtonClicked()

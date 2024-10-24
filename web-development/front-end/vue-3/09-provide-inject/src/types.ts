@@ -7,15 +7,15 @@ export interface NameValue {
 
 export interface FirstNameFunction {
   firstName: Ref<string>
-  updateFirst: (vaalue: string) => void
+  updateFirst: (value: string) => void
 }
 
 export interface MiddleNameFunction {
   middleName: Ref<string>
-  updateMiddle: (vaalue: string) => void
+  updateMiddle: (value: string) => void
 }
 
 export interface LastNameFunction {
   lastName: Ref<string>
-  updateLast: (vaalue: string) => void
+  updateLast: (value: string) => void
 }

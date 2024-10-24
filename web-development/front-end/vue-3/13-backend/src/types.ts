@@ -1,6 +1,6 @@
-export interface Post {
-  id: number
-  title: string
-  body: string
-  date: string
+import { Ref } from "vue"
+
+export interface AlertMessageFunction {
+  alertMessage: Ref<string>
+  setAlertMessage: (value: string) => void
 }
