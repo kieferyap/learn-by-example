@@ -1,4 +1,4 @@
-import { User, Role, Post } from './fake-api-data-types'
+import { User, Role, Post } from './types'
 
 // Sample Data
 export const users: Array<User> = [

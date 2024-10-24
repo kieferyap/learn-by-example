@@ -1,29 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Post from '../../models/post'
-import { onBeforeRouteLeave } from 'vue-router'
-import { useRouter } from 'vue-router'
 
-const isUnsavedChangesPresent = ref(false)
-const router = useRouter()
-
-// The parameters are: to, from, next
-onBeforeRouteLeave((_, _2, next) => {
-  // Ask for confirmation if there are unsaved changes.
-  if (isUnsavedChangesPresent.value) {
-    const answer = window.confirm('You have unsaved changes. Are you sure you want to leave?')
-    if (answer) {
-      next()
-    }
-    else {
-      next(false)
-    }
-  }
-  else {
-    // Allow navigation because there are no unsaved changes
-    next()
-  }
-})
+interface Emit {
+  (e: "changed", value: boolean): void
+  (e: "saved", value: number): void
+}
+const emit = defineEmits<Emit>()
 
 // Component custom properties: Props
 interface Props {
@@ -43,13 +26,16 @@ const id = ref(props.id)
 
 // Save the post
 const savePost = async function () {
+  emit('changed', false)
+
   try {
+    const currentDate = new Date().toISOString().split('T')[0]
     // New post
     if (props.id === 0) {
       const post = new Post({
         title: title.value,
         body: body.value,
-        date: new Date().toISOString().split('T')[0],
+        date: currentDate,
         userId: 1
       })
       const newPost = await post.save()
@@ -62,11 +48,11 @@ const savePost = async function () {
       const post = 'data' in response ? response.data : response
       post.title = title.value
       post.body = body.value
+      post.date = currentDate
       await post.save()
     }
 
-    // Redirect to new post
-    router.push(`/post/${id.value}`)
+    emit('saved', id.value)
   } catch (error) {
     console.error(`An error occured: ${error}`)
   }
@@ -86,7 +72,7 @@ const savePost = async function () {
         class="form-control"
         placeholder="Title"
         v-model="title"
-        @change="isUnsavedChangesPresent = true"
+        @change="$emit('changed', true)"
       >
     </div>
 
@@ -97,17 +83,21 @@ const savePost = async function () {
         rows="3"
         placeholder="Body"
         v-model="body"
-        @change="isUnsavedChangesPresent = true"
+        @change="$emit('changed', true)"
       />
     </div>
 
     <!-- Save button -->
-    <button
-      class="btn btn-primary mb-4"
-      type="button"
-      @click="savePost"
-    >
-      Save
-    </button>
+    <div class="row">
+      <div class="col text-end">
+        <button
+          class="btn btn-primary mb-4"
+          type="button"
+          @click="savePost"
+        >
+          Save
+        </button>
+      </div>
+    </div>
   </div>
 </template>
