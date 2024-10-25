@@ -13,8 +13,7 @@ const getPosts = async function () {
   try {
     isLoading.value = true
     const query = { userId: 1 }
-    const response = await Post.where(query).get()
-    allPosts.value = 'data' in response ? response.data : response
+    allPosts.value = await Post.where(query).get()
     isLoading.value = false
   } catch (error) {
     console.error(`Failed to fetch resource: ${error}`)

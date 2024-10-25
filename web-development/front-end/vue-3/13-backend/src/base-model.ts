@@ -15,5 +15,8 @@ export default class BaseModel extends Model {
     return { data: await this.$http(config.url, config) }
   }
 
+  async getEntries(): Promise<this[]> {
+    const response = await super.get()
+    return 'data' in response ? response.data : response
+  }
 }
-

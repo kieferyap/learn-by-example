@@ -46,7 +46,8 @@ const editButtonClicked = function () {
 const getPost = async function () {
   try {
     isLoading.value = true
-    post.value = await Post.find(id.value)
+    const response = await Post.find(id.value)
+    post.value = 'data' in response ? response.data : response
     isLoading.value = false
   } catch (error) {
     console.error(`Failed to fetch resource: ${error}`)
@@ -108,6 +109,7 @@ getPost()
           type="button"
           class="btn btn-outline-secondary btn-sm me-2"
         >
+          <!-- TODO: Delete functionality -->
           Delete
         </button>
         <button

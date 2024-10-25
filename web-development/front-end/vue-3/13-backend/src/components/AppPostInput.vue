@@ -44,8 +44,7 @@ const savePost = async function () {
 
     // Update post
     else {
-      const response = await Post.find(props.id)
-      const post = 'data' in response ? response.data : response
+      const post = await Post.find(props.id)
       post.title = title.value
       post.body = body.value
       post.date = currentDate
