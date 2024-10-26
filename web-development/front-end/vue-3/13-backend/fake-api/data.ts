@@ -7,7 +7,7 @@ export const users: Array<User> = [
   { id: 3, username: 'gible', password: '', roleType: 'U' },
   { id: 4, username: 'dragonair', password: '', roleType: 'M' },
   { id: 5, username: 'gabite', password: '', roleType: 'M' },
-  { id: 6, username: 'gabite', password: '', roleType: 'A' },
+  { id: 6, username: 'dragonite', password: '', roleType: 'A' },
 ]
 
 export const roles: Array<Role> = [

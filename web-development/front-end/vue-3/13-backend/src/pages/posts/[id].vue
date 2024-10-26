@@ -7,7 +7,9 @@ import Post from './../../../models/post'
 import AppPostInput from '../../components/AppPostInput.vue'
 import { onBeforeRouteLeave } from 'vue-router'
 import { AlertMessageFunction } from './../../types'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const route = useRoute('/posts/[id]')
 const id = ref(Number(route.params.id))
 const post = ref<Post | null>(null)
@@ -15,7 +17,7 @@ const isLoading = ref(false)
 const isEditing = ref(false)
 const isUnsavedChangesPresent = ref(false)
 
-const { alertMessage, setAlertMessage } = inject('alert-message') as AlertMessageFunction
+const { setAlertMessage } = inject('alert-message') as AlertMessageFunction
 
 // The parameters are: to, from, next
 onBeforeRouteLeave((_, _2, next) => {
@@ -61,24 +63,17 @@ const savedPost = function () {
   editButtonClicked()
 }
 
+const deletePost = async function () {
+  const post = await Post.find(id.value)
+  await post.delete()
+  setAlertMessage('Post deleted successfully')
+  router.push('/posts')
+}
+
 getPost()
 </script>
 
 <template>
-  <div
-    class="alert alert-primary alert-dismissible fade show"
-    role="alert"
-    v-if="alertMessage"
-  >
-    {{ alertMessage }}
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-      @click="alertMessage = ''"
-    />
-  </div>
   <AppLoading
     :isLoading="isLoading"
     variant="primary"
@@ -108,8 +103,8 @@ getPost()
         <button
           type="button"
           class="btn btn-outline-secondary btn-sm me-2"
+          @click="deletePost"
         >
-          <!-- TODO: Delete functionality -->
           Delete
         </button>
         <button

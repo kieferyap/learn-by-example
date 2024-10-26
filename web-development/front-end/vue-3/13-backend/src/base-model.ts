@@ -11,12 +11,8 @@ export default class BaseModel extends Model {
   }
 
   async request(config: any) {
+    console.log('[base-model.ts] Calling the following URL:', config.url)
     config.body = 'data' in config ? JSON.parse(JSON.stringify(config.data)) : undefined
     return { data: await this.$http(config.url, config) }
-  }
-
-  async getEntries(): Promise<this[]> {
-    const response = await super.get()
-    return 'data' in response ? response.data : response
   }
 }

@@ -1,4 +1,5 @@
 import { ofetch } from 'ofetch'
+import router from './router'
 
 export const $api = ofetch.create({
   baseURL: 'http://localhost:3001/api',
@@ -6,5 +7,10 @@ export const $api = ofetch.create({
     options.headers = {
       ...options.headers,
     }
+  },
+
+  // Error response (e.g.: 404, 500, etc.)
+  async onResponseError({ response }) {
+    router.push(`/not-found/${response.status}`)
   }
 })

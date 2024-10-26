@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { users, roles, posts } from './fake-api/data'
-import { Post } from './fake-api/types'
+import { User, Post } from './fake-api/types'
 
 import express from 'express'
 import cors from 'cors'
@@ -15,10 +15,23 @@ let localPosts = posts
 //// GET requests for all tables
 app.get('/api/users', (req: Request, res: Response) => {
   const filter = req.query.filter
+  const include = req.query.include
 
   // Get all users
   if (!filter) {
     console.log('[GET] all users')
+    const entries: User[] = JSON.parse(JSON.stringify(localUsers)) // Create deep copy
+    
+    // Include
+    if (include?.length) {
+      console.log('[GET][USER] Includes:', include)
+      entries.forEach((entry: User) => {
+        entry.roleType = roles.find(role => role.type === entry.roleType) ?? ''
+      })
+      res.json(entries)
+      return
+    }
+
     res.json(localUsers)
     return
   }
@@ -27,9 +40,10 @@ app.get('/api/users', (req: Request, res: Response) => {
 
   if (username) {
     console.log(`[GET] user with username: ${username}`)
-    const user = localUsers.find(user => user.username === username);
-    user
-      ? res.json(user)
+    const entry = localUsers.find(user => user.username === username)
+
+    entry
+      ? res.json(entry)
       : res.status(404).json({ error: 'Resource not found' })
   }
 })
@@ -47,9 +61,9 @@ app.get('/api/roles', (req: Request, res: Response) => {
   const type = filter['type']
   if (type) {
     console.log(`[GET] role with type: ${type}`)
-    const role = roles.find(role => role.type === type);
-    role
-      ? res.json(role)
+    const entry = roles.find(role => role.type === type);
+    entry
+      ? res.json(entry)
       : res.status(404).json({ error: 'Resource not found' })
   }
 })
@@ -69,9 +83,9 @@ app.get('/api/posts', (req: Request, res: Response) => {
   // Get post from specific user with userID
   if (userId) {
     console.log(`[GET] post from user with userId: ${userId}`)
-    const posts = localPosts.filter(post => post.userId === userId)
-    posts
-      ? res.json(posts)
+    const entry = localPosts.filter(post => post.userId === userId)
+    entry
+      ? res.json(entry)
       : res.status(404).json({ error: 'Resource not found' })
   }
 })
@@ -80,9 +94,9 @@ app.get('/api/posts', (req: Request, res: Response) => {
 app.get('/api/posts/:id', (req: Request, res: Response) => {
   const id = Number(req.params.id)
   console.log(`[GET] post with id: ${id}`)
-  const post = localPosts.find(post => post.id === id)
-  post
-    ? res.json(post)
+  const entry = localPosts.find(post => post.id === id)
+  entry
+    ? res.json(entry)
     : res.status(404).json({ error: 'Resource not found' })
 })
 
@@ -123,7 +137,7 @@ app.put('/api/posts/:id', (req: Request, res: Response) => {
 
 //// DELETE
 // Post
-app.delete('/api/post/:id', (req: Request, res: Response) => {
+app.delete('/api/posts/:id', (req: Request, res: Response) => {
   console.log(`[DELETE] post with id: ${req.params.id}`)
   const { id } = req.params
   const postIndex = posts.findIndex(post => post.id === Number(id))

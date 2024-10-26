@@ -11,7 +11,7 @@
   "dependencies": {
     "@babel/runtime": "^7.25.7",
     "@types/express": "^5.0.0",
-    "@types/node": "^22.7.8",
+    "@types/node": "^22.8.1",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "fake-api": "^0.0.1",

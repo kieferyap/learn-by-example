@@ -1,10 +1,4 @@
 // Sample Tables
-export interface User {
-  id: number
-  username: string
-  password: string
-  roleType: string
-}
 
 export interface Role {
   id: number
@@ -22,4 +16,11 @@ export interface Post {
   body: string
   date: string
   userId: number
+}
+
+export interface User {
+  id: number
+  username: string
+  password: string
+  roleType: string | Role
 }

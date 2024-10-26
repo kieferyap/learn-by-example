@@ -12,13 +12,6 @@ class Post extends BaseModel {
   resource() {
     return 'posts'
   }
-
-  relations() {
-    // Use 'relationships.user' instead to eager load
-    return {
-      userId: User
-    }
-  }
 }
 
 export default Post

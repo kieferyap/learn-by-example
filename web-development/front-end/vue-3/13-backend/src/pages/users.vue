@@ -1,18 +1,7 @@
 <script lang="ts" setup>
-import { definePage } from 'unplugin-vue-router/runtime'
 import User from '../../models/user'
 import { ref } from 'vue'
 import AppLoading from './../components/AppLoading.vue'
-
-definePage({
-  // Page-specific navigation guard
-  beforeEnter(to, from, next) {
-    console.log('users.vue beforeEnter called:', to, from)
-    next() // allows access to this page
-    // next(false) // blocks access to this page
-    // next('/post') // redirects to another page
-  }
-})
 
 const isLoading = ref(false)
 const allUsers = ref<User[]>()
@@ -20,9 +9,8 @@ const allUsers = ref<User[]>()
 const getUsers = async function () {
   try {
     isLoading.value = true
-    const response = await User.get()
+    const response = await User.include('roleType').get()
     allUsers.value = 'data' in response ? response.data : response
-    console.log('response', allUsers.value)
     isLoading.value = false
   } catch (error) {
     console.error(`Failed to fetch users: ${error}`)
@@ -49,10 +37,10 @@ getUsers()
       <thead>
         <tr>
           <th
-            v-for="(header, value) in tableHeaders"
-            :key="header"
+            v-for="(header, key) in tableHeaders"
+            :key="key"
           >
-            {{ value }}
+            {{ header }}
           </th>
         </tr>
       </thead>
@@ -60,8 +48,7 @@ getUsers()
         <tr v-for="user in allUsers" :key="user.id">
           <th scope="row">{{ user.id }}</th>
           <td>{{ user.username }}</td>
-          <td>{{ user.roleType }}</td>
-          <!-- TODO: Get the role name by defining relations-->
+          <td>{{ user.roleType.name }}</td>
         </tr>
       </tbody>
     </table>
