@@ -61,7 +61,7 @@ app.get('/api/roles', (req: Request, res: Response) => {
   const type = filter['type']
   if (type) {
     console.log(`[GET] role with type: ${type}`)
-    const entry = roles.find(role => role.type === type);
+    const entry = roles.find(role => role.type === type)
     entry
       ? res.json(entry)
       : res.status(404).json({ error: 'Resource not found' })

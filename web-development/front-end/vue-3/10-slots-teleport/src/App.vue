@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import AppLoading from './components/AppLoading.vue';
-import FullNameInput from './components/FullNameInput.vue';
+import { ref, watch } from 'vue'
+import AppLoading from './components/AppLoading.vue'
+import FullNameInput from './components/FullNameInput.vue'
 
 const isLoading = ref(true)
 const progress = ref(0)

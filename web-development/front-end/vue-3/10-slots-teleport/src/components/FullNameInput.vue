@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import ListGroupInput from './ListGroupInput.vue';
+import { ref } from 'vue'
+import ListGroupInput from './ListGroupInput.vue'
 
 const first = ref('Nicholas')
 const middle = ref('Piberius')

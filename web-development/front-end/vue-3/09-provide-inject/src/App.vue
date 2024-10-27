@@ -6,9 +6,9 @@ import {
   readonly,
   ref,
 } from "vue"
-import { FirstNameFunction, MiddleNameFunction, LastNameFunction } from "./types";
-import BorderedFullName from "./components/BorderedFullName.vue";
-import ComponentSelector from "./components/ComponentSelector.vue";
+import { FirstNameFunction, MiddleNameFunction, LastNameFunction } from "./types"
+import BorderedFullName from "./components/BorderedFullName.vue"
+import ComponentSelector from "./components/ComponentSelector.vue"
 
 const firstName: Ref<string> = ref('Judith')
 const middleName: Ref<string> = ref('Laverne')

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppPost from '../../components/AppPost.vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
-import { Ref, ref, watch } from 'vue';
+import { Ref, ref, watch } from 'vue'
 import data from './../../data'
 import { Post } from './../../types'
 

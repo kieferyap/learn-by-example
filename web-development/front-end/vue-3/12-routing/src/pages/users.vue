@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { definePage } from 'unplugin-vue-router/runtime';
+import { definePage } from 'unplugin-vue-router/runtime'
 
 definePage({
   // Page-specific navigation guard
@@ -9,7 +9,7 @@ definePage({
     // next(false) // blocks access to this page
     // next('/post') // redirects to another page
   }
-});
+})
 
 </script>
 

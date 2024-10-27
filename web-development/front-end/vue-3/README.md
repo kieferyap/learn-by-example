@@ -78,11 +78,22 @@
   - Routing Programmatically: `router.push()`
   - Same Path Routing: `onBeforeRouteUpdate(updateGuard)`
   - definePage(): `alias`, `meta`, `path`, `props`, `redirect`, `beforeEnter(to, from, next)` 
-- [13 Back-end Communication](./13-backend/)
-- [14 Vue and CASL: An Authorization Library](./14-casl/)
-- 15 States with Pinia
-- 16 Vue Use
-- 17 Mixins and Hooks
+- [13 Back-end Communication with vue-api-query](./13-backend/)
+  - Vue API Query
+  - Create
+  - Read
+    - Read a list
+    - Read an entry
+    - Read with related table
+  - Update
+  - Delete
+- 14 Mixins and Composables
+- 15 Vue and CASL: An Authorization Library
+- 16 States with Pinia
+- 17 Vue Use
 - 18 Optimization
 - 19 Testing with ViTest
 - 20 Progressive Web Applications
+  - Setting up
+  - Notifying
+- 21 Docker

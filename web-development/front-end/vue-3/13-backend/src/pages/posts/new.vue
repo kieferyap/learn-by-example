@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { inject } from 'vue';
-import AppPostInput from '../../components/AppPostInput.vue';
+import { inject } from 'vue'
+import AppPostInput from '../../components/AppPostInput.vue'
 import { useRouter } from 'vue-router'
-import { AlertMessageFunction } from '../../types';
+import { AlertMessageFunction } from '../../types'
 
 const { setAlertMessage } = inject('alert-message') as AlertMessageFunction
 

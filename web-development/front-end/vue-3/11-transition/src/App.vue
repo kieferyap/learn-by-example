@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import AppCard from './components/AppCard.vue';
-import BasicTransition from './components/BasicTransition.vue';
-import OutInTransition from './components/OutInTransition.vue';
-import ItemListAdder from './components/ItemListAdder.vue';
+import AppCard from './components/AppCard.vue'
+import BasicTransition from './components/BasicTransition.vue'
+import OutInTransition from './components/OutInTransition.vue'
+import ItemListAdder from './components/ItemListAdder.vue'
 
 </script>
 

@@ -5,7 +5,7 @@ import {
   reactive,
   ref,
 } from "vue"
-import { NameValue } from "./types";
+import { NameValue } from "./types"
 
 const fullName = reactive({
   first: "",

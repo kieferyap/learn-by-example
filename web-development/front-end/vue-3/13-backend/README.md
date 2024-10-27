@@ -16,7 +16,6 @@ These were the commands I ran to start `13-backend`. You don't have to run them 
 npm install fake-api express
 npm install typescript ts-node @types/node @types/express cors
 npm install vue-api-query
-
 ```
 
 This project also makes use of the routing packages, so if you'd like to install them, feel free to have a look at [../12-routing/README.md](./../12-routing/README.md).

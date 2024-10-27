@@ -1,5 +1,5 @@
 function generateRandomNumber(from, to) {
-  return Math.floor(Math.random() * (to - from)) + from;
+  return Math.floor(Math.random() * (to - from)) + from
 }
 
 const app = Vue.createApp({
