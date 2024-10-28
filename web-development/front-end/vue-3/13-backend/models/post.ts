@@ -1,5 +1,4 @@
 import BaseModel from "../src/base-model"
-import User from './user'
 
 interface Post {
   id: number

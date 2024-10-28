@@ -21,7 +21,7 @@ class User extends BaseModel {
 
   relations() {
     return {
-      roletype: Role, // Eager load their role
+      roletype: Role,
     }
   }
 }

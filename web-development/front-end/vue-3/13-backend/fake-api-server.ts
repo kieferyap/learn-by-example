@@ -35,17 +35,6 @@ app.get('/api/users', (req: Request, res: Response) => {
     res.json(localUsers)
     return
   }
-
-  const username = filter['username']
-
-  if (username) {
-    console.log(`[GET] user with username: ${username}`)
-    const entry = localUsers.find(user => user.username === username)
-
-    entry
-      ? res.json(entry)
-      : res.status(404).json({ error: 'Resource not found' })
-  }
 })
 
 app.get('/api/roles', (req: Request, res: Response) => {
