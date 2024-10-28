@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FullNameListInput from './FullNameListInput.vue';
+import FullNameListInput from './FullNameListInput.vue'
 </script>
 
 <template>

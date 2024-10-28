@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { Ref, ref } from 'vue'
 
 const newItem = ref('')
 const items: Ref<Array<string>> = ref([])

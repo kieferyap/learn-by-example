@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import { NameValue } from '@/types';
+import { NameValue } from '@/types'
 
 // Component custom properties: Props
 interface Props {

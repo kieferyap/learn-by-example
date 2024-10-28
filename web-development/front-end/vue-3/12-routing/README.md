@@ -1,19 +1,37 @@
 # About
 ## Objective
 To learn about routing with Unpluggin Vue Router
-- Router File
-- Scroll Behavior
-- Route Array
-- Navigation Guards
+- Router File: 
+  - `createRouter()`
+  - `createWebHistory()`
+- Scroll Behavior: `scrollBehavior(to, from, savedPosition)`
+- Routes Array
+  - `path`
+  - `component`
+  - `props`
+  - `children`
+  - `query`
+- Navigation Guards: `beforeEach()`
 - Unplugin Vue Router
-  - File-based Routing
-  - Catch-all Routes
-- Router View
-- Router Link
+  - File-based Routing: 
+    - `posts.vue`
+    - `posts/index.vue`
+    - `posts/[id].vue`
+  - Catch-all Routes: `[...error.vue]`
+- Router View: `<router-view name="" />`
 - Nested Routes
-- Routing Programmatically
-- Same Path Routing
-- definePage() 
+- Router Link: 
+  - `<router-link :to="" tag="">`
+  - `.router-link-active`
+- Routing Programmatically: `router.push()`
+- Same Path Routing: `onBeforeRouteUpdate(updateGuard)`
+- definePage(): 
+  -`alias`
+  - `meta`
+  - `path`
+  - `props`
+  - `redirect`
+  - `beforeEnter(to, from, next)` 
 
 ## Running the Demo
 - Navigate to the `12-routing` directory in your command line

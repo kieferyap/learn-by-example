@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { TabData } from '@/types'
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const tabData: Array<TabData> = [
   {

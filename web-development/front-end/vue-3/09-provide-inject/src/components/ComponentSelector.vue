@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Ref, ref, shallowRef, watch } from 'vue';
-import ListGroupInput from './ListGroupInput.vue';
-import AppendedInput from './AppendedInput.vue';
+import { shallowRef } from 'vue'
+import ListGroupInput from './ListGroupInput.vue'
+import AppendedInput from './AppendedInput.vue'
 
 const selectedValue = shallowRef(AppendedInput)
 const bindOptions = {

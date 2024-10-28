@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { onBeforeRouteLeave } from 'vue-router';
+import { ref } from 'vue'
+import { onBeforeRouteLeave } from 'vue-router'
 
 const isUnsavedChangesPresent = ref(true)
 

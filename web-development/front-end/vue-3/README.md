@@ -1,9 +1,9 @@
 # Objective
 - To learn the ins and outs of Vue
 
-# Target
+# Who's this for?
 - People who are starting out with Vue and want to see actual code examples from mini projects.
-- People who are familiar with Vue and want some code snippets they can copy-paste.
+- People who are familiar with Vue and want some code snippets they can potentially copy-paste.
 
 # Author Notes
 - While I have notes and explanations in each lesson's README, this is not a comprehensive guide.
@@ -65,24 +65,35 @@
   - Transition Multiple Elements with `v-if`
   - Transition Group
 - [12 Routing with unplugin-vue-router](./12-routing/)
-  - Router File
-  - Scroll Behavior
-  - Route Array
-  - Navigation Guards
+  - Router File: `createRouter()`, `createWebHistory()`
+  - Scroll Behavior: `scrollBehavior(to, from, savedPosition)`
+  - Routes Array: `path`, `component`, `props`, `children`, `query`
+  - Navigation Guards: `beforeEach()`
   - Unplugin Vue Router
-    - File-based Routing
-    - Catch-all Routes
-  - Router View
-  - Router Link
+    - File-based Routing: `posts.vue`, `posts/index.vue`, `posts/[id].vue`
+    - Catch-all Routes: `[...error.vue]`
+  - Router View: `<router-view name="" />`
   - Nested Routes
-  - Routing Programmatically
-  - Same Path Routing
-  - definePage() 
-- 13 Vue and CASL: An Authorization Library
-- 14 States with Pinia
-- 15 Back-end Communication
-- 16 Mixins and Hooks
-- 17 Optimization
-- 18 Testing with ViTest
-- 19 Progressive Web Applications
-- 20 Vue Style Guide
+  - Router Link: `<router-link :to="" tag="">`, `.router-link-active`
+  - Routing Programmatically: `router.push()`
+  - Same Path Routing: `onBeforeRouteUpdate(updateGuard)`
+  - definePage(): `alias`, `meta`, `path`, `props`, `redirect`, `beforeEnter(to, from, next)` 
+- [13 Back-end Communication with vue-api-query](./13-backend/)
+  - Vue API Query
+  - Create
+  - Read
+    - Read a list
+    - Read an entry
+    - Read with related table
+  - Update
+  - Delete
+- 14 Mixins and Composables
+- 15 Vue and CASL: An Authorization Library
+- 16 States with Pinia
+- 17 Vue Use
+- 18 Optimization
+- 19 Testing with ViTest
+- 20 Progressive Web Applications
+  - Setting up
+  - Notifying
+- 21 Docker
