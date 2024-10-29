@@ -87,7 +87,7 @@
     - Read with related table
   - Update
   - Delete
-- 14 Mixins and Composables
+- 14 Composables
 - 15 Vue and CASL: An Authorization Library
 - 16 States with Pinia
 - 17 Vue Use
