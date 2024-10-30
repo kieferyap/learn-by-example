@@ -193,7 +193,7 @@ src/pages/
   - In our case, we have a default `<router-view>` at line 29, and a **footer** `<router-view>` at line 34.
 
 ## Nested Routes
-- You can the above Router Views see this in action in [src/pages/posts.vue](./src/pages/posts.vue), which also has two router views: 
+- You can see this in action in [src/pages/posts.vue](./src/pages/posts.vue), which also has two router views: 
   - a default, nameless one 
   - and a footer one.
 - When the user goes to `/posts/`, the following happens:
