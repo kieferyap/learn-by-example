@@ -153,6 +153,27 @@ app.delete('/api/user/:id', (req: Request, res: Response) => {
   }
 })
 
+app.post('/api/auth/login', async (req: Request, res: Response) => {
+  console.log(`[POST] Logging in with request:`, req.body)
+  const { username, password } = req.body
+
+  const userIndex = localUsers.findIndex(user => user.username === username && user.password === password)
+  if (userIndex === -1) {
+    res.status(401).json({ error: 'Incorrect credentials' })
+    return
+  }
+
+  // NOTE: Do NOT use this as an authToken. I'm only doing this as an example.
+  const loggedInUser = localUsers[userIndex]
+  res.json({
+    authToken: `justAnAuthTokenYay123456${username}`,
+    userData: {
+      username: loggedInUser.username,
+      roleType: loggedInUser.roleType
+    }
+  })
+})
+
 const port = 3001
 app.listen(port, () => {
   console.log(`Fake API server is now running on http://localhost:${port}`)

@@ -11,6 +11,8 @@ export const $api = ofetch.create({
 
   // Error response (e.g.: 404, 500, etc.)
   async onResponseError({ response }) {
-    router.push(`/not-found/${response.status}`)
+    if (response.status !== 401) {
+      router.push(`/not-found/${response.status}`)
+    }
   }
 })

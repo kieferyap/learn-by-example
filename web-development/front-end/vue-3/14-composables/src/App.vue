@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { provide, ref } from 'vue'
+import { ButtonHTMLAttributes, provide, ref } from 'vue'
 import AppCard from './components/AppCard.vue'
 import RouterButton from './components/RouterButton.vue'
-import { AlertMessageFunction } from './types'
+import { AlertMessageFunction, LoggedInFunction } from './types'
+import { deleteCookie, getCookie } from './composables/useCookie'
+import { useRouter } from 'vue-router'
 
-const buttonProperties = {
+const buttonProperties: ButtonHTMLAttributes = {
   type: 'button',
   class: 'btn btn-outline-primary'
 }
@@ -14,14 +16,35 @@ const setAlertMessage = function (value: string) {
   alertMessage.value = value
 }
 
+const isLoggedIn = ref(false)
+const setLoggedIn = function (value: boolean) {
+  isLoggedIn.value = value
+}
+isLoggedIn.value = !!(getCookie('authToken') && getCookie('userData'))
+
+const router = useRouter()
+const logout = async function () {
+  // Clear the cookies
+  deleteCookie('authToken')
+  deleteCookie('userData')
+  isLoggedIn.value = false
+
+  // Set alert message
+  alertMessage.value = 'Logout successful'
+
+  // Redirect to login
+  router.push('/login')
+}
+
 provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFunction)
+provide('is-logged-in', { isLoggedIn, setLoggedIn } as LoggedInFunction)
 
 </script>
 
 <template>
   <AppCard title="Composables">
     <div class="row">
-      <div class="col-3">
+      <div :class="isLoggedIn ? 'col-3' : 'd-none'">
         <div class="btn-group-vertical w-100">
           <RouterButton
             to="/posts"
@@ -33,9 +56,15 @@ provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFuncti
             :button="buttonProperties"
             name="Users"
           />
+          <button
+            v-bind="buttonProperties"
+            @click="logout"
+          >
+            Logout
+          </button>
         </div>
       </div>
-      <div class="col-9">
+      <div :class="isLoggedIn ? 'col-9' : 'col-12'">
         <div
           class="alert alert-primary alert-dismissible fade show"
           role="alert"

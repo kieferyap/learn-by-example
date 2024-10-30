@@ -13,7 +13,7 @@ To learn about making HTTP requests with ofetch (and vue-api-query)
 These were the commands I ran to start `14-composables`. You don't have to run them anymore, but these commands may be helpful to those who would like to setup a project that has `cookie-es`:
 
 ```bash
-npm install cookie-es
+npm install cookie-es bcryptjs
 ```
 
 This project also makes use of the routing and backend communication packages, so if you'd like to install them, feel free to have a look at [../13-routing/README.md](./../13-routing/README.md).

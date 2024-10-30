@@ -1,6 +1,7 @@
 // Router
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
+import { getCookie } from './composables/useCookie'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -27,7 +28,7 @@ router.beforeEach(to => {
     return
 
   // We check if the user is logged in
-  const isLoggedIn = false
+  const isLoggedIn = !!(getCookie('authToken') && getCookie('userData'))
 
   // The user is trying to go to login/signup pages
   if (to.meta.unauthenticated) {

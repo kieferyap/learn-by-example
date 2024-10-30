@@ -2,12 +2,42 @@ import { User, Role, Post } from './types'
 
 // Sample Data
 export const users: Array<User> = [
-  { id: 1, username: 'dratini', password: '', roleType: 'U' },
-  { id: 2, username: 'bagon', password: '', roleType: 'U' },
-  { id: 3, username: 'gible', password: '', roleType: 'U' },
-  { id: 4, username: 'dragonair', password: '', roleType: 'M' },
-  { id: 5, username: 'gabite', password: '', roleType: 'M' },
-  { id: 6, username: 'dragonite', password: '', roleType: 'A' },
+  {
+    id: 1,
+    username: 'dratini',
+    password: 'Twister147', // Don't store them like this, in plain text...
+    roleType: 'U'
+  },
+  {
+    id: 2,
+    username: 'bagon',
+    password: 'DragonClaw371', // ...Instead, use a hashing algorithm.
+    roleType: 'U'
+  },
+  {
+    id: 3,
+    username: 'gible',
+    password: 'DragonBreath443', // Feel free to check out the functions in /src/composables/useEncryption.ts
+    roleType: 'U'
+  },
+  {
+    id: 4,
+    username: 'dragonair',
+    password: 'DragonTail148', // I'd also like users to actually be able to login by looking at this file,  
+    roleType: 'M'
+  },
+  {
+    id: 5,
+    username: 'gabite',
+    password: 'DragonRush444', // ...so I'm keeping them in plain text.
+    roleType: 'M'
+  },
+  {
+    id: 6,
+    username: 'dragonite',
+    password: 'Outrage149', // Also my Git Guardian's gonna complain if I have a high entropy, hashed text here.
+    roleType: 'A'
+  },
 ]
 
 export const roles: Array<Role> = [
