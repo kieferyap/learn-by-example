@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { users, roles, posts } from './fake-api/data'
-import { User, Post } from './fake-api/types'
+import { users, roles, posts } from './src/fake-api/data'
+import { User, Post } from './src/fake-api/types'
 
 import express from 'express'
 import cors from 'cors'

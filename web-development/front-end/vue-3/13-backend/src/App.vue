@@ -19,7 +19,7 @@ provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFuncti
 </script>
 
 <template>
-  <AppCard title="Routing Practice">
+  <AppCard title="Backend: HTTP Requests">
     <div class="row">
       <div class="col-3">
         <div class="btn-group-vertical w-100">

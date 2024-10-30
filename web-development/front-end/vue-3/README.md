@@ -87,12 +87,12 @@
     - Read with related table
   - Update
   - Delete
-- 14 Mixins and Composables
-- 15 Vue and CASL: An Authorization Library
-- 16 States with Pinia
-- 17 Vue Use
-- 18 Optimization
-- 19 Testing with ViTest
+- [14 Composables](./14-composables/)
+- 15 States with Pinia
+- 16 Vue and CASL: An Authorization Library
+- 17 Optimization
+- 18 Testing with ViTest
+- 19 Vue Use
 - 20 Progressive Web Applications
   - Setting up
   - Notifying
