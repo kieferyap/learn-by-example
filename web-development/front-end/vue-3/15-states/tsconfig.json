@@ -1,0 +1,28 @@
+{
+  "include": [
+    // other files...
+    "./typed-router.d.ts",
+    "./vite.config.*",
+    "./env.d.ts",
+    "./src/*",
+    "./src/*.vue",
+    "./auto-imports.d.ts", "src/composables/useApi.ts",
+  ],
+  "exclude": [
+    "./node_modules"
+  ],
+  "compilerOptions": {
+    // ...
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "moduleResolution": "Bundler",
+    "types": [
+      "unplugin-vue-router/client"
+    ]
+    // ...
+  }
+}
