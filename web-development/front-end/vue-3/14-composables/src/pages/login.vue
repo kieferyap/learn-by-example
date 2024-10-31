@@ -2,7 +2,7 @@
 import { definePage } from 'unplugin-vue-router/runtime'
 import { nextTick, ref, inject } from 'vue'
 import { $api } from './../composables/useApi'
-import { setCookie } from './../composables/useCookie'
+import useCookie from './../composables/useCookie'
 import { useRouter } from 'vue-router'
 import { AlertMessageFunction, LoggedInFunction } from './../types'
 
@@ -18,6 +18,7 @@ definePage({
 const username = ref('')
 const password = ref('')
 const router = useRouter()
+const { setCookie } = useCookie()
 
 const login = async function () {
   try {
