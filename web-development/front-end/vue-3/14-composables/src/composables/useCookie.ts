@@ -4,21 +4,29 @@ import {
   CookieSerializeOptions,
 } from 'cookie-es'
 
-const defaultCookieOptions: CookieSerializeOptions = {
-  maxAge: 60 * 60 * 24, // 1 day
-  secure: true,
-  sameSite: "strict"
-}
+export default function useCookie() {
+  const defaultCookieOptions: CookieSerializeOptions = {
+    maxAge: 60 * 60 * 24, // 1 day
+    secure: true,
+    sameSite: "strict"
+  }
 
-export const setCookie = function (key: string, value: string) {
-  document.cookie = serialize(key, value, defaultCookieOptions)
-}
+  const setCookie = function (key: string, value: string) {
+    document.cookie = serialize(key, value, defaultCookieOptions)
+  }
+  
+  const getCookie = function (key: string): string | undefined {
+    const cookies = parse(document.cookie)
+    return cookies[key]
+  }
+  
+  const deleteCookie = function (key: string) {
+    document.cookie = serialize(key, '', { ...defaultCookieOptions, maxAge: 0 })
+  }
 
-export const getCookie = function (key: string): string | undefined {
-  const cookies = parse(document.cookie)
-  return cookies[key]
-}
-
-export const deleteCookie = function (key: string) {
-  document.cookie = serialize(key, '', { ...defaultCookieOptions, maxAge: 0 })
+  return {
+    setCookie,
+    getCookie,
+    deleteCookie
+  }
 }

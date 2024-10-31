@@ -78,15 +78,15 @@
   - Routing Programmatically: `router.push()`
   - Same Path Routing: `onBeforeRouteUpdate(updateGuard)`
   - definePage(): `alias`, `meta`, `path`, `props`, `redirect`, `beforeEnter(to, from, next)` 
-- [13 Back-end Communication with vue-api-query](./13-backend/)
+- [13 Backend REST API with vue-api-query](./13-backend/)
   - Vue API Query
-  - Create
+  - Create `post.save()`
   - Read
-    - Read a list
-    - Read an entry
-    - Read with related table
-  - Update
-  - Delete
+    - Read a list `Post.get()`
+    - Read an entry `Post.find(id)`
+    - Read with related table `Post.include('comments').get()`
+  - Update `post.save()`
+  - Delete `post.delete()`
 - [14 Composables](./14-composables/)
 - 15 States with Pinia
 - 16 Vue and CASL: An Authorization Library

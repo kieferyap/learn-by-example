@@ -153,6 +153,7 @@ app.delete('/api/user/:id', (req: Request, res: Response) => {
   }
 })
 
+// Login
 app.post('/api/auth/login', async (req: Request, res: Response) => {
   console.log(`[POST] Logging in with request:`, req.body)
   const { username, password } = req.body

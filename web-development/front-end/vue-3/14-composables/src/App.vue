@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, provide, ref } from 'vue'
 import AppCard from './components/AppCard.vue'
 import RouterButton from './components/RouterButton.vue'
 import { AlertMessageFunction, LoggedInFunction } from './types'
-import { deleteCookie, getCookie } from './composables/useCookie'
+import useCookie from './composables/useCookie'
 import { useRouter } from 'vue-router'
 
 const buttonProperties: ButtonHTMLAttributes = {
@@ -16,6 +16,7 @@ const setAlertMessage = function (value: string) {
   alertMessage.value = value
 }
 
+const { deleteCookie, getCookie } = useCookie()
 const isLoggedIn = ref(false)
 const setLoggedIn = function (value: boolean) {
   isLoggedIn.value = value
