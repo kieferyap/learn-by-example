@@ -88,6 +88,8 @@
   - Update `post.save()`
   - Delete `post.delete()`
 - [14 Composables](./14-composables/)
+  - Making and using a composable
+  - Examples of composables
 - 15 States with Pinia
 - 16 Vue and CASL: An Authorization Library
 - 17 Optimization
