@@ -12,7 +12,7 @@ const username = ref('')
 const password = ref('')
 
 const login = async function () {
-  console.log('Login will be covered in mixins/composables, next lesson.')
+  console.log('Login will be covered in composables, next lesson.')
 }
 </script>
 

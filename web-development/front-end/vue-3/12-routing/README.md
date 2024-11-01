@@ -86,7 +86,7 @@ You should see the routes file, [typed-router.d.ts](./typed-router.d.ts) auto-ge
 - The router file ([router.ts](./src/router.ts)) is where all the routing magic happens, so we shall break it down over the course of this document.
 
 ## Router File: createRouter()
-In [router.ts](./src/router.ts), line 5, we are calling the `createRouter()` function, which takes in an object.
+In [router.ts](./src/router.ts), line 5, we are calling the `createRouter()` function, which takes in an object, which can have the following properties: `history`, `scrollBehavior`, and `routes`. Let's go through these one by one, starting with...
 
 ### History
 `history` ([router.ts](./src/router.ts), line 6): Tells the router how to manage routing history, and has two main modes and a memory mode:

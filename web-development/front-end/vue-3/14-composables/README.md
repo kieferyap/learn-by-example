@@ -1,6 +1,8 @@
 # About
 ## Objective
-To learn about what composables are
+To learn about composables
+- What they are
+- How to use them
 
 ## Running the Demo
 - Navigate to the `14-composables` directory in your command line
@@ -43,5 +45,5 @@ This project also makes use of the routing and backend communication packages, s
 2. `useCookie.ts` has three functions: `getCookie()`, `setCookie()`, and `deleteCookie()`
 3. `getCookie()` is used to check if the user is logged in. (See [router.ts](./src/router.ts), line 32)
 
-# Further reading:
+# Further reading
 - Vue Composables: https://vuejs.org/guide/reusability/composables.html
