@@ -2,6 +2,7 @@
 ## Objective
 To learn about Stores (with Pinia)
 - Intro to Stores
+- Key Concepts
 - Stores with Pinia
 - Store Creation
 - Data Retrieval

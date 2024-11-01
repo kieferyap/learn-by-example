@@ -91,6 +91,13 @@
   - Making and using a composable
   - Examples of composables
 - [15 Stores with Pinia](./15-stores/)
+  - Intro to Stores
+  - Key Concepts
+  - Stores with Pinia
+  - Store Creation
+  - Data Retrieval
+  - Data Update
+  - Types of Stores (Options and Setup)
 - 16 Vue and CASL: An Authorization Library
 - 17 Optimization
 - 18 Testing with ViTest
