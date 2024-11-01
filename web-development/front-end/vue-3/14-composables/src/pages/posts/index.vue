@@ -12,9 +12,12 @@ const allPosts = ref<Post[]>([])
 const getPosts = async function () {
   try {
     isLoading.value = true
+    console.log('Getting the posts of the currently logged in user will be covered next lesson, stores with Pinia.')
+
     const query = { userId: 1 }
     const response = await Post.where(query).get()
     allPosts.value = 'data' in response ? response.data : response
+    
     isLoading.value = false
   } catch (error) {
     console.error(`Failed to fetch resource: ${error}`)

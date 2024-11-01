@@ -1,3 +1,4 @@
+// Custom type 
 export const RoleType = {
   User: 'U',
   Moderator: 'M',
