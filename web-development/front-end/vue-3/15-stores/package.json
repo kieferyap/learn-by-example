@@ -1,5 +1,5 @@
 {
-  "name": "14-composables",
+  "name": "15-stores",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -18,6 +18,7 @@
     "express": "^4.21.1",
     "fake-api": "^0.0.1",
     "ofetch": "^1.4.1",
+    "pinia": "^2.2.5",
     "ts-node": "^10.9.2",
     "vue": "^3.5.10",
     "vue-api-query": "^1.11.0",

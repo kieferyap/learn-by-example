@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ButtonHTMLAttributes, provide, ref } from 'vue'
-import AppCard from './components/AppCard.vue'
-import RouterButton from './components/RouterButton.vue'
-import { AlertMessageFunction, LoggedInFunction } from './types'
-import useCookie from './composables/useCookie'
+import { useUserStore } from './stores/useUserStore'
+import { AlertMessageFunction } from './types'
+import { RoleType } from './enums/role'
 import { useRouter } from 'vue-router'
+import RouterButton from './components/RouterButton.vue'
+import AppCard from './components/AppCard.vue'
+import useCookie from './composables/useCookie'
 
+const userStore = useUserStore()
 const buttonProperties: ButtonHTMLAttributes = {
   type: 'button',
   class: 'btn btn-outline-primary'
@@ -16,19 +19,26 @@ const setAlertMessage = function (value: string) {
   alertMessage.value = value
 }
 
+// Get login status
 const { deleteCookie, getCookie } = useCookie()
-const isLoggedIn = ref(false)
-const setLoggedIn = function (value: boolean) {
-  isLoggedIn.value = value
+const userData = JSON.parse(getCookie('userData') ?? '{}')
+
+if ('username' in userData && 'roleType' in userData && 'id' in userData) {
+  userStore.username = userData.username
+  userStore.role = userData.roleType
+  userStore.id = userData.id
 }
-isLoggedIn.value = !!(getCookie('authToken') && getCookie('userData'))
 
 const router = useRouter()
 const logout = async function () {
   // Clear the cookies
   deleteCookie('authToken')
   deleteCookie('userData')
-  isLoggedIn.value = false
+
+  // Clear the store
+  userStore.username = ''
+  userStore.role = RoleType.User
+  userStore.id = 0
 
   // Set alert message
   alertMessage.value = 'Logout successful'
@@ -38,14 +48,21 @@ const logout = async function () {
 }
 
 provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFunction)
-provide('is-logged-in', { isLoggedIn, setLoggedIn } as LoggedInFunction)
 
 </script>
 
 <template>
   <AppCard title="Composables">
+    <!-- Header -->
+    <div class="row" v-if="userStore.id">
+      <h4 class="col-12 text-secondary">
+        Welcome, {{ userStore.username }}
+      </h4>
+    </div>
+
+    <!-- Body -->
     <div class="row">
-      <div :class="isLoggedIn ? 'col-3' : 'd-none'">
+      <div :class="userStore.id ? 'col-3' : 'd-none'">
         <div class="btn-group-vertical w-100">
           <RouterButton
             to="/posts"
@@ -57,6 +74,11 @@ provide('is-logged-in', { isLoggedIn, setLoggedIn } as LoggedInFunction)
             :button="buttonProperties"
             name="Users"
           />
+          <RouterButton
+            to="/settings"
+            :button="buttonProperties"
+            name="Settings"
+          />
           <button
             v-bind="buttonProperties"
             @click="logout"
@@ -65,7 +87,7 @@ provide('is-logged-in', { isLoggedIn, setLoggedIn } as LoggedInFunction)
           </button>
         </div>
       </div>
-      <div :class="isLoggedIn ? 'col-9' : 'col-12'">
+      <div :class="userStore.username ? 'col-9' : 'col-12'">
         <div
           class="alert alert-primary alert-dismissible fade show"
           role="alert"

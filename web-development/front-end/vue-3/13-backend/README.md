@@ -67,6 +67,6 @@ This project also makes use of the routing packages, so if you'd like to install
     - The backend, using fake-api, is looking for the data within `config.body` (see [fake-api-server.ts](./fake-api-server.ts):103 and 112)
     - Therefore, the data processing within `request()` involves moving data from `.data` (if it exists) to `.body` before sending it to the backend
 
-# Further reading:
+# Further reading
 - Vue API Query: https://robsontenorio.github.io/vue-api-query/
 - Fake API: https://www.npmjs.com/package/fake-api

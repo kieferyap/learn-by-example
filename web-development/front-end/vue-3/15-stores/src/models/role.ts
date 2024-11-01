@@ -1,8 +1,9 @@
 import BaseModel from "../base-model"
+import { RoleType } from './../enums/role'
 
 interface Role {
   id: number
-  type: string
+  type: RoleType
   name: string
   action: string
   subject: string

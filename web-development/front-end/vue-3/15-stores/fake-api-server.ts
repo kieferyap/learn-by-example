@@ -124,6 +124,20 @@ app.put('/api/posts/:id', (req: Request, res: Response) => {
   }
 })
 
+app.put('/api/users/:id', (req: Request, res: Response) => {
+  console.log(`[PUT] user with id: ${req.params.id}, parameters: ${JSON.stringify(req.params)}, and body: ${JSON.stringify(req.body)}`)
+  const { id } = req.params
+  const { username } = req.body
+  const userIndex = localUsers.findIndex(user => user.id === Number(id))
+
+  if (userIndex !== -1) {
+    localUsers[userIndex].username = username
+    res.json(id)
+  } else {
+    res.status(404).json({ error: 'Resource not found' })
+  }
+})
+
 //// DELETE
 // Post
 app.delete('/api/posts/:id', (req: Request, res: Response) => {
@@ -169,6 +183,7 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
   res.json({
     authToken: `justAnAuthTokenYay123456${username}`,
     userData: {
+      id: loggedInUser.id,
       username: loggedInUser.username,
       roleType: loggedInUser.roleType
     }

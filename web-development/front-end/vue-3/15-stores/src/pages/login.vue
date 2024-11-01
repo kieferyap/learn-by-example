@@ -4,10 +4,10 @@ import { nextTick, ref, inject } from 'vue'
 import { $api } from './../composables/useApi'
 import useCookie from './../composables/useCookie'
 import { useRouter } from 'vue-router'
-import { AlertMessageFunction, LoggedInFunction } from './../types'
+import { AlertMessageFunction } from './../types'
+import { useUserStore } from '../stores/useUserStore'
 
 const { setAlertMessage } = inject('alert-message') as AlertMessageFunction
-const { setLoggedIn } = inject('is-logged-in') as LoggedInFunction
 
 definePage({
   meta: {
@@ -20,6 +20,7 @@ const password = ref('')
 const router = useRouter()
 const { setCookie } = useCookie()
 
+const userStore = useUserStore()
 const login = async function () {
   try {
     // Call the API
@@ -35,7 +36,11 @@ const login = async function () {
     const { authToken, userData } = response
     setCookie('authToken', authToken)
     setCookie('userData', JSON.stringify(userData))
-    setLoggedIn(true)
+
+    // Set store details
+    userStore.username = userData.username
+    userStore.role = userData.roleType
+    userStore.id = userData.id
 
     // Redirect
     setAlertMessage('Login successful')

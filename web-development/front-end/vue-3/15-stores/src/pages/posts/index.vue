@@ -1,18 +1,21 @@
 <script setup lang="ts">
+import { useUserStore } from './../../stores/useUserStore'
 import AppLoading from '../../components/AppLoading.vue'
 import AppPost from '../../components/AppPost.vue'
 import Post from './../../models/post'
+
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
 const router = useRouter()
 const isLoading = ref(false)
 const allPosts = ref<Post[]>([])
+const userStore = useUserStore()
 
 const getPosts = async function () {
   try {
     isLoading.value = true
-    const query = { userId: 1 }
+    const query = { userId: userStore.id }
     const response = await Post.where(query).get()
     allPosts.value = 'data' in response ? response.data : response
     isLoading.value = false
