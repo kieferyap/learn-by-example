@@ -174,19 +174,34 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 
   const userIndex = localUsers.findIndex(user => user.username === username && user.password === password)
   if (userIndex === -1) {
+    console.log('[auth/login] Incorrect credentials')
     res.status(401).json({ error: 'Incorrect credentials' })
     return
   }
 
-  // NOTE: Do NOT use this as an authToken. I'm only doing this as an example.
+  // Retrieve the roles
   const loggedInUser = localUsers[userIndex]
-  res.json({
-    authToken: `justAnAuthTokenYay123456${username}`,
-    userData: {
-      id: loggedInUser.id,
-      username: loggedInUser.username,
-      roleType: loggedInUser.roleType
+  const currentPermissions = roles.filter(role => role.type === loggedInUser.roleType)
+  const userPermissions = currentPermissions.map(role => {
+    const condition = role.permission.replace('user.id', `${loggedInUser.id}`)
+    return {
+      action: role.action,
+      subject: role.subject,
+      conditions: JSON.parse(condition)
     }
+  })
+  const userData = {
+    id: loggedInUser.id,
+    username: loggedInUser.username,
+    roleType: loggedInUser.roleType
+  }
+
+  console.log('[auth/login] Login successful with user data:', userData)
+  res.json({
+    // NOTE: Do NOT use this as an authToken. This is just as an example.
+    authToken: `justAnAuthTokenYay123456${username}`,
+    userData: userData,
+    permissions: userPermissions
   })
 })
 

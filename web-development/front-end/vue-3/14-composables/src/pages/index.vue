@@ -1,3 +1,3 @@
 <template>
-  Homepage of a demo project that illustrates routing in Vue. Click on "Posts" or "Users" to begin.
+  Homepage of a demo project that illustrates using composables in Vue.
 </template>

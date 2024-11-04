@@ -6,6 +6,7 @@ import useCookie from './../composables/useCookie'
 import { useRouter } from 'vue-router'
 import { AlertMessageFunction } from './../types'
 import { useUserStore } from '../stores/useUserStore'
+import { useCaslAbility } from './../plugins/casl/useAbility'
 
 const { setAlertMessage } = inject('alert-message') as AlertMessageFunction
 
@@ -19,8 +20,9 @@ const username = ref('')
 const password = ref('')
 const router = useRouter()
 const { setCookie } = useCookie()
-
 const userStore = useUserStore()
+const ability = useCaslAbility()
+
 const login = async function () {
   try {
     // Call the API
@@ -33,9 +35,13 @@ const login = async function () {
     })
 
     // Store the login information in the cookie
-    const { authToken, userData } = response
+    const { authToken, userData, permissions } = response
     setCookie('authToken', authToken)
     setCookie('userData', JSON.stringify(userData))
+    setCookie('abilityRules', JSON.stringify(permissions))
+
+    // Set the ability of the user
+    ability.update(permissions)
 
     // Set store details
     userStore.username = userData.username
@@ -48,6 +54,7 @@ const login = async function () {
       router.push('/')
     })
   } catch (error) {
+    console.error(error)
     username.value = ''
     password.value = ''
     setAlertMessage('Login incorrect. (Username: dratini, Password: Twister147)')

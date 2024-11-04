@@ -48,7 +48,7 @@ export const roles: Array<Role> = [
     action: 'manage',
     subject: 'Post',
     field: '["body", "title"]',
-    permission: '{ id: user.id }'
+    permission: '{ "userId": user.id }'
   },
   {
     id: 2,
@@ -57,7 +57,7 @@ export const roles: Array<Role> = [
     action: 'manage',
     subject: 'Post',
     field: '',
-    permission: ''
+    permission: '{ "userId": user.id }'
   },
   {
     id: 3,
@@ -66,7 +66,7 @@ export const roles: Array<Role> = [
     action: 'manage',
     subject: 'User',
     field: '',
-    permission: '{ roleId: 1 }'
+    permission: '{ "roleId": 1 }'
   },
   {
     id: 4,

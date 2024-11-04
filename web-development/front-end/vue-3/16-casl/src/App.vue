@@ -4,10 +4,13 @@ import { useUserStore } from './stores/useUserStore'
 import { AlertMessageFunction } from './types'
 import { RoleType } from './enums/role'
 import { useRouter } from 'vue-router'
+import { Action, Subject } from './plugins/casl/ability'
 import RouterButton from './components/RouterButton.vue'
 import AppCard from './components/AppCard.vue'
 import useCookie from './composables/useCookie'
+import { useCaslAbility } from './plugins/casl/useAbility'
 
+const ability = useCaslAbility()
 const userStore = useUserStore()
 const buttonProperties: ButtonHTMLAttributes = {
   type: 'button',
@@ -31,20 +34,28 @@ if ('username' in userData && 'roleType' in userData && 'id' in userData) {
 
 const router = useRouter()
 const logout = async function () {
-  // Clear the cookies
-  deleteCookie('authToken')
-  deleteCookie('userData')
-
-  // Clear the store
-  userStore.username = ''
-  userStore.role = RoleType.User
-  userStore.id = 0
-
-  // Set alert message
-  alertMessage.value = 'Logout successful'
-
-  // Redirect to login
-  router.push('/login')
+  try {
+    // Clear the cookies
+    deleteCookie('authToken')
+    deleteCookie('userData')
+    deleteCookie('abilityRules')
+    
+    // Clear the store
+    userStore.username = ''
+    userStore.role = RoleType.User
+    userStore.id = 0
+    
+    // Reset the ability
+    ability.update([])
+    
+    // Set alert message
+    alertMessage.value = 'Logout successful'
+    
+    // Redirect to login
+    router.push('/login')
+  } catch (error) {
+    console.log('Error occured while logging out:', error)
+  }
 }
 
 provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFunction)
@@ -52,7 +63,7 @@ provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFuncti
 </script>
 
 <template>
-  <AppCard title="Composables">
+  <AppCard title="CASL">
     <!-- Header -->
     <div class="row" v-if="userStore.id">
       <h4 class="col-12 text-secondary">
@@ -71,6 +82,7 @@ provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFuncti
           />
           <RouterButton
             to="/users"
+            v-if="ability.can(Action.Manage, Subject.User)"
             :button="buttonProperties"
             name="Users"
           />

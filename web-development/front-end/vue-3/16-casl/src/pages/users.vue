@@ -2,6 +2,15 @@
 import User from '../models/user'
 import { ref } from 'vue'
 import AppLoading from './../components/AppLoading.vue'
+import { definePage } from 'unplugin-vue-router/runtime'
+import { Action, Subject } from '../plugins/casl/ability';
+
+definePage({
+  meta: {
+    action: Action.Manage,
+    subject: Subject.User
+  }
+})
 
 const isLoading = ref(false)
 const allUsers = ref<User[]>()

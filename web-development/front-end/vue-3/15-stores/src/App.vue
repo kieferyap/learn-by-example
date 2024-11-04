@@ -52,7 +52,7 @@ provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFuncti
 </script>
 
 <template>
-  <AppCard title="Composables">
+  <AppCard title="Stores with Pinia">
     <!-- Header -->
     <div class="row" v-if="userStore.id">
       <h4 class="col-12 text-secondary">

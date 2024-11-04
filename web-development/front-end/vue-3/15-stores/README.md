@@ -62,6 +62,17 @@ VueX used to be the traditional state management library for Vue. However, Pinia
 | TypeScript | Cumbersome and requires more boilerplate code, requires extra setup | Support provided out of the box, IDE-friendly |
 
 # Usage
+## Importing the plugin
+- The plugin can be imported as follows ([main.ts](./src/main.ts)):
+  ```typescript
+  // Import the plugin
+  import { createPinia } from 'pinia' // Line 2
+
+  // Use the plugin
+  const store = createPinia() // Line 8
+  app.use(store) // Line 11
+  ```
+
 ## Store Creation
 - We create a store to be used in the app.
 - You can see an example of a store that was created in [useUserStore.ts](./src/stores/useUserStore.ts)

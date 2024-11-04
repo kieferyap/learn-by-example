@@ -1,7 +1,9 @@
 // Router
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
+import { useCaslAbility } from './casl/useAbility'
 import useCookie from '../composables/useCookie'
+import { Action, Subject } from './casl/ability'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -46,8 +48,25 @@ router.beforeEach(to => {
     return '/login'
   }
 
-  // Allow navigation
-  return
+  // Use CASL to determine if page can be navigated to
+  const ability = useCaslAbility()
+  const action = to.meta.action as Action
+  const subject = to.meta.subject as Subject
+  
+  // If there are no restrictions, immediately allow navigation
+  if (!action && !subject) {
+    return
+  }
+
+  // If page has restrictions, only allow navigation if user has permission
+  if (ability.can(action, subject)) {
+    return
+  } 
+  
+  // User has no permission: redirect to 404
+  else {
+    return '/not-found/404'
+  }
 })
 
 export default router
