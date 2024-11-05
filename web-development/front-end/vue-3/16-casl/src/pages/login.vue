@@ -6,7 +6,7 @@ import useCookie from './../composables/useCookie'
 import { useRouter } from 'vue-router'
 import { AlertMessageFunction } from './../types'
 import { useUserStore } from '../stores/useUserStore'
-import { useCaslAbility } from './../plugins/casl/useAbility'
+import { useCaslAbility } from './../plugins/casl/useCaslAbility'
 
 const { setAlertMessage } = inject('alert-message') as AlertMessageFunction
 

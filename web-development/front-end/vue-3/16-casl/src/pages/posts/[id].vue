@@ -8,8 +8,8 @@ import AppPostInput from '../../components/AppPostInput.vue'
 import { onBeforeRouteLeave } from 'vue-router'
 import { AlertMessageFunction } from './../../types'
 import { useRouter } from 'vue-router'
-import { useCaslAbility } from '../../plugins/casl/useAbility'
-import { Action, Subject } from '../../plugins/casl/ability'
+import { useCaslAbility } from '../../plugins/casl/useCaslAbility'
+import { Action } from '../../plugins/casl/ability'
 
 const router = useRouter()
 const route = useRoute('/posts/[id]')

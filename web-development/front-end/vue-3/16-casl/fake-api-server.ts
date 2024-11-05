@@ -154,7 +154,7 @@ app.delete('/api/posts/:id', (req: Request, res: Response) => {
 })
 
 // User
-app.delete('/api/user/:id', (req: Request, res: Response) => {
+app.delete('/api/users/:id', (req: Request, res: Response) => {
   console.log(`[DELETE] user with id: ${req.params.id}`)
   const { id } = req.params
   const userIndex = localUsers.findIndex(user => user.id === Number(id))

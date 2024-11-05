@@ -1,7 +1,7 @@
 // Router
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
-import { useCaslAbility } from './casl/useAbility'
+import { useCaslAbility } from './casl/useCaslAbility'
 import useCookie from '../composables/useCookie'
 import { Action, Subject } from './casl/ability'
 

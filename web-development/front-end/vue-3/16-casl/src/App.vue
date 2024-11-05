@@ -8,7 +8,7 @@ import { Action, Subject } from './plugins/casl/ability'
 import RouterButton from './components/RouterButton.vue'
 import AppCard from './components/AppCard.vue'
 import useCookie from './composables/useCookie'
-import { useCaslAbility } from './plugins/casl/useAbility'
+import { useCaslAbility } from './plugins/casl/useCaslAbility'
 
 const ability = useCaslAbility()
 const userStore = useUserStore()

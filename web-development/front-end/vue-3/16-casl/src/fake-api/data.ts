@@ -66,7 +66,7 @@ export const roles: Array<Role> = [
     action: 'manage',
     subject: 'User',
     field: '',
-    permission: '{ "roleId": 1 }'
+    permission: '{ "roleType.type": "U" }'
   },
   {
     id: 4,
@@ -75,7 +75,7 @@ export const roles: Array<Role> = [
     action: 'manage',
     subject: 'all',
     field: '',
-    permission: ''
+    permission: '{}'
   },
   // All users must not be able to delete themselves
 ]
