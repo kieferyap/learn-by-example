@@ -100,12 +100,57 @@ This project is a continuation of the previous one, so for this project to work,
   - Returns the reactive `Ability` when called, which is used to perform permission checks
 
 # Ability Retrieval and Setting
-## Login
-## Cookies
+- While logging in, the user's ability data is retrieved from the backend. (e.g.: "they can only view their own posts")
+- Once retrieved, the cookies are set to contain this ability data.
+- CASL is also used to set this retrieved ability data.
+- You can see all this in action in [login.vue](./src/pages/login.vue), with the following relevant lines below:
+  ```typescript
+  // Retrieve the response information
+  const { authToken, userData, permissions } = response
+
+  // Set the ability information within the cookie
+  setCookie('abilityRules', JSON.stringify(permissions))
+
+  // Use CASL to update the user's abilities
+  ability.update(permissions)
+  ```
+- Suppose that the user has logged in previously and accesses the app.
+  - Since we stored the ability information within the cookies, they are retrieved and set with CASL.
+  - It is important to note that it is possible to manually edit cookies, so users can potentially give themselves abilities they should not have.
+  - Therefore, it is important to take one or more of the following steps to be safe:
+    - Verify user abilities in the server
+    - Make sure that the server's behavior is consistent with the CASL abilities provided (i.e.: Users who cannot see the delete button in the UI should not be able to delete the resource, even if they somehow make the delete button visible)
 
 # Ability Usage
 ## Navigation Visibility
+- CASL abilities can be used to determine whether certain navigation buttons are visible.
+- In this example:
+  - The User List should only be visible to users of type: "Moderator" and "Admin"
+  - The User List should NOT be visible to users of type: "User"
+- This can be done with the method: `ability.can()`
+- An example of this in action can be seen in [App.vue](./src/App.vue):
+  ```typescript
+  import { Action, Subject } from './plugins/casl/ability'
+  import { useCaslAbility } from './plugins/casl/useCaslAbility'
+  const ability = useCaslAbility()
+  ```
+  ```html
+  <RouterButton
+    to="/users"
+    v-if="ability.can(Action.Manage, Subject.User)"
+    :button="buttonProperties"
+    name="Users"
+  />
+  ```
+- Note that abilities are reactive, so if there are any updates to the current ability data (using `ability.update()`), these changes will be reflected immediately
+
 ## Page Visibility
+- The User List button has been made invisible for users; however, it is still accessible through the URL.
+- Users with the role type, "User", can still access the page by typing `http://localhost:5173/users` in the URL.
+- To prevent this, we do the following:
+  - Declare ability settings within the page by stating that the `users.vue` page has the ability to manage users.
+  - Modify the router file such that before the user goes into a new page: we check if the user has the ability to access the page.
+
 ### Meta Properties
 ### Router Changes
 ## Post Visibility
