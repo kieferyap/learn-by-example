@@ -98,7 +98,15 @@
   - Data Retrieval
   - Data Update
   - Types of Stores (Options and Setup)
-- 16 Vue and CASL: An Authorization Library
+- [16 Vue and CASL: An Authorization Library](./16-casl/)
+  - About CASL
+  - Setting up CASL
+  - Retrieving and setting CASL abilities
+  - Using CASL:
+    - Navigation button visibility
+    - Page visibility (via URL access)
+    - Meta properties and router checks
+  - User-specific resource visibility
 - 17 Optimization
 - 18 Testing with ViTest
 - 19 Vue Use

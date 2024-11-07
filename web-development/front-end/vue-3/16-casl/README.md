@@ -1,6 +1,14 @@
 # About
 ## Objective
 To learn about CASL
+- About CASL
+- Setting up CASL
+- Retrieving and setting CASL abilities
+- Using CASL:
+  - Navigation button visibility
+  - Page visibility (via URL access)
+  - Meta properties and router checks
+- User-specific resource visibility
 
 ## Running the Demo
 - Navigate to the `16-casl` directory in your command line
@@ -146,15 +154,80 @@ This project is a continuation of the previous one, so for this project to work,
 
 ## Page Visibility
 - The User List button has been made invisible for users; however, it is still accessible through the URL.
-- Users with the role type, "User", can still access the page by typing `http://localhost:5173/users` in the URL.
+- In other words, users with the role type, "User", can still access the page by typing `http://localhost:5173/users` in the URL.
 - To prevent this, we do the following:
   - Declare ability settings within the page by stating that the `users.vue` page has the ability to manage users.
   - Modify the router file such that before the user goes into a new page: we check if the user has the ability to access the page.
 
 ### Meta Properties
-### Router Changes
+- Declaring ability settings [users.vue](./src/pages/users.vue)
+  ```typescript
+  import { definePage } from 'unplugin-vue-router/runtime'
+  definePage({
+    meta: {
+      action: Action.Manage,
+      subject: Subject.User
+    }
+  })
+  ```
+
+### Router Checks
+- Router checks [router.ts](./src/plugins/router.ts)
+  ```typescript
+  // Use CASL to determine if page can be navigated to
+  const ability = useCaslAbility()
+  const action = to.meta.action as Action
+  const subject = to.meta.subject as Subject
+  
+  // If there are no restrictions, immediately allow navigation
+  if (!action && !subject) {
+    return
+  }
+
+  // If page has restrictions, only allow navigation if user has permission
+  if (ability.can(action, subject)) {
+    return
+  } 
+  
+  // User has no permission: redirect to 404
+  else {
+    return '/not-found/404'
+  }
+  ```
+
 ## Post Visibility
-## User Management
+- Feature explanation:
+  - A user should only be able to see their *very own* posts.
+  - They should not be able to see the posts of other people.
+- To do that, we:
+  - Write down the permission data in the database.
+  - We retrieve the permission data.
+  - We add a check to make sure that they can only see their own posts.
+- Database values:
+  ```typescript
+  {
+    id: 1,
+    type: 'U',
+    name: 'User',
+    action: 'manage', // They can manage...
+    subject: 'Post', // their own posts...
+    field: '["body", "title"]', 
+    permission: '{ "userId": user.id }' // ...but only if it's their own.
+  },
+  ```
+- This permission data is then retrieved on log in and is set in the ability.
+- Finally, we add a permission check in [/src/pages/posts/[id].vue](./src/pages/posts/[id].vue), like so:
+  ```typescript
+  const ability = useCaslAbility()
+  const response = await Post.find(id.value)
+  const responsePost = 'data' in response ? response.data : response
+
+  if (ability.can(Action.Manage, responsePost)) {
+    post.value = 'data' in response ? response.data : response
+  } else {
+    router.push('/not-found/404')
+  }
+  ```
 
 # Further reading
 - Pinia: https://pinia.vuejs.org/introduction.html
