@@ -107,7 +107,7 @@
     - Page visibility (via URL access)
     - Meta properties and router checks
   - User-specific resource visibility
-- 17 Optimization
+- [17 Optimization](./17-optimization/)
 - 18 Testing with ViTest
 - 19 Vue Use
 - 20 Progressive Web Applications
