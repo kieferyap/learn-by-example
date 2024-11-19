@@ -42,7 +42,7 @@ Let's look into a summary of common optimization techniques in Vue:
   - We'll add a search bar in the user list to illustrate this example.
 - Prefetching
   - Pre-fetch components or routes when you are absolutely certain that a user will navigate to them soon.
-  - We'll pre-fetch the `AppPostInput.vue` component within the `/post/[id]` page to illustrate this example.
+  - We'll pre-fetch the `AppPostInput.vue` component within the `/post/index` page to illustrate this example.
 - `defineAsyncComponent()`
   - Tells Vue not to load a component on initial load
   - Instead, load it only when needed
@@ -81,8 +81,49 @@ Reasoning:
 - In the first unoptimized example, `calculateFahrenheit()` is called on every render, even when `celsius` isn't changed, which causes unnecessary recalculations. 
 
 ## Optimizing Event Handlers
+- An example of this in action can be seen in [users.vue](./src/pages/users.vue)
+```html
+<input
+  type="text"
+  class="form-control"
+  placeholder="Search user"
+  v-model="searchString"
+  @input="searchUsers"
+/>
+```
+```javascript
+// The following code is unoptimized
+const searchUsers = (event) => {
+  const username = event.target.value
+  userSearchResults.value = allUsers.value.filter(user => user.username.includes(username))
+}
+
+// The following code is optimized
+const debounceTimerMs = 300 // Execute the function after 300ms of no input
+const searchUsers = debounce((event) => {
+  const username = event.target.value
+  userSearchResults.value = allUsers.value.filter(user => user.username.includes(username))
+}, debounceTimerMs)
+```
+- Without `debounce()`, `searchUsers()` gets triggered on every key press, which leads to unnecessary function calls.
 
 ## Prefetching 
+- An example of this in action can be seen in [posts/index.vue](./src/pages/posts/index.vue)
+```javascript
+const prefetchInputComponent = () => import('./../../components/AppPostInput.vue')
+prefetchInputComponent()
+```
+- To see if the AppPostInput.vue is being pre-fetched:
+  - Go to the Developer Tools (Inspect Element)
+  - Go to the Network tab.
+- If the `prefetchInputComponent()` is commented out, then the Network tab will look like the following:
+
+![No Prefetch Demo](guide/01-no-prefetch.png)
+
+- However, if it is being called, then the Network tab will look like the following:
+
+![Prefetch Demo](guide/02-prefetch.png)
+
 
 ## `defineAsyncComponent()`
 

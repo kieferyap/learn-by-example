@@ -30,6 +30,11 @@ getPosts()
 const newPost = function () {
   router.push('/posts/new')
 }
+
+// Prefetching
+const prefetchInputComponent = () => import('./../../components/AppPostInput.vue')
+
+prefetchInputComponent()
 </script>
 
 <template>

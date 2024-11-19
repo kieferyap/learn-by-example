@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import User from '../models/user'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import AppLoading from './../components/AppLoading.vue'
 import { definePage } from 'unplugin-vue-router/runtime'
 import { Action, Subject } from '../plugins/casl/ability'
@@ -56,9 +56,17 @@ getUsers()
 const debounceTimerMs = 300 // Execute the function after 300ms of no input
 const searchUsers = debounce((event) => {
   const username = event.target.value
-  userSearchResults.value = allUsers.filter(user => user.name === username)
+  userSearchResults.value = allUsers.value.filter(user => user.username.includes(username))
 }, debounceTimerMs)
 
+/*
+// Without debounce(), this function triggers on every key press
+// This leads to unnecessary function calls
+const searchUsers = (event) => {
+  const username = event.target.value
+  userSearchResults.value = allUsers.value.filter(user => user.username.includes(username))
+}
+*/
 </script>
 
 <template>
