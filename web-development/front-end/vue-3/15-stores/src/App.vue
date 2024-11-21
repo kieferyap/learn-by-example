@@ -87,7 +87,7 @@ provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFuncti
           </button>
         </div>
       </div>
-      <div :class="userStore.username ? 'col-9' : 'col-12'">
+      <div :class="userStore.id ? 'col-9' : 'col-12'">
         <div
           class="alert alert-primary alert-dismissible fade show"
           role="alert"

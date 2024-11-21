@@ -2,6 +2,7 @@
 interface Props {
   to: string
   name: string
+  isVisible: boolean
   button: any
 }
 const props = defineProps<Props>()
@@ -9,6 +10,7 @@ const props = defineProps<Props>()
 
 <template>
   <router-link
+    v-if="props.isVisible"
     :to="props.to"
     tag="button"
     v-bind="props.button"
