@@ -118,16 +118,65 @@ prefetchInputComponent()
   - Go to the Network tab.
 - If the `prefetchInputComponent()` is commented out, then the Network tab will look like the following:
 
-![No Prefetch Demo](guide/01-no-prefetch.png)
+  ![No Prefetch Demo](guide/01-no-prefetch.png)
 
 - However, if it is being called, then the Network tab will look like the following:
 
-![Prefetch Demo](guide/02-prefetch.png)
-
+  ![Prefetch Demo](guide/02-prefetch.png)
 
 ## `defineAsyncComponent()`
+- Some components are only used in very specific places, and not in the entire app.
+  - This means that the source code of some components do not need to be downloaded all the time.
+  - This causes a problem: the user downloads way too much code than needed.
+  - We want users to only download what is needed, thereby making the app load faster.
+  - Therefore, we would want to load some components *lazily*.
+- We can achieve lazy-loading components via `defineAsyncComponent()`:
+  - This function tells Vue to *not* download the source code of a component on first load.
+  - Instead, do it only when it is needed.
+- Consider the following code within [App.vue](./src/App.vue) 
+  ```html
+    <!-- Lines 113 to 124, but only the important parts -->
+    <!-- We have a checkbox to specify if the user wants a horizontal or vertical layout -->
+    <input v-model="isLayoutVertical" type="checkbox">
+    <label>
+      {{ isLayoutVertical ? 'Vertical' : 'Horizontal' }}
+    </label>
+    
+    <!-- Lines 131 to 137, but only the important parts -->
+    <!-- We then use the information from the checkbox to load the appropriate component -->
+    <Component :is="isLayoutVertical ? LayoutVertical : LayoutHorizontal">
+  ```
+- In order to use `LayoutVertical` and `LayoutHorizontal`, we needed to import them like so:
+  ```javascript
+  // The following code imports them as is, without using defineAsyncComponent
+  // Importing them like this tells Vue to download BOTH LayoutVertical and LayoutHorizontal
+  // even though the user won't really need both, as they would most likely just use one or the other
+  import LayoutVertical from './components/LayoutVertical.vue'
+  import LayoutHorizontal from './components/LayoutHorizontal.vue'
+  ```
+  - You can see the browser loading both components by going to the Network tab and reloading the page with the above code, like so:
+
+    ![Prefetch Demo](guide/03-loading-both.png)
+
+  - You'll notice how both `LayoutVertical` and `LayoutHorizontal` components are being loaded.
+
+- However, it is possible to load only one of the components using `defineAsyncComponent()`, like so:
+  ```javascript
+  // The following code imports them using defineAsyncComponent()
+  const LayoutVertical = defineAsyncComponent(() => import('./components/LayoutVertical.vue'))
+  const LayoutHorizontal = defineAsyncComponent(() => import('./components/LayoutHorizontal.vue'))
+  ```
+  - Doing so makes it so that they are loaded on demand. You can confirm this by checking out the network tab.
+  - The following is a list of what is loaded on first load. Notice how LayoutVertical is loaded, but LayoutHorizontal is absent.
+
+    ![Prefetch Demo](guide/04-vertical-only.png)
+
+  - Then, upon toggling the checkbox, the LayoutHorizontal is loaded.
+
+    ![Prefetch Demo](guide/05-load-on-demand.png)
+
+- Thus, with `defineAsyncComponent()`, we are able to load components only when needed.
+
 
 # Further reading
-- Pinia: https://pinia.vuejs.org/introduction.html
-  - Option/Setup Stores: https://pinia.vuejs.org/core-concepts/#Option-Stores
-- VueX: https://vuex.vuejs.org
+- Async Components: https://vuejs.org/guide/components/async.html

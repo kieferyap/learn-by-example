@@ -98,7 +98,7 @@ provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFuncti
 
 <template>
   <AppCard title="Optimization">
-    <div class="isLoggedIn">
+    <div v-if="isLoggedIn">
       <!-- Header -->
       <div class="row">
         <h4 class="col-6 text-secondary">
