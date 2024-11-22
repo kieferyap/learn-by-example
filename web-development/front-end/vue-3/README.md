@@ -107,10 +107,13 @@
     - Page visibility (via URL access)
     - Meta properties and router checks
   - User-specific resource visibility
-- 17 Optimization
+- [17 Optimization](./17-optimization/)
+  - Memoization
+  - Event Handler Optimization
+  - Prefetching
+  - Load components on demand: `defineAsyncComponent()`
 - 18 Testing with ViTest
-- 19 Vue Use
-- 20 Progressive Web Applications
+- 19 Progressive Web Applications
   - Setting up
   - Notifying
-- 21 Docker
+- 20 Docker
