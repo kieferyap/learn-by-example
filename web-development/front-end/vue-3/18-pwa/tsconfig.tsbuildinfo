@@ -1,0 +1,1 @@
+{"root":["./typed-router.d.ts","./vite.config.ts","./src/App.vue","./src/base-model.ts","./src/main.ts","./src/registerServiceWorker.ts","./src/serviceWorkter.ts","./src/types.ts","./src/vite-env.d.ts","./auto-imports.d.ts","./src/composables/useApi.ts","./src/plugins/router.ts"],"errors":true,"version":"5.6.3"}
