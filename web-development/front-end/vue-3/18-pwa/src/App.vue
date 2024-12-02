@@ -97,7 +97,7 @@ provide('alert-message', { alertMessage, setAlertMessage } as AlertMessageFuncti
 </script>
 
 <template>
-  <AppCard title="Optimization">
+  <AppCard title="PWA">
     <div v-if="isLoggedIn">
       <!-- Header -->
       <div class="row">

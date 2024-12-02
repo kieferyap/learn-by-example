@@ -29,21 +29,37 @@ export default defineConfig({
         background_color: '#336699',
         icons: [
           {
-            src: 'icon-512.png',
+            src: '/icons/icon-512.png',
             sizes: '512x512',
             type: 'image/png',
           },
           {
-            src: 'icon-192.png',
-            sizes: '72x72 96x96 128x128 256x256',
+            src: '/icons/icon-128.png',
+            sizes: '128x128',
             type: 'image/png',
             purpose: 'maskable',
           },
           {
-            src: 'icon-60.png',
+            src: '/icons/icon-48.png',
             sizes: '48x48',
           },
         ],
+        screenshots: [
+          {
+            src: '/sources/01-desktop.png',
+            sizes: '655x376',
+            type: 'image/png',
+            form_factor: 'wide',
+            label: 'Application'
+          },
+          {
+            src: '/sources/02-mobile.png',
+            sizes: '416x438',
+            type: 'image/png',
+            form_factor: 'narrow',
+            label: 'Application'
+          }
+        ]
       },
       injectManifest: {
         swSrc: './src/serviceWorker.ts',

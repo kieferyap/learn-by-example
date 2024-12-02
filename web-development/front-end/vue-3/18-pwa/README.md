@@ -91,19 +91,34 @@ To learn how to turn your app into a PWA
     npm install vite-plugin-pwa --save-dev
     ```
 2. Configure the PWA plugin within [vite.config.ts](./vite.config.ts): see `plugins.VitePWA()`
-3. Create the service worker: See [serviceWorkter.ts](./src/serviceWorkter.ts)
+3. Create the service worker: See [serviceWorker.ts](./src/serviceWorker.ts)
 4. Create the service worker registration file: See [registerServiceWorker.ts](./src/registerServiceWorker.ts)
 5. Add registerServiceWorker into [main.ts](./src/main.ts), like so:
     ```typescript
     // PWA: Register Service Worker
     import './registerServiceWorker'
     ```
-6. Build the app
+6. Add the icons. See [./public/icons/](./public/icons/)
+7. Build the app
     ```bash
     npm run build
     ```
+    - Note: `npm run build` is supposed to run both `vue-tsc -b` and `vite build` (See [package.json](./package.json))
+    - However, `vue-tsc` does not work with the current version of TypeScript (5.7.2).
+    - Therefore, I've removed `vue-tsc -b` for now. 
+    - See https://github.com/vuejs/language-tools/issues/5018 for more details.
+8. Starts a local web server which serves the built solution from `./dist`
+    ```bash
+    npm run preview
+    ```
+9. If everything is done correctly, then the website should be *installable*, as seen in the screenshots below:
+![Prompt to install your PWA](./guide/01-pwa-install.png)
+![Running the installed PWA](./guide/02-installed.png)
 
+## PWA with Push Notifications
 
 # Further reading
 - PWA Capabilities: https://web.dev/learn/pwa/capabilities/
+- PWA Richer Install UI: https://web.dev/patterns/web-apps/richer-install-ui/
 - PWA Demos: https://whatpwacando.today
+- Icon source: https://www.iconarchive.com/show/windows-8-icons-by-icons8/Very-Basic-Icons8-Cup-icon.html
