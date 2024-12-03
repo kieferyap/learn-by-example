@@ -205,6 +205,29 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
   })
 })
 
+// Updates the user's notification settings
+app.post('/api/settings/update', async (req: Request, res: Response) => {
+  // If setting entry exists, update that
+
+  // Else, create new entry and set it to false
+})
+
+// Sends a push notification given a message
+app.post('/api/settings/push', async (req: Request, res: Response) => {
+  // If there is no setting entry, return error.
+
+  // If there IS a setting entry but value is FALSE, return error.
+
+  // Else, send the notification
+})
+
+// Gets the user's notification settings
+app.get('/api/settings/push', async (req: Request, res: Response) => {
+  // If setting entry exists, retrieve that
+
+  // Else, create new entry and set it to false
+})
+
 const port = 3001
 app.listen(port, () => {
   console.log(`Fake API server is now running on http://localhost:${port}`)

@@ -1,4 +1,4 @@
-import { User, Role, Post } from './types'
+import { User, Role, Post, Setting } from './types'
 
 // Sample Data
 export const users: Array<User> = [
@@ -115,5 +115,14 @@ export const posts: Array<Post> = [
     body: 'There was a fire drill today, and we had to neatly and orderly line up outside. Other than that, it was business as usual. The sixth graders were easier to handle as they were more behaved.',
     date: '2024-10-15',
     userId: 4
+  }
+]
+
+export const settings: Array<Setting> = [
+  {
+    id: 1,
+    userId: 1,
+    settingId: 1, // Push notification setting
+    value: 0 // Setting is set to false
   }
 ]

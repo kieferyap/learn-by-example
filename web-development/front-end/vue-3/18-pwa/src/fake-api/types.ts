@@ -24,3 +24,10 @@ export interface User {
   password: string
   roleType: string | Role
 }
+
+export interface Setting {
+  id: number
+  userId: number
+  settingId: number
+  value: number
+}

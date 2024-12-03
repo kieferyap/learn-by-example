@@ -98,7 +98,8 @@ To learn how to turn your app into a PWA
     // PWA: Register Service Worker
     import './registerServiceWorker'
     ```
-6. Add the icons. See [./public/icons/](./public/icons/)
+6. Add the images. See files within [./public/icons/](./public/icons/) and [./public/sources/](./public/sources/)
+    - Configure the PWA plugin within [vite.config.ts](./vite.config.ts) to reflect the newly-added images
 7. Build the app
     ```bash
     npm run build
@@ -116,6 +117,25 @@ To learn how to turn your app into a PWA
 ![Running the installed PWA](./guide/02-installed.png)
 
 ## PWA with Push Notifications
+### Preparations
+1. Install web-push globally
+    ```bash
+    npm install -g web-push
+    ```
+2. Generate VAPID Keys
+    ```bash
+    web-push generate-vapid-keys
+    ```
+3. Install workbox-build
+    ```bash
+    npm install workbox-build --save-dev
+    ```
+4. Configure [vite.config.ts](./vite.config.ts) to use `injectManifest`
+### Front-end 
+1. Ask the user for Push Notification permission
+  
+2. Make the service worker handle push events
+### Back-end
 
 # Further reading
 - PWA Capabilities: https://web.dev/learn/pwa/capabilities/

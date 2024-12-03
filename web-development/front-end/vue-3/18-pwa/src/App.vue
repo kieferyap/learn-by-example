@@ -73,6 +73,11 @@ const routerData: ComputedRef<RouterEntry[]> = computed(() => {
       name: 'Settings',
       to: '/settings',
       isVisible: true
+    },
+    {
+      name: 'Notifications',
+      to: '/notifications',
+      isVisible: true
     }
   ]
   return userStore.id ? sidebarData : []

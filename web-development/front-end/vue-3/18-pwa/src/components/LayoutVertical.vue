@@ -21,7 +21,7 @@ const emit = defineEmits<Emit>()
 
 <template>
   <div class="row">
-    <div :class="props.isLoggedIn ? 'col-3' : 'd-none'">
+    <div :class="props.isLoggedIn ? 'col-12 col-md-3' : 'd-none'">
       <div class="btn-group-vertical w-100">
         <RouterButton
           v-for="entry in props.routerData ?? []"
@@ -38,7 +38,7 @@ const emit = defineEmits<Emit>()
         </button>
       </div>
     </div>
-    <div :class="props.isLoggedIn ? 'col-9' : 'col-12'">
+    <div :class="props.isLoggedIn ? 'col-12 col-md-9' : 'col-12'">
       <slot />
     </div>
   </div>
