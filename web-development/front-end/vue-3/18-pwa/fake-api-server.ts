@@ -4,6 +4,7 @@ import { User, Post } from './src/fake-api/types'
 
 import express from 'express'
 import cors from 'cors'
+import webPush from 'web-push'
 
 const app = express()
 app.use(cors())
@@ -22,7 +23,7 @@ app.get('/api/users', (req: Request, res: Response) => {
   if (!filter) {
     console.log('[GET] all users')
     const entries: User[] = JSON.parse(JSON.stringify(localUsers)) // Create deep copy
-    
+
     // Include
     if (include?.length) {
       console.log('[GET][USER] Includes:', include)
@@ -253,11 +254,41 @@ app.get('/api/settings/push', async (req: Request, res: Response) => {
 
 // Sends a push notification given a message
 app.post('/api/settings/push', async (req: Request, res: Response) => {
+  const { userId, settingId, subscription, message } = req.body
+  const settingIndex = localSettings.findIndex(setting => setting.userId === userId && setting.settingId === settingId)
+
   // If there is no setting entry, return error.
+  if (settingIndex === -1) {
+    res.status(404).json({ error: 'Setting not found' })
+    return
+  }
 
   // If there IS a setting entry but value is FALSE, return error.
+  if (localSettings[settingIndex].value === 0) {
+    res.status(404).json({ error: 'Setting was set to false' })
+    return
+  }
 
   // Else, send the notification
+  // On an actual app, put this in the .env as environmental variables
+  const ENV_VITE_VAPID_PUBLIC_KEY = 'BKUX6A48x55VlvoHGR-lK1KrLZ6lyrIpFmKG5gE8yMM23acugzfLgcu_2WPF6qdhe_T1-S7RkxYTYjqXXaz16-U'
+  const ENV_VITE_VAPID_PRIVATE_KEY = 'wsuwlH1-SYmJiZZ6AmH8CHXIjfpcmKmLSih2M-SNi0c'
+
+  webPush.setVapidDetails(
+    'mailto:test-email@example.com',
+    ENV_VITE_VAPID_PUBLIC_KEY,
+    ENV_VITE_VAPID_PRIVATE_KEY
+  )
+
+  webPush.sendNotification(
+    subscription,
+    {
+      title: 'Learn by Example Push Notification',
+      body: message,
+    }
+  )
+  .then((_1) => res.status(200).json())
+  .catch(error => res.status(500).json({ error }))
 })
 
 const port = 3001

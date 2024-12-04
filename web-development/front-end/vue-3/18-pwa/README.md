@@ -118,15 +118,16 @@ To learn how to turn your app into a PWA
 
 ## PWA with Push Notifications
 ### Preparations
-1. Install web-push globally
+1. Install web-push globally and locally // TODO: What's this for again?
     ```bash
     npm install -g web-push
+    npm install web-push
     ```
-2. Generate VAPID Keys
+2. Generate VAPID Keys // TODO: What's this for again?
     ```bash
     web-push generate-vapid-keys
     ```
-3. Install workbox-build
+3. Install workbox-build // TODO: What's this for again?
     ```bash
     npm install workbox-build --save-dev
     ```
