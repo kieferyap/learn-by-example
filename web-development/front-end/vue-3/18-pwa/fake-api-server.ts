@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { users, roles, posts } from './src/fake-api/data'
+import { users, roles, posts, settings } from './src/fake-api/data'
 import { User, Post } from './src/fake-api/types'
 
 import express from 'express'
@@ -11,6 +11,7 @@ app.use(express.json())
 
 let localUsers = users
 let localPosts = posts
+let localSettings = settings
 
 //// GET requests for all tables
 app.get('/api/users', (req: Request, res: Response) => {
@@ -208,8 +209,46 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 // Updates the user's notification settings
 app.post('/api/settings/update', async (req: Request, res: Response) => {
   // If setting entry exists, update that
+  const { userId, settingId, value } = req.body
+  const settingIndex = localSettings.findIndex(setting => setting.userId === userId && setting.settingId === settingId)
 
   // Else, create new entry and set it to false
+  if (settingIndex !== -1) {
+    localSettings[settingIndex].value = value
+  } else {
+    localSettings.push({
+      id: localSettings.length,
+      userId: userId,
+      settingId: settingId,
+      value: value
+    })
+  }
+  res.status(204).send()
+})
+
+// Gets the user's notification settings
+app.get('/api/settings/push', async (req: Request, res: Response) => {
+  // If setting entry exists, retrieve that
+  const { userId, settingId } = req.body
+  const settingIndex = localSettings.findIndex(setting => setting.userId === userId && setting.settingId === settingId)
+
+  // Else, create new entry and set it to false
+  if (settingId !== -1) {
+    res.json({
+      value: localSettings[settingIndex].value
+    })
+  } else {
+    const newValue = 0
+    localSettings.push({
+      id: localSettings.length,
+      userId: userId,
+      settingId: settingId,
+      value: newValue
+    })
+    res.json({
+      value: newValue
+    })
+  }
 })
 
 // Sends a push notification given a message
@@ -219,13 +258,6 @@ app.post('/api/settings/push', async (req: Request, res: Response) => {
   // If there IS a setting entry but value is FALSE, return error.
 
   // Else, send the notification
-})
-
-// Gets the user's notification settings
-app.get('/api/settings/push', async (req: Request, res: Response) => {
-  // If setting entry exists, retrieve that
-
-  // Else, create new entry and set it to false
 })
 
 const port = 3001
