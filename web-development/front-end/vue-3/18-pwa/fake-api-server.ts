@@ -14,6 +14,16 @@ let localUsers = users
 let localPosts = posts
 let localSettings = settings
 
+// On an actual app, put these keys in the .env as environmental variables
+const ENV_VITE_VAPID_PUBLIC_KEY = 'BKUX6A48x55VlvoHGR-lK1KrLZ6lyrIpFmKG5gE8yMM23acugzfLgcu_2WPF6qdhe_T1-S7RkxYTYjqXXaz16-U'
+const ENV_VITE_VAPID_PRIVATE_KEY = 'wsuwlH1-SYmJiZZ6AmH8CHXIjfpcmKmLSih2M-SNi0c'
+
+webPush.setVapidDetails(
+  'mailto:test-email@example.com',
+  ENV_VITE_VAPID_PUBLIC_KEY,
+  ENV_VITE_VAPID_PRIVATE_KEY
+)
+
 //// GET requests for all tables
 app.get('/api/users', (req: Request, res: Response) => {
   const filter = req.query.filter
@@ -211,10 +221,12 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
 app.post('/api/settings/update', async (req: Request, res: Response) => {
   // If setting entry exists, update that
   const { userId, settingId, value } = req.body
+  console.log(`[POST] settings/update: Updating push settings of userID: ${userId}, settingID: ${settingId} with value: ${value}`)
   const settingIndex = localSettings.findIndex(setting => setting.userId === userId && setting.settingId === settingId)
 
   // Else, create new entry and set it to false
   if (settingIndex !== -1) {
+    console.log(`[settings/push] Setting entry found. Updating value to ${value}`)
     localSettings[settingIndex].value = value
   } else {
     localSettings.push({
@@ -228,24 +240,28 @@ app.post('/api/settings/update', async (req: Request, res: Response) => {
 })
 
 // Gets the user's notification settings
-app.get('/api/settings/push', async (req: Request, res: Response) => {
+app.post('/api/settings/retrieve', async (req: Request, res: Response) => {
   // If setting entry exists, retrieve that
   const { userId, settingId } = req.body
+  console.log(`[POST] settings/push: Retrieve user notification settings of userID: ${userId}, settingID: ${settingId}`)
   const settingIndex = localSettings.findIndex(setting => setting.userId === userId && setting.settingId === settingId)
 
   // Else, create new entry and set it to false
-  if (settingId !== -1) {
+  if (settingIndex !== -1) {
+    console.log(`[settings/push] Setting found at index ${settingIndex}, with value: ${JSON.stringify(localSettings[settingIndex])}`)
     res.json({
       value: localSettings[settingIndex].value
     })
   } else {
     const newValue = 0
-    localSettings.push({
+    const newEntry = {
       id: localSettings.length,
       userId: userId,
       settingId: settingId,
       value: newValue
-    })
+    }
+    console.log(`[settings/push] Setting NOT found. Creating new entry with values: ${JSON.stringify(newEntry)}`)
+    localSettings.push(newEntry)
     res.json({
       value: newValue
     })
@@ -255,40 +271,35 @@ app.get('/api/settings/push', async (req: Request, res: Response) => {
 // Sends a push notification given a message
 app.post('/api/settings/push', async (req: Request, res: Response) => {
   const { userId, settingId, subscription, message } = req.body
+  console.log(`[POST] settings/push: Sending push notification with userID: ${userId}, settingID: ${settingId}, message: ${message}`)
   const settingIndex = localSettings.findIndex(setting => setting.userId === userId && setting.settingId === settingId)
 
   // If there is no setting entry, return error.
   if (settingIndex === -1) {
+    console.log('[settings/push] Setting not found')
     res.status(404).json({ error: 'Setting not found' })
     return
   }
 
   // If there IS a setting entry but value is FALSE, return error.
   if (localSettings[settingIndex].value === 0) {
+    console.log('[settings/push] Setting found, but notification sending is disabled')
     res.status(404).json({ error: 'Setting was set to false' })
     return
   }
 
   // Else, send the notification
-  // On an actual app, put this in the .env as environmental variables
-  const ENV_VITE_VAPID_PUBLIC_KEY = 'BKUX6A48x55VlvoHGR-lK1KrLZ6lyrIpFmKG5gE8yMM23acugzfLgcu_2WPF6qdhe_T1-S7RkxYTYjqXXaz16-U'
-  const ENV_VITE_VAPID_PRIVATE_KEY = 'wsuwlH1-SYmJiZZ6AmH8CHXIjfpcmKmLSih2M-SNi0c'
-
-  webPush.setVapidDetails(
-    'mailto:test-email@example.com',
-    ENV_VITE_VAPID_PUBLIC_KEY,
-    ENV_VITE_VAPID_PRIVATE_KEY
-  )
-
   webPush.sendNotification(
-    subscription,
-    {
-      title: 'Learn by Example Push Notification',
-      body: message,
-    }
+    JSON.parse(subscription),
+    message
   )
-  .then((_1) => res.status(200).json())
-  .catch(error => res.status(500).json({ error }))
+  .then((_1) => {
+    res.status(200).json()
+  })
+  .catch((error) => {
+    console.log('[settings/push] Error:', error)
+    res.status(500).json({ error })
+  })
 })
 
 const port = 3001

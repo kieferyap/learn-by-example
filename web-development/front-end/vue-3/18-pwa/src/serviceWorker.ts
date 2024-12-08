@@ -10,9 +10,6 @@ precacheAndRoute(self.__WB_MANIFEST);
 
 // Service Worker: Push notifications
 self.addEventListener('push', (event: PushEvent) => {
-  console.log('event.data:', event.data);
-  console.log('event.data.text():', event.data?.text());
-
   // Optional: Ensure event data is present
   const message = event.data?.text() || 'Default notification message';
 
