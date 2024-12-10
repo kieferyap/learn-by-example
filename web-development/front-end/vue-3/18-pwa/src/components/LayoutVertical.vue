@@ -21,7 +21,7 @@ const emit = defineEmits<Emit>()
 
 <template>
   <div class="row">
-    <div :class="props.isLoggedIn ? 'col-12 col-md-3' : 'd-none'">
+    <div :class="props.isLoggedIn ? 'col-12 col-md-3 mb-2' : 'd-none'">
       <div class="btn-group-vertical w-100">
         <RouterButton
           v-for="entry in props.routerData ?? []"
