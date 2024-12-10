@@ -112,8 +112,14 @@
   - Event Handler Optimization
   - Prefetching
   - Load components on demand: `defineAsyncComponent()`
-- 18 Testing with ViTest
-- 19 Progressive Web Applications
-  - Setting up
-  - Notifying
+- [18 Progressive Web Applications (PWA)](./18-pwa/)
+  - PWA Basics
+    - What is a PWA?
+    - Key features of a PWA
+    - PWA access capabilities
+  - Turning the app into a PWA (step-by-step)
+  - Making the PWA app send push notifications
+    - Preparation/Installation
+    - Code examples
+- 19 Testing with ViTest
 - 20 Docker

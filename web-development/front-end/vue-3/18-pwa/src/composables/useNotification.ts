@@ -29,7 +29,7 @@ const usePushSubscription = () => {
     }
   }
 
-  // Subscribes the user by first asking for permission
+  // Subscribes the user to push notifications by first asking for permission
   const subscribeUser = async () => {
     notificationLoading.value = true
     const permission = await Notification.requestPermission()

@@ -85,7 +85,7 @@ To learn how to turn your app into a PWA
       - Virtual Keyboard Management (Virtual Keyboard API)
 - The capabilities that are in **bold** are the ones we'll try to integrate into our web app as a demo.
 
-## Turning this app into a PWA: step by step
+## Turning this app into a PWA: a step by step
 1. Install plugin
     ```bash
     npm install vite-plugin-pwa --save-dev
@@ -118,25 +118,104 @@ To learn how to turn your app into a PWA
 
 ## PWA with Push Notifications
 ### Preparations
-1. Install web-push globally and locally // TODO: What's this for again?
+1. Install `web-push` globally and locally
+    - `web-push` is used to send push notifications from a server to a browser through the **Push API**
+    - It simplifies the process of:
+      - Generating payloads
+      - Managing payloads
+      - Encrypting payloads
+      - Securely send payload to browser through the Push API
     ```bash
     npm install -g web-push
     npm install web-push
     ```
-2. Generate VAPID Keys // TODO: What's this for again?
+2. Generate VAPID Keys
+    - VAPID stands for Voluntary Application Server Identification
+    - It is used in push notifications to authenticate server, allowing it to send push notifications to the browser
+    - Components:
+      - Public Key: shared with the client during subscription. Used to verify that the notification originates from the correct server
+      - Private Key: Stays on the server and is used to sign notifications
     ```bash
     web-push generate-vapid-keys
     ```
-3. Install workbox-build // TODO: What's this for again?
+3. Install workbox-build
+    - Part of Google's Workbox Suite
+    - Purpose: simplify service worker creation and management in PWAs
+    - Provides tools to generate, manage, and inject service worker files with caching strategies
+    - Enables offline capabilities in web apps.
     ```bash
     npm install workbox-build --save-dev
     ```
 4. Configure [vite.config.ts](./vite.config.ts) to use `injectManifest`
-### Front-end 
-1. Ask the user for Push Notification permission
-  
+
+### Code
+1. Ask the user for Push Notification permission: [useNotification.ts](./src/composables/useNotification.ts)
+      ```javascript
+      // Subscribes the user to push notifications by first asking for permission
+      const subscribeUser = async () => {
+        // "[Website Name] would like you to allow notifications"
+        const permission = await Notification.requestPermission()
+
+        // User presses OK
+        if (permission === 'granted') {
+          // Check service worker
+          const registration = await navigator.serviceWorker.ready
+
+          // Subscribe the user to notifications and retrieve the subscription
+          subscription.value = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: String(ENV_VITE_VAPID_PUBLIC_KEY),
+          })
+
+          // Other code is present here to tell the back-end that the user is subscribed
+          // ...
+        }
+      }
+      ```
 2. Make the service worker handle push events
-### Back-end
+    - Front-end function located in [useNotification.ts](./src/composables/useNotification.ts)
+      ```javascript
+      // Sends a push notification given a message
+      const pushNotification = async (message: string) => {
+        // If the subscription is not found, call the subscribeUser function
+        // This function is the one above, which asks for permission before subscribing
+        if (subscription.value === null)
+          await subscribeUser()
+
+        // Call the API which sends the notification
+        if (subscription.value) {
+          await $api('/settings/push', {
+            method: 'POST',
+            body: {
+              userId: userStore.id,
+              settingId: SettingType.PushNotification,
+              subscription: JSON.stringify(subscription.value),
+              message, // The message to display in the push notification
+            },
+          })
+        }
+      }
+      ```
+    - Back-end function which handles the actual notification sending, in [fake-api-server.ts](./fake-api-server.ts)
+      ```javascript
+      import webPush from 'web-push'
+
+      // Set the authentication details
+      webPush.setVapidDetails(
+        'mailto:test-email@example.com',
+        ENV_VITE_VAPID_PUBLIC_KEY,
+        ENV_VITE_VAPID_PRIVATE_KEY
+      )
+
+      // Send the notification
+      webPush.sendNotification(
+        JSON.parse(subscription),
+        message
+      )
+      ```
+- With that, we are now able to:
+  - Turn our app into a PWA
+  - Set up push notifications
 
 # Further reading
 - PWA Capabilities: https://web.dev/learn/pwa/capabilities/
