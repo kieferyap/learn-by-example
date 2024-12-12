@@ -8,8 +8,9 @@ import AppPostInput from '../../components/AppPostInput.vue'
 import { onBeforeRouteLeave } from 'vue-router'
 import { AlertMessageFunction } from './../../types'
 import { useRouter } from 'vue-router'
-import { useCaslAbility } from '../../plugins/casl/useCaslAbility'
-import { Action } from '../../plugins/casl/ability'
+import { useUserStore } from './../../stores/useUserStore'
+
+const userStore = useUserStore()
 
 const router = useRouter()
 const route = useRoute('/posts/[id]')
@@ -50,18 +51,12 @@ const editButtonClicked = function () {
 const getPost = async function () {
   try {
     isLoading.value = true
-    const ability = useCaslAbility()
     const response = await Post.find(id.value)
-    const responsePost = 'data' in response ? response.data : response
-
-    // Ideally, you're supposed to do a server-side check to see if the post is accessible.
-    // Because if you're ONLY doing a client-side check like this one, you can actually 
-    // already see the post of another user by checking the network logs. (Inspect Element > Network)
-    // Anyway, this is a demo on how you can use CASL to bar the user from accessing the post
-    // ...at least, on the UI-side.
-    if (ability.can(Action.Manage, responsePost)) {
-      post.value = 'data' in response ? response.data : response
-    } else {
+    const responseData = 'data' in response ? response.data : response
+    if (responseData.userId === userStore.id) {
+      post.value = responseData
+    }
+    else {
       router.push('/not-found/404')
     }
     isLoading.value = false

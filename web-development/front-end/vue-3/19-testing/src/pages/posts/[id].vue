@@ -110,6 +110,7 @@ getPost()
     <div class="row">
       <div class="col text-end">
         <button
+          name="post-delete"
           type="button"
           class="btn btn-outline-secondary btn-sm me-2"
           @click="deletePost"
@@ -117,6 +118,7 @@ getPost()
           Delete
         </button>
         <button
+          name="post-edit-cancel"
           type="button"
           class="btn btn-outline-primary btn-sm"
           @click="editButtonClicked"

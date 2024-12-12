@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Post from '../models/post'
+import { useUserStore } from './../stores/useUserStore'
+
+const userStore = useUserStore()
 
 interface Emit {
   (e: "changed", value: boolean): void
@@ -36,7 +39,7 @@ const savePost = async function () {
         title: title.value,
         body: body.value,
         date: currentDate,
-        userId: 1
+        userId: userStore.id
       })
       const newPost = await post.save()
       id.value = newPost.id
