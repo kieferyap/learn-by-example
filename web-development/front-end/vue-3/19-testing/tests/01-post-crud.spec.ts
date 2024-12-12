@@ -1,36 +1,48 @@
-import { test, expect } from 'playwright/test';
+import { test, expect } from 'playwright/test'
+import { useLogin } from './helpers/useLogin'
 
 test('01 Page title', async ({ page }) => {
   // Navigate to the homepage
   await page.goto('/')
 
-  // Login
-  await page.fill('input[name="username"]', 'tester')
-  await page.fill('input[name="password"]', 'TestPassword1000')
-  await page.click('button[name="login"]')
-
   // Verify homepage title
   await expect(page).toHaveTitle('19-testing')
-  // // Verify the page title
-
-  // // Create a new blog post
-  // await page.click('text=New Post');
-  // await page.fill('input[name="title"]', 'Sample Blog Post');
-  // await page.fill('textarea[name="content"]', 'This is a sample blog post.');
-  // await page.click('text=Save');
-
-  // // Verify the blog post is listed
-  // await expect(page.locator('text=Sample Blog Post')).toBeVisible();
-
-  // // Edit the blog post
-  // await page.click('text=Edit');
-  // await page.fill('textarea[name="content"]', 'Updated content.');
-  // await page.click('text=Save');
-
-  // // Verify the updated content
-  // await expect(page.locator('text=Updated content.')).toBeVisible();
-
-  // // Delete the blog post
-  // await page.click('text=Delete');
-  // await expect(page.locator('text=Sample Blog Post')).not.toBeVisible();
 });
+
+test('02 CRUD on posts', async ({ page }) => {
+  // Login
+  await useLogin(page)
+
+  // Navigate to new post
+  await page.goto('/posts/new')
+
+  // Create post
+  await page.fill('input[name="post-title"]', 'Sample Post')
+  await page.fill('textarea[name="post-body"]', 'This is a sample blog post')
+  await page.click('button[name="post-submit"]')
+
+  // Verify post
+  await expect(page.locator('text=Sample Post')).toBeVisible()
+
+  // Edit post
+  await page.click('button[name="post-edit-cancel"]')
+  await page.fill('textarea[name="post-body"]', 'Updated content.')
+  await page.click('button[name="post-submit"]')
+
+  // Verify updated post
+  await expect(page.locator('text=Updated content.')).toBeVisible()
+
+  // Delete the post
+  await page.click('button[name="post-delete"]')
+  await expect(page.locator('text=Sample Post')).not.toBeVisible()
+})
+
+// You can use test.only() instead of test() if you want to run only this one test within the file
+test('03 Access post of other user', async ({ page }) => {
+  // Login
+  await useLogin(page)
+
+  // Go to another user's post
+  await page.goto('/posts/1')
+  await expect(page.locator('text=Error 404.')).toBeVisible()
+})

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Post from '../models/post'
+import { useUserStore } from './../stores/useUserStore'
+
+const userStore = useUserStore()
 
 interface Emit {
   (e: "changed", value: boolean): void
@@ -36,7 +39,7 @@ const savePost = async function () {
         title: title.value,
         body: body.value,
         date: currentDate,
-        userId: 1
+        userId: userStore.id
       })
       const newPost = await post.save()
       id.value = newPost.id
@@ -68,6 +71,7 @@ const savePost = async function () {
     <div class="input-group mb-3">
       <input
         type="text"
+        name="post-title"
         class="form-control"
         placeholder="Title"
         v-model="title"
@@ -79,6 +83,7 @@ const savePost = async function () {
     <div class="input-group mb-3">
       <textarea
         class="form-control"
+        name="post-body"
         rows="3"
         placeholder="Body"
         v-model="body"
@@ -91,6 +96,7 @@ const savePost = async function () {
       <div class="col text-end">
         <button
           class="btn btn-primary mb-4"
+          name="post-submit"
           type="button"
           @click="savePost"
         >

@@ -121,5 +121,5 @@
   - Making the PWA app send push notifications
     - Preparation/Installation
     - Code examples
-- [19 UI Testing with Nightwatch](./19-testing/)
+- [19 UI Testing with Playwright](./19-testing/)
 - 20 Docker
