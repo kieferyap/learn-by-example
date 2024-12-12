@@ -69,6 +69,7 @@ const login = async function () {
     <div class="input-group mb-3">
       <input
         type="text"
+        name="username"
         class="form-control"
         placeholder="Username"
         v-model="username"
@@ -79,6 +80,7 @@ const login = async function () {
     <div class="input-group mb-3">
       <input
         type="password"
+        name="password"
         class="form-control"
         placeholder="Password"
         v-model="password"
@@ -91,6 +93,7 @@ const login = async function () {
         <button
           class="btn btn-primary mb-4"
           type="submit"
+          name="login"
           @click="login"
         >
           Login

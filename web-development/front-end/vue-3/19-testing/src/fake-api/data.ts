@@ -38,6 +38,12 @@ export const users: Array<User> = [
     password: 'Outrage149', // Also my Git Guardian's gonna complain if I have a high entropy, hashed text here.
     roleType: 'A'
   },
+  {
+    id: 7,
+    username: 'tester',
+    password: 'TestPassword1000', // Also my Git Guardian's gonna complain if I have a high entropy, hashed text here.
+    roleType: 'U'
+  },
 ]
 
 export const roles: Array<Role> = [
