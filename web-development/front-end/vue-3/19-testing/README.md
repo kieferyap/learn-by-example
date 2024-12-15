@@ -3,8 +3,20 @@
 To learn how to do end-to-end testing with Nightwatch
 
 ## Running the Demo
-- Navigate to the `19-optimization` directory in your command line
+- Navigate to the `19-testing` directory in your command line
 - Run `npm install` to install dependencies
+
+# Setup
+## Setting up Playwright
+
+## Configuration
+
+# Testing
+## Writing tests
+
+## Helpers (Composables)
+
+## Commands
 
 # Further reading
 - PWA Capabilities: https://web.dev/learn/pwa/capabilities/
