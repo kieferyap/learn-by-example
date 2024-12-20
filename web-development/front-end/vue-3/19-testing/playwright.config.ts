@@ -6,7 +6,7 @@ export default defineConfig({
   retries: 1,         // Retry once on failure
   use: {
     baseURL: 'http://localhost:5173', // Base URL of your Vite dev server
-    trace: 'on-first-retry',         // Collect traces on first retry
+    trace: 'on-first-retry',          // Collect traces on first retry
   },
   projects: [
     {
