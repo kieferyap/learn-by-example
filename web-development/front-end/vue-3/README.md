@@ -122,4 +122,11 @@
     - Preparation/Installation
     - Code examples
 - [19 UI Testing with Playwright](./19-testing/)
-- 20 Docker
+  - Install/Setup
+    - Setting up Playwright
+    - Configuration
+  - Testing
+    - Writing tests
+    - Helpers (Composables)
+    - Running specific tests
+- [20 Docker](./20-docker/)
