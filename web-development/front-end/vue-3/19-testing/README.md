@@ -12,6 +12,9 @@ To learn how to do end-to-end testing with Playwright
 ## Running the Demo
 - Navigate to the `19-testing` directory in your command line
 - Run `npm install` to install dependencies
+- Run `npm run dev` to run the front end server
+- Run `npx tsx fake-api-server.ts` to run the backend server
+- Run `npm run test:headed` to run an end-to-end test
 
 # Install and Setup
 ## Setting up Playwright
