@@ -42,7 +42,7 @@ const app = Vue.createApp({
   - `setup()` is called very early in the lifecycle, so you cannot use `this` within `setup()`
   - `setup()` is called only once, when Vue sets up the component
 - Rewriting `setup()` over and over can get repetitive, so:
-  ```javascript
+  ```html
   <script>
   import { ref } from 'vue'
   export default {
@@ -54,7 +54,7 @@ const app = Vue.createApp({
   </script>
   ```
   can be written as:
-  ```javascript
+  ```html
   <script setup>
   import { ref } from 'vue'
   const username = ref('Test')
@@ -77,7 +77,7 @@ const app = Vue.createApp({
 
 ## computed
 - Computed Properties are written as `const computedProperty = computed(() => { /* Calculate for the computed property */ })`
-- Computed properties are readonly, and cannot be manually assigned a new value. (i.e.: You cannot do `computedProperty.value`)
+- Computed properties are readonly, and cannot be manually assigned a new value. (i.e.: You cannot do `computedProperty.value = newValue`)
 - You can see this in action within [./src/App.vue](./src/App.vue), lines 118-123
 - `computed()` needs to be imported from `vue`, like so: `import { computed } from 'vue'`
 

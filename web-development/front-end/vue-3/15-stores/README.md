@@ -53,7 +53,7 @@ This project is a continuation of the previous one, so for this project to work,
   - Note: Pinia does not use mutations
 
 ## Pinia?
-VueX used to be the traditional state management library for Vue. However, Pinia is now the more prefered alternative. 
+VueX used to be the traditional state management library for Vue. However, Pinia is now the more preferred alternative. 
 
 | Criteria | VueX | Pinia |
 |----------|------|-------|

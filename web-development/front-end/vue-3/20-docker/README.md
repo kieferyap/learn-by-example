@@ -4,7 +4,7 @@ To learn how to use Docker with Vue/Vite
 
 ## Running the Demo
 - Navigate to the `20-docker` directory in your command line
-- Run `docker run -p 5173:5173 -p 3001:3001 --name learn-by-example-container learn-by-example` after setting up docker in your computer.
+- Run `docker run -p 5173:5173 -p 3001:3001 --name learn-by-example-container learn-by-example` after setting up docker on your computer.
 
 # About Docker
 - **What is it?**: It's kind of like a virtual machine specifically for your project, but lighter

@@ -22,12 +22,12 @@ This project also makes use of the routing and backend communication packages, s
 
 # Composables
 - What are they?
-  - Composables are basically snippets of code that are useable by the entire app.
+  - Composables are basically snippets of code that are usable by the entire app.
   - These can be repeating functions (methods, watchers, etc.) that can be used in different components
 - As a convention, they usually start with the prefix `use`.
 - While not shown in this app, there are cases where the following occurs:
   - A composable has a function that accepts an array.
-  - A component calls the function, and passes an arrray.
+  - A component calls the function, and passes an array.
   - However, another component calls the same function, but passes a `ref` of an array.
   - In that case, you can do the following:
     - Make the function within the composable accept the ref of an array, and use `toRefs` to turn the array into a `Ref<Array<T>>` to make it more consistent.

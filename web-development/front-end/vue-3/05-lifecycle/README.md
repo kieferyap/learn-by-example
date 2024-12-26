@@ -3,7 +3,7 @@
 - To understand the Vue Instance Lifecycle
 
 ## Running the Demo
-- Double click `index.html` to open the file in your default browser.
+- Double click [index.html](./index.html) to open the file in your default browser.
 
 # Vue Instance Lifecycle
 ## Adding Breakpoints

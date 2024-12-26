@@ -1,7 +1,4 @@
 # About
-- **Status**: I'm still setting up shop at the moment, so while this repository is public, isn't ready just yet.
-  - As of the moment, Vue is *almost* done. I just need to do 20-docker, and the README of [19-testing](web-development/front-end/vue-3/19-testing).
-  - After that, I'm going to proofread my READMEs and review my code. 
 - **Objective**: To share what we know via easy-to-follow tutorials and code examples.
 - **Topics**: Anything related to computer science and programming. 
 - **Language**: English

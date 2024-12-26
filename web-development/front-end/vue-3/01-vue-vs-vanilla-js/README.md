@@ -9,16 +9,59 @@
 ## Feature
 - If you open `index.html` in the browser, you'll notice two areas: one titled "Vanilla JavaScript", and the other titled, "Vue Application"
 - Both areas do the same thing: 
-  - If you enter some text in the `<input>` field, and press the "Add Item" button
-  - The `<input>` field will be cleared, and the item that was entered will be visible in the list underneath the `<input>`.
+  - If you enter some text in the `<input>` field...
+  - and press the "Add Item" button...
+  - ...the `<input>` field will be cleared, and the item that was entered will be visible in the list underneath the `<input>`.
 - A GIF of the explanation above can be seen below:
-
 ![GIF detailing the feature explanation](guide/001-demo.gif)
-
 ## Under the hood: Vanilla JavaScript
-- First, let's take a look at `index.html`, lines 20-41.
-  - You'll notice that we have a `<label>`, an `<input>`, a `<button>`, and an empty `<ul></ul>`
-- Now, let's take a look at `app.js`, lines 5-22. To code the above feature in pure, vanilla JavaScript:
+- First, let's take a look at [index.html](./index.html), lines 20-41.
+  - You'll notice that we have a `<label>`, an `<input>`, a `<button>`, and an empty `<ul></ul>`, as seen below:
+  ```html
+  <fieldset id="vanilla" class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
+    <legend>Vanilla JavaScript</legend>
+
+    <!-- Input group -->
+    <div class="input-group mb-3">
+      <!-- Label -->
+      <div class="input-group-prepend">
+        <span class="input-group-text">Item</span>
+      </div>
+
+      <!-- Input -->
+      <input type="text" class="form-control" placeholder="Enter item here">
+
+      <!-- Button-->
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button">Add item</button>
+      </div>
+    </div>
+
+    <!-- List of to-dos -->
+    <ul></ul>
+  </fieldset>
+  ```
+- Now, let's take a look at [app.js](./app.js), lines 5-22. To code the above feature in pure, vanilla JavaScript:
+  ```javascript
+  // Grab the relevant elements from the HTML page
+  const buttonElement = document.querySelector('#vanilla button')
+  const inputElement = document.querySelector('#vanilla input')
+  const listElement = document.querySelector('#vanilla ul')
+
+  // Adds a new item from the text within the <input> into the <ul>
+  function addItem() {
+    // Get the value of the new item
+    const newItem = inputElement.value
+
+    // Create a new <li> element with the new item and append it into the <ul>
+    const listItemElement = document.createElement('li')
+    listItemElement.textContent = newItem
+    listElement.appendChild(listItemElement)
+
+    // Clear the <input>
+    inputElement.value = ''
+  }
+  ```
   - We first grab the relevant elements through `document.querySelector()`
   - We then code the `addItem()` function, which does the following:
     - We get the value that was typed within the `<input>` tag
@@ -31,7 +74,41 @@
   - The problem with writing code this way is that when your application gets bigger, things can get difficult to maintain very fast.
 
 ## Under the hood: Vue
-- Let's first take a look at `index.html`, and note the following:
+- Let's first take a look at [index.html](./index.html), and note the following:
+  ```html
+  <!-- Line 11: Vue import -->
+  <script src="https://unpkg.com/vue@3.4.9/dist/vue.global.js"></script>
+
+  <!-- Lines 45-70 -->
+  <!-- Same as VanillaJS portion, but this time using Vue -->
+  <div id="app" class="row">
+    <fieldset class="border rounded p-3 mt-3 col-12 col-md-6 mx-auto">
+      <legend>Vue Application</legend>
+
+      <!-- Input group -->
+      <div class="input-group mb-3">
+        <!-- Label -->
+        <div class="input-group-prepend">
+          <span class="input-group-text">Item</span>
+        </div>
+
+        <!-- Input -->
+        <input type="text" class="form-control" placeholder="Enter item here" v-model="newItem" />
+
+        <!-- Button-->
+        <div class="input-group-append">
+          <button class="btn btn-success" type="button" @click="addItem">Add item</button>
+        </div>
+      </div>
+
+      <!-- List of added to-dos -->
+      <ul>
+        <li v-for="item in list">{{ item }}</li>
+      </ul>
+    </fieldset>
+  </div>
+
+  ```
   - At line 11, we are importing Vue.
   - Line 45: We have a div with `id="app"` (Its [selector](https://www.w3schools.com/cssref/css_selectors.php) is `#app`)
   - Line 57: Our `<input>` tag has a new *directive*: `v-model="newItem"`
@@ -39,7 +116,32 @@
   - Line 67: `<li>` has a `v-for="item in list"` directive
   - Line 67: Inside the `<li>` is `{{ item }}`
 
-- Now, let's take a look at `app.js`, lines 31-53:
+- Now, let's take a look at [app.js](./app.js), lines 31-53:
+  ```javascript
+  const app = Vue.createApp({
+    data() {
+      // Declare the object which will contain the data to be used in the app
+      // In this case, we need a list of items (an empty array at the moment)
+      // and the new item (an empty string at the moment)
+      return {
+        list: [],
+        newItem: ''
+      }
+    },
+    methods: {
+      // This function pushes whatever string is contained within the newItem
+      // into the list of items. It also clears the newItem string.
+      addItem() {
+        this.list.push(this.newItem)
+        this.newItem = ''
+      }
+    }
+  })
+
+  // Link up the Vue App into the HTML part by specifying the selector 
+  // In this case, an element with an ID of 'app'
+  app.mount('#app')
+  ```
   - Line 31: `const app = Vue.createApp()`
     - We have an object called `Vue`, which is present because we imported Vue in Line 11 of `index.html`.
     - We are calling a function called `createApp()`, which takes in an object, and passing its result to a variable called `app`

@@ -17,8 +17,8 @@ To learn how to turn your app into a PWA
 ### Key Features
 - **Installable**
   - Works on any device and feels like a native app
-  - Can be added to home screenw without the need to go to the App/Play Store
-- **Reponsive**: adjusts to various screen sizes
+  - Can be added to home screen without the need to go to the App/Play Store
+- **Responsive**: adjusts to various screen sizes
 - **Connectivity-Independent**: can work offline using service workers
 - **Updatable**: version can be updated using service workers
 
