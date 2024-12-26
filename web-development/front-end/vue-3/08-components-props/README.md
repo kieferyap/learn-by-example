@@ -16,7 +16,7 @@
 - Back in the previous lesson's [App.vue](./../07-composition-api/src/App.vue), you'll notice that there are blocks of HTML code *that are very similar* (lines 46-48, 51-53, 56-58)
 - Components address this problem by providing a way to make... something like a class with *properties*, which can be imported to different parts of the code
 - Note that while not seen in the example, it is possible to use directives such as `v-for`, `v-if`, `v-show`, etc., in components
-- In the previous lesson's [README.md](./../07-composition-api/README.md), we noted two different ways of writinf the JS/TS portion (See Notable Changes portion). From this lesson onwards, we will be using the following form:
+- In the previous lesson's [README.md](./../07-composition-api/README.md), we noted two different ways of writing the JS/TS portion (See Notable Changes portion). From this lesson onwards, we will be using the following form:
   ```javascript
   <script setup>
   import { ref } from 'vue'
@@ -39,7 +39,7 @@
   - Single-word Element: `Input`, `Span`
   
 # Props (Component's Properties)
-Props are varibles that are passed from a parent component to a child component.
+Props are variables that are passed from a parent component to a child component.
 
 ## Declaring Props
 As an example, let's take a look at `src/components/ListGroupInput.vue`: 

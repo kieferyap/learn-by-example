@@ -92,7 +92,7 @@ In [router.ts](./src/router.ts), line 5, we are calling the `createRouter()` fun
 `history` ([router.ts](./src/router.ts), line 6): Tells the router how to manage routing history, and has two main modes and a memory mode:
 - `createWebHashHistory()`:
   - Uses a hash character (#) before the URL is internally passed
-  - Has a bad impact in SEO. 
+  - Has a bad impact on SEO. 
   - It is apparently only used in special cases such as legacy browser support or local prototyping with no server-side support.
 - `createWebHistory()`:
   - The **recommended** mode (according to the [docs](https://router.vuejs.org/guide/essentials/history-mode.html))
@@ -117,7 +117,7 @@ In [router.ts](./src/router.ts), line 5, we are calling the `createRouter()` fun
 
 ### Routes
 - ([router.ts](./src/router.ts), line 20): 
-  - Contains an array which tells the router what which component to load given a URL.
+  - Contains an array which tells the router which component to load given a URL.
   - "If the user enters the URL, `https://site.com/teams/1`", render the following component: `teams.vue`
 
 ### Navigation Guards:
@@ -179,7 +179,7 @@ src/pages/
 | `/*` | [src/pages/[...error].vue](./src/pages/[...error].vue]) |
 
 ## Catch-All Routes
-- Files with the name formattted in the following way: `[...error].vue`, where `error` can be any string, will be considered as a catch-all route by the unplugin-vue-router.
+- Files with the name formatted in the following way: `[...error].vue`, where `error` can be any string, will be considered as a catch-all route by the unplugin-vue-router.
 - This means that if the user goes to the page like `/this-page-does-not-exist`, it will render `[...error].vue`
 - By this logic, if we were to create the following file: `src/pages/posts/[...dne].vue`, then:
   - If the user goes to the page like `/posts/test-page`, then `src/pages/posts/[...dne].vue` will be rendered
@@ -236,10 +236,10 @@ src/pages/
 
 # Same Path Routing
 - Suppose the user is in `/posts/1`, and wants to navigate to `/posts/2` by clicking the "Next" button within the page.
-  - In this case, the navigation fails. We get stuck in the same page.
+  - In this case, the navigation fails. We get stuck on the same page.
   - This is because `/posts/1` and `/posts/2` are both the *same route*.
   - If you look at the table above, both of them are in the `/posts/[id]` route.
-  - Since they are in the same route, the page does not get updated.
+  - Since they are on the same route, the page does not get updated.
 - So how do we update the page? There are two possible solutions:
   - We use `watch()` to keep an eye out on the `route` variable: if it changes, we take note of the new ID and retrieve the appropriate values. ([/src/pages/posts/[id].vue](./src/pages/posts/[id].vue), line 18-22)
   - OR we can use `onBeforeRouteUpdate(updateGuard)`, because as the name implies, this function gets triggered before the route gets updated, and we can use the `updateGuard` parameter to take note of the new ID. ([/src/pages/posts/[id].vue](./src/pages/posts/[id].vue), line 24-31)

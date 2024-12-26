@@ -84,7 +84,7 @@ Here are other helpful test commands:
   // A test to check if the text "Sample Post" is visible.
   await expect(page.locator('text=Sample Post')).toBeVisible()
 
-  // A test to check if the text "Sample Post" is NOT visibly.
+  // A test to check if the text "Sample Post" is NOT visible.
   await expect(page.locator('text=Sample Post')).not.toBeVisible()
   ```
 

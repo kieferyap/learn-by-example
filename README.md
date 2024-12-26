@@ -1,5 +1,4 @@
 # About
-- **Status**: I'm still setting up shop at the moment, so while this repository is public, isn't ready just yet.
 - **Objective**: To share what we know via easy-to-follow tutorials and code examples.
 - **Topics**: Anything related to computer science and programming. 
 - **Language**: English

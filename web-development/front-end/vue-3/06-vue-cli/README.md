@@ -100,7 +100,7 @@ proceed)
   - It is empty because that's where Vue will fill it with information
 - `src/`: The place where all the Vue-related files are kept, so let's dive a bit deeper
   - `assets/`: A project's static files (images, videos, etc.) are kept here
-  - `components/`: A project's components are kept here (Components will be tackled in lesson 08)
+  - `components/`: A project's components are kept here (Components will be tackled in [08-components-props/](./../08-components-props/))
   - `main.ts`:
     - Line 1: import the `createApp()` function from `vue` (As a replacement for `Vue.createApp({})`)
     - Line 2: import the app's configuration from `App.vue` (As a replacement for the object we've been passing into `createApp()`)
