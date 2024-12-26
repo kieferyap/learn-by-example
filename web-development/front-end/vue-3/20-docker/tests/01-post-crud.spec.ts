@@ -6,7 +6,7 @@ test('01 Page title', async ({ page }) => {
   await page.goto('/')
 
   // Verify homepage title
-  await expect(page).toHaveTitle('19-testing')
+  await expect(page).toHaveTitle('20-docker')
 });
 
 test('02 CRUD on posts', async ({ page }) => {
